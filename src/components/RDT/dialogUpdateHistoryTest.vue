@@ -215,8 +215,8 @@
                           :label="$t('label.choose_place_test')"
                           :items="listLab"
                           menu-props="auto"
-                          item-text="lab_name"
-                          item-value="lab_name"
+                          item-text="name"
+                          item-value="name"
                           single-line
                           solo
                           autocomplete
