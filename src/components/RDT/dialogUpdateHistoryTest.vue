@@ -377,7 +377,7 @@ export default {
       if (value.test_date) {
         this.testDate = await formatDatetime(
           value.test_date,
-          'DD MMMM YYYY'
+          'YYYY/MM/DD'
         )
       }
       this.detailGender =
