@@ -2,7 +2,6 @@ on:
   push:
     branches:
       - master
-      - development
     pull_request:
       types: [assigned, opened, synchronize, reopened]
 name: Run SonarCloud Scan
