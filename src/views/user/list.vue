@@ -211,6 +211,7 @@ export default {
   },
   async mounted() {
     if (this.roles[0] === 'dinkeskota') this.listQuery.code_district_city = this.district_user
+    await this.$store.dispatch('user/listUser', this.listQuery)
   },
   methods: {
     completeAddress,
