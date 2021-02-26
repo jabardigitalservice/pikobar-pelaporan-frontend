@@ -1,7 +1,8 @@
 # Pikobar Pelaporan Frontend
-
-[![Maintainability](https://api.codeclimate.com/v1/badges/9e08f1a0b93baa37f697/maintainability)](https://codeclimate.com/github/jabardigitalservice/pikobar-pelaporan-frontend/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/9e08f1a0b93baa37f697/test_coverage)](https://codeclimate.com/github/jabardigitalservice/pikobar-pelaporan-frontend/test_coverage)
+[![Quality Gate Status](https://sonarqube.rover.digitalservice.id/api/project_badges/measure?project=pikobar-pelaporan&metric=alert_status)](https://sonarqube.rover.digitalservice.id/dashboard?id=pikobar-pelaporan)
+[![Maintainability Rating](https://sonarqube.rover.digitalservice.id/api/project_badges/measure?project=pikobar-pelaporan&metric=sqale_rating)](https://sonarqube.rover.digitalservice.id/dashboard?id=pikobar-pelaporan)
+[![Reliability Rating](https://sonarqube.rover.digitalservice.id/api/project_badges/measure?project=pikobar-pelaporan&metric=reliability_rating)](https://sonarqube.rover.digitalservice.id/dashboard?id=pikobar-pelaporan)
+[![Security Rating](https://sonarqube.rover.digitalservice.id/api/project_badges/measure?project=pikobar-pelaporan&metric=security_rating)](https://sonarqube.rover.digitalservice.id/dashboard?id=pikobar-pelaporan)
 
 # template-material
 
