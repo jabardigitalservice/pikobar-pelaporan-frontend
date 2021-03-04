@@ -254,7 +254,6 @@ export default {
   },
   async mounted() {
     const response = await this.$store.dispatch('region/listUnit', this.queryUnit)
-    console.log('hh')
     if (this.roles[0] === rolesPerm.ADMIN) this.disabledDistrict = false
     this.unitList = response.data
     if (this.isEdit) {
