@@ -1,8 +1,8 @@
 # Pikobar Pelaporan Frontend
-[![Quality Gate Status](https://sonarqube.rover.digitalservice.id/api/project_badges/measure?project=pikobar-pelaporan&metric=alert_status)](https://sonarqube.rover.digitalservice.id/dashboard?id=pikobar-pelaporan)
-[![Maintainability Rating](https://sonarqube.rover.digitalservice.id/api/project_badges/measure?project=pikobar-pelaporan&metric=sqale_rating)](https://sonarqube.rover.digitalservice.id/dashboard?id=pikobar-pelaporan)
-[![Reliability Rating](https://sonarqube.rover.digitalservice.id/api/project_badges/measure?project=pikobar-pelaporan&metric=reliability_rating)](https://sonarqube.rover.digitalservice.id/dashboard?id=pikobar-pelaporan)
-[![Security Rating](https://sonarqube.rover.digitalservice.id/api/project_badges/measure?project=pikobar-pelaporan&metric=security_rating)](https://sonarqube.rover.digitalservice.id/dashboard?id=pikobar-pelaporan)
+[![Quality Gate Status](https://sonar.digitalservice.id/api/project_badges/measure?project=pikobar-pelaporan-frontend&metric=alert_status)](https://sonar.digitalservice.id/dashboard?id=pikobar-pelaporan-frontend)
+[![Maintainability Rating](https://sonar.digitalservice.id/api/project_badges/measure?project=pikobar-pelaporan-frontend&metric=sqale_rating)](https://sonar.digitalservice.id/dashboard?id=pikobar-pelaporan-frontend)
+[![Reliability Rating](https://sonar.digitalservice.id/api/project_badges/measure?project=pikobar-pelaporan-frontend&metric=reliability_rating)](https://sonar.digitalservice.id/dashboard?id=pikobar-pelaporan-frontend)
+[![Security Rating](https://sonar.digitalservice.id/api/project_badges/measure?project=pikobar-pelaporan-frontend&metric=security_rating)](https://sonar.digitalservice.id/dashboard?id=pikobar-pelaporan-frontend)
 
 # template-material
 
