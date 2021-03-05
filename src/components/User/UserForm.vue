@@ -248,14 +248,14 @@ export default {
       this.isUnitLoading = true
       this.queryUnit.search = value
       const response = await this.$store.dispatch('region/listUnit', this.queryUnit)
-      this.unitList = response.data
+      this.unitList = response.data.itemsList
       this.isUnitLoading = false
     }
   },
   async mounted() {
     const response = await this.$store.dispatch('region/listUnit', this.queryUnit)
     if (this.roles[0] === rolesPerm.ADMIN) this.disabledDistrict = false
-    this.unitList = response.data
+    this.unitList = response.data.itemsList
     if (this.isEdit) {
       if (this.formUser.unit_id !== null) {
         const detailUnit = await this.$store.dispatch('region/detailUnit', this.formUser.unit_id)
