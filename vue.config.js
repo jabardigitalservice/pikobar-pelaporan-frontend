@@ -14,10 +14,10 @@ let plugins = [
   new webpack.IgnorePlugin(
     /^\.\/locale$/, /moment$/
   ),
-  // new PreloadWebpackPlugin({
-  //   rel: 'preload',
-  //   as: 'script'
-  // }),
+  new PreloadWebpackPlugin({
+    rel: 'prefetch',
+    as: 'script'
+  }),
   // new BundleAnalyzerPlugin()
 ]
 
