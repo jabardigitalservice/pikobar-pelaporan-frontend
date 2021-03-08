@@ -4,7 +4,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const vueEnverywere = require('vue-enverywhere')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin')
+// const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin')
 
 let plugins = [
   new vueEnverywere({ filename: 'env-vars.js' }),
@@ -14,10 +14,10 @@ let plugins = [
   new webpack.IgnorePlugin(
     /^\.\/locale$/, /moment$/
   ),
-  new PreloadWebpackPlugin({
-    rel: 'prefetch',
-    as: 'script'
-  }),
+  // new PreloadWebpackPlugin({
+  //   rel: 'prefetch',
+  //   as: 'script'
+  // }),
   // new BundleAnalyzerPlugin()
 ]
 
@@ -89,12 +89,8 @@ module.exports = {
       config.devtool('cheap-source-map')
     )
     config.when(process.env.NODE_ENV === 'production', config => {
-      config.performance
-        .maxEntrypointSize(400000)
-        .maxAssetSize(400000)
       config.optimization.splitChunks({
         chunks: 'all',
-        maxSize: 400000,
         cacheGroups: {
           libs: {
             name: 'chunk-libs',
@@ -116,13 +112,45 @@ module.exports = {
           }
         }
       })
-      config.optimization.minimizer("terser").tap(args => {
-        const { terserOptions } = args[0]
-        terserOptions.compress = true
-        return args
-      })
       config.optimization.runtimeChunk('single')
     })
   },
   transpileDependencies: ['vuetify']
+  //   config.when(process.env.NODE_ENV === 'production', config => {
+  //     config.performance
+  //       .maxEntrypointSize(400000)
+  //       .maxAssetSize(400000)
+  //     config.optimization.splitChunks({
+  //       chunks: 'all',
+  //       maxSize: 400000,
+  //       cacheGroups: {
+  //         libs: {
+  //           name: 'chunk-libs',
+  //           test: /[\\/]node_modules[\\/]/,
+  //           priority: 10,
+  //           chunks: 'initial' // only package third parties that are initially dependent
+  //         },
+          // vuetify: {
+          //   name: 'chunk-vuetify', // split vuetify into a single package
+          //   priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+          //   test: /[\\/]node_modules[\\/]vuetify[\\/]/
+          // },
+  //         commons: {
+  //           name: 'chunk-commons',
+  //           test: resolve('src/components'), // can customize your rules
+  //           minChunks: 3, //  minimum common number
+  //           priority: 5,
+  //           reuseExistingChunk: true
+  //         }
+  //       }
+  //     })
+  //     config.optimization.minimizer("terser").tap(args => {
+  //       const { terserOptions } = args[0]
+  //       terserOptions.compress = true
+  //       return args
+  //     })
+  //     config.optimization.runtimeChunk('single')
+  //   })
+  // },
+  // transpileDependencies: ['vuetify']
 }
