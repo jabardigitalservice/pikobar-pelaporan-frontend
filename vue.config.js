@@ -4,7 +4,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const vueEnverywere = require('vue-enverywhere')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin')
+// const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin')
 
 let plugins = [
   new vueEnverywere({ filename: 'env-vars.js' }),
@@ -14,10 +14,10 @@ let plugins = [
   new webpack.IgnorePlugin(
     /^\.\/locale$/, /moment$/
   ),
-  new PreloadWebpackPlugin({
-    rel: 'preload',
-    as: 'script'
-  }),
+  // new PreloadWebpackPlugin({
+  //   rel: 'preload',
+  //   as: 'script'
+  // }),
   // new BundleAnalyzerPlugin()
 ]
 
