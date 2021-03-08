@@ -13,6 +13,7 @@ export default {
         commit('SET_TOTAL_DATA_PASIEN', response.data._meta.itemCount)
         commit('SET_LIST_PASIEN', response.data.cases)
       }
+
       return response
     } catch (error) {
       return error.response

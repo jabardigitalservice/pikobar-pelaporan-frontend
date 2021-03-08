@@ -1,6 +1,9 @@
 import axios from 'axios'
+// import assert from 'assert'
 import store from '@/store'
 import { ResponseRequest } from '@/utils/constantVariable'
+import { setupCache } from 'axios-cache-adapter'
+
 import { getToken } from '@/utils/cookies'
 
 const isSecure = String(process.env.VUE_APP_SECURE) === 'true'
@@ -11,11 +14,18 @@ if (process.env.VUE_APP_PORT !== undefined && process.env.VUE_APP_PORT.length > 
 } else {
   url = `${method}://${process.env.VUE_APP_URL}`
 }
+
+// Create `axios-cache-adapter` instance
+const cache = setupCache({
+  maxAge: 15 * 60 * 1000
+})
+
 // create an axios instance
 const service = axios.create({
   baseURL: url, // api base_url
-  withCredentials: false, // cookies
-  timeout: 500000 // request timeout
+  // withCredentials: false, // cookies
+  // timeout: 500000, // request timeout
+  adapter: cache.adapter// cache will be enabled by default
 })
 
 // request interceptor
@@ -42,7 +52,7 @@ service.interceptors.response.use(
    * If you want to get information such as headers or status
    * Please return  response => response
    */
-  response => {
+  async(response) => {
     // store.commit('animationLottie/SET_LOADING', false)
     const res = response.data
 

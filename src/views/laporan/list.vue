@@ -389,13 +389,12 @@ export default {
     }
   },
   async mounted() {
+    if (rolesWidget['dinkesKotaAndFaskes'].includes(this.roles[0])) this.listQuery.address_district_code = this.district_user
+    this.queryReportCase.address_district_code = this.district_user
+    await this.getStatistic()
     EventBus.$on('refreshPageListReport', (value) => {
       this.handleSearch()
     })
-    if (rolesWidget['dinkesKotaAndFaskes'].includes(this.roles[0])) this.listQuery.address_district_code = this.district_user
-    this.queryReportCase.address_district_code = this.district_user
-    await this.$store.dispatch('reports/listReportCase', this.listQuery)
-    await this.getStatistic()
   },
   methods: {
     formatDatetime,
