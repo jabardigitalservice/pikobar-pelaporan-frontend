@@ -1,5 +1,4 @@
 import axios from 'axios'
-// import assert from 'assert'
 import store from '@/store'
 import { ResponseRequest } from '@/utils/constantVariable'
 import { setupCache } from 'axios-cache-adapter'
@@ -23,9 +22,13 @@ const cache = setupCache({
 // create an axios instance
 const service = axios.create({
   baseURL: url, // api base_url
-  // withCredentials: false, // cookies
-  // timeout: 500000, // request timeout
-  adapter: cache.adapter// cache will be enabled by default
+  withCredentials: false, // cookies
+  timeout: 500000, // request timeout
+  adapter: cache.adapter, // cache will be enabled by default
+  cache: {
+    key: null,
+    useOnNetworkError: true
+  }
 })
 
 // request interceptor

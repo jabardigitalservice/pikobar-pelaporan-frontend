@@ -1,7 +1,16 @@
 import request from '@/utils/request'
+import requestCache from '@/utils/requestCache'
 
-export function requestServer(url, method, data, onProgress) {
-  if ((method === 'GET') || method === 'DELETE') {
+export async function requestServer(url, method, data, onProgress) {
+  if ((method === 'GET')) {
+    const response = await requestCache.get(url, { params: data }, {
+      cache: {
+        groups: ['members']
+      }
+    })
+    console.log(response)
+    return response
+  } else if (method === 'DELETE') {
     return request({
       url: url,
       method: method,
