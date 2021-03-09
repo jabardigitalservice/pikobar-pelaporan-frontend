@@ -8,7 +8,6 @@ export async function requestServer(url, method, data, onProgress) {
         groups: ['members']
       }
     })
-    console.log(response)
     return response
   } else if (method === 'DELETE') {
     return request({
