@@ -76,7 +76,7 @@
             <v-list-item-title>{{ $t('label.change_password') }}</v-list-item-title>
           </v-list-item>
           <v-list-item @click.native="logout">
-            <v-icon class="mr-3 font-lg text-gray">ti-power-off</v-icon>
+            <v-icon class="mr-3 font-lg text-gray">mdi-logout</v-icon>
             <v-list-item-title>{{ $t('label.log_out') }}</v-list-item-title>
           </v-list-item>
         </v-list>
