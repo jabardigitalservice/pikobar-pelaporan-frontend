@@ -1,7 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
 import { ResponseRequest } from '@/utils/constantVariable'
-import { setupCache } from 'axios-cache-adapter'
 
 import { getToken } from '@/utils/cookies'
 
@@ -14,21 +13,11 @@ if (process.env.VUE_APP_PORT !== undefined && process.env.VUE_APP_PORT.length > 
   url = `${method}://${process.env.VUE_APP_URL}`
 }
 
-// Create `axios-cache-adapter` instance
-const cache = setupCache({
-  maxAge: 15 * 60 * 1000
-})
-
 // create an axios instance
 const service = axios.create({
   baseURL: url, // api base_url
   withCredentials: false, // cookies
-  timeout: 500000, // request timeout
-  adapter: cache.adapter, // cache will be enabled by default
-  cache: {
-    key: null,
-    useOnNetworkError: true
-  }
+  timeout: 500000 // request timeout
 })
 
 // request interceptor
