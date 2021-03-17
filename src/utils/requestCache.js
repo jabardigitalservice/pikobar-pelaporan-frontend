@@ -39,6 +39,12 @@ function exclude(config = {}, req) {
     return true
   }
 
+  // do not cache request with id
+  const hasIdParams = req.url.split('/').some((el) => el.length === 24)
+  if (hasIdParams) {
+    return true
+  }
+
   return false
 }
 
@@ -49,6 +55,7 @@ const cacheStore = localforage.createInstance({ name: 'pelaporan' })
 const cacheAdapter = setupCache({
   clearOnStale: false,
   debug: false,
+  readHeaders: true,
   exclude: {
     filter: req => {
       return req.cache && req.cache.exclude
