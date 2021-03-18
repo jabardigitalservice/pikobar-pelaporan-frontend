@@ -42,7 +42,7 @@ const actions = {
   },
   async summaryNotification({ commit }) {
     try {
-      const response = await requestServer(`/api/notifications/summary`, 'GET')
+      const response = await requestServer(`/api/notifications/summary?`, 'GET')
       const totalUnread = response.data ? response.data.unread : 0
       commit('NOTIFICATION_TOTAL_UNREAD', totalUnread)
       return response

@@ -5,7 +5,7 @@ export default {
     commit
   }, idCase) {
     try {
-      const response = await requestServer(`/api/public-place/${idCase}`, 'GET')
+      const response = await requestServer(`/api/public-place/${idCase}?`, 'GET')
       return response
     } catch (error) {
       return error.response
@@ -18,7 +18,7 @@ export default {
       idPublicPlace
     } = data
     try {
-      const response = await requestServer(`/api/public-place/${idPublicPlace}`, 'GET')
+      const response = await requestServer(`/api/public-place/${idPublicPlace}?`, 'GET')
       return response
     } catch (error) {
       return error.response

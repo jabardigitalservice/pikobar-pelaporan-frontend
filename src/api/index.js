@@ -1,12 +1,11 @@
 import request from '@/utils/request'
 import requestCache from '@/utils/requestCache'
 
-export async function requestServer(url, method, data, cache, onProgress) {
+export async function requestServer(url, method, data, onProgress) {
   if (method === 'GET') {
     const response = await requestCache.get(url, { params: data }, {
       cache: {
-        groups: ['members'],
-        exclude: { query: true }
+        groups: ['members']
       }
     })
     return response

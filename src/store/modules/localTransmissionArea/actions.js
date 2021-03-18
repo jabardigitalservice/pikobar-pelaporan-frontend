@@ -5,7 +5,7 @@ export default {
     commit
   }, idCase) {
     try {
-      const response = await requestServer(`/api/local-transmission/${idCase}`, 'GET')
+      const response = await requestServer(`/api/local-transmission/${idCase}?`, 'GET')
       return response
     } catch (error) {
       return error.response
@@ -18,7 +18,7 @@ export default {
       idTransmissionArea
     } = data
     try {
-      const response = await requestServer(`/api/local-transmission/${idTransmissionArea}`, 'GET')
+      const response = await requestServer(`/api/local-transmission/${idTransmissionArea}?`, 'GET')
       return response
     } catch (error) {
       return error.response
