@@ -226,6 +226,29 @@ export default {
       return error.response
     }
   },
+  async caseHospitalReferralInOut({ commit }, data) {
+    const {
+      type,
+      params
+    } = data
+    try {
+      const response = await requestServer(`/api/cases-transfer/${type}`, 'GET', params)
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
+  async caseHospitalReferralSummary({ commit }, data) {
+    const {
+      type
+    } = data
+    try {
+      const response = await requestServer(`/api/cases-transfer-summary/${type}`, 'GET')
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
   resetListCase({ commit }) {
     commit('RESET_LIST_CASE')
   },
