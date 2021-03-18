@@ -97,7 +97,7 @@ export default {
   },
   async detailCaseRelated({ commit }, id) {
     try {
-      const response = await requestServer(`/api/case-related/${id}`, 'GET')
+      const response = await requestServer(`/api/case-related/${id}?`, 'GET')
       return response
     } catch (error) {
       return error.response

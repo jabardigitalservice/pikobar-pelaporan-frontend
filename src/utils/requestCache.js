@@ -39,6 +39,12 @@ function exclude(config = {}, req) {
     return true
   }
 
+  // do not cache request with id
+  const hasIdParams = req.url.split('/').some((el) => el.length === 24)
+  if (exclude.query && hasIdParams) {
+    return true
+  }
+
   return false
 }
 

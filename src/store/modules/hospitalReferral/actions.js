@@ -48,7 +48,7 @@ export default {
       type
     } = data
     try {
-      const response = await requestServer(`/api/cases-transfer-summary/${type}`, 'GET')
+      const response = await requestServer(`/api/cases-transfer-summary/${type}?`, 'GET')
       return response
     } catch (error) {
       return error.response
@@ -70,7 +70,7 @@ export default {
   },
   async caseHospitalReferralHistory({ commit }, id) {
     try {
-      const response = await requestServer(`/api/cases/${id}/transfers`, 'GET')
+      const response = await requestServer(`/api/cases/${id}/transfers?`, 'GET')
       return response
     } catch (error) {
       return error.response

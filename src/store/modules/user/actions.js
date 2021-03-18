@@ -104,7 +104,7 @@ export default {
 
   async detailUser({ commit }, id) {
     try {
-      const response = await requestServer(`/api/users/${id}`, 'GET')
+      const response = await requestServer(`/api/users/${id}?`, 'GET')
       return response
     } catch (error) {
       return error.response

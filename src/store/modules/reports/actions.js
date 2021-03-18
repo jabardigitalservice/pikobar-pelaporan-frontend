@@ -45,7 +45,7 @@ export default {
   },
   async statusCase({ commit }, id) {
     try {
-      const response = await requestServer(`/api/v2/cases/${id}/status`, 'GET')
+      const response = await requestServer(`/api/v2/cases/${id}/status?`, 'GET')
       return response
     } catch (error) {
       return error.response
@@ -71,7 +71,7 @@ export default {
   },
   async detailReportCase({ commit }, id) {
     try {
-      const response = await requestServer(`/api/cases/${id}`, 'GET')
+      const response = await requestServer(`/api/cases/${id}?`, 'GET')
       return response
     } catch (error) {
       return error.response
@@ -79,7 +79,7 @@ export default {
   },
   async summaryReportCase({ commit }, id) {
     try {
-      const response = await requestServer(`/api/v2/cases/${id}/summary`, 'GET')
+      const response = await requestServer(`/api/v2/cases/${id}/summary?`, 'GET')
       return response
     } catch (error) {
       return error.response
@@ -95,7 +95,7 @@ export default {
   },
   async detailHistoryCase({ commit }, id) {
     try {
-      const response = await requestServer(`/api/cases/${id}/last-history`, 'GET')
+      const response = await requestServer(`/api/cases/${id}/last-history?`, 'GET')
       return response.data[0]
     } catch (error) {
       return error.response
@@ -119,7 +119,7 @@ export default {
   },
   async listHistoryCase({ commit }, id) {
     try {
-      const response = await requestServer(`/api/cases/${id}/history`, 'GET')
+      const response = await requestServer(`/api/cases/${id}/history?`, 'GET')
       return response.data
     } catch (error) {
       return error.response
@@ -160,7 +160,7 @@ export default {
   },
   async getNik({ commit }, nik) {
     try {
-      const response = await requestServer(`/api/cases-by-nik/${nik}`, 'GET')
+      const response = await requestServer(`/api/cases-by-nik/${nik}?`, 'GET')
       return response
     } catch (error) {
       return error.response
@@ -177,7 +177,7 @@ export default {
   },
   async countVerificationCase({ commit }) {
     try {
-      const response = await requestServer('/api/cases-summary-verification', 'GET')
+      const response = await requestServer('/api/cases-summary-verification?', 'GET')
       commit('SET_TOTAL_PENDING', response.data.PENDING)
       return response
     } catch (e) {
