@@ -31,7 +31,7 @@ export default {
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
-      requestServer('/api/users/info', 'GET').then(async(response) => {
+      requestServer('/api/users/info?', 'GET').then(async(response) => {
         const {
           role,
           fullname,

@@ -77,6 +77,22 @@ export const constantRoutes = [
         title: 'update_profile'
       }
     }]
+  },
+  {
+    path: '/notification',
+    component: Layout,
+    hidden: true,
+    meta: {
+      title: 'notification'
+    },
+    children: [{
+      path: '/notification-list-all',
+      component: () => import('@/views/notifications/index'),
+      hidden: true,
+      meta: {
+        title: 'notification'
+      }
+    }]
   }
 ]
 
