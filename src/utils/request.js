@@ -1,6 +1,7 @@
 import axios from 'axios'
 import store from '@/store'
 import { ResponseRequest } from '@/utils/constantVariable'
+
 import { getToken } from '@/utils/cookies'
 
 const isSecure = String(process.env.VUE_APP_SECURE) === 'true'
@@ -11,6 +12,7 @@ if (process.env.VUE_APP_PORT !== undefined && process.env.VUE_APP_PORT.length > 
 } else {
   url = `${method}://${process.env.VUE_APP_URL}`
 }
+
 // create an axios instance
 const service = axios.create({
   baseURL: url, // api base_url
@@ -42,7 +44,7 @@ service.interceptors.response.use(
    * If you want to get information such as headers or status
    * Please return  response => response
    */
-  response => {
+  async(response) => {
     // store.commit('animationLottie/SET_LOADING', false)
     const res = response.data
 

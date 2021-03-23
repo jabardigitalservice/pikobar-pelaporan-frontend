@@ -23,7 +23,7 @@ export default {
   },
   async getListCloseContactByCase({ commit }, idCase) {
     try {
-      const response = await requestServer(`/api/cases/${idCase}/closecontact`, 'GET')
+      const response = await requestServer(`/api/cases/${idCase}/closecontact?`, 'GET')
       return response
     } catch (error) {
       return error.response
@@ -42,7 +42,7 @@ export default {
       idCloseContact
     } = data
     try {
-      const response = await requestServer(`/api/close-contacts/${idCloseContact}`, 'GET')
+      const response = await requestServer(`/api/close-contacts/${idCloseContact}?`, 'GET')
       return response
     } catch (error) {
       return error.response

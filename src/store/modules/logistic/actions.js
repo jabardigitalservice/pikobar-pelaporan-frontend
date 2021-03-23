@@ -20,7 +20,7 @@ export default {
   },
   async getListAPD({ commit }, params) {
     try {
-      const response = await requestServer('/api/logistics/products', 'GET')
+      const response = await requestServer('/api/logistics/products?', 'GET')
       commit('SET_LIST_APD', response.data)
       return response
     } catch (error) {

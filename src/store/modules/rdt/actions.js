@@ -19,7 +19,7 @@ export default {
   },
   async getListTarget({ commit }, params) {
     try {
-      const response = await requestServer(`/api/category-target/${params}`, 'GET')
+      const response = await requestServer(`/api/category-target/${params}?`, 'GET')
       commit('SET_LIST_TARGET', response.data.rdt)
       return response
     } catch (error) {
@@ -60,7 +60,7 @@ export default {
   },
   async detailParticipant({ commit }, id) {
     try {
-      const response = await requestServer(`/api/rdt/${id}`, 'GET')
+      const response = await requestServer(`/api/rdt/${id}?`, 'GET')
       return response
     } catch (error) {
       return error.response
@@ -76,7 +76,7 @@ export default {
   },
   async listHistoryRDT({ commit }, id) {
     try {
-      const response = await requestServer(`/api/rdt/${id}/histories`, 'GET')
+      const response = await requestServer(`/api/rdt/${id}/histories?`, 'GET')
       return response
     } catch (error) {
       return error.response
@@ -84,7 +84,7 @@ export default {
   },
   async listLocationTest({ commit }) {
     try {
-      const response = await requestServer(`/api/rdt/list-location-test`, 'GET')
+      const response = await requestServer(`/api/rdt/list-location-test?`, 'GET')
       return response
     } catch (error) {
       return error.response

@@ -31,7 +31,7 @@ export default {
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
-      requestServer('/api/users/info', 'GET').then(async(response) => {
+      requestServer('/api/users/info?', 'GET').then(async(response) => {
         const {
           role,
           fullname,
@@ -104,7 +104,7 @@ export default {
 
   async detailUser({ commit }, id) {
     try {
-      const response = await requestServer(`/api/users/${id}`, 'GET')
+      const response = await requestServer(`/api/users/${id}?`, 'GET')
       return response
     } catch (error) {
       return error.response
