@@ -165,8 +165,13 @@ export default {
     changeLanguage: function(lang) {
       this.$i18n.locale = lang
     },
-    handleNotif() {
-      this.$store.dispatch('notifDrawer/notificationDrawer', !this.notifDrawer)
+    async handleNotif() {
+      const params = {
+        page: 1,
+        limit: 30,
+      }
+      await this.$store.dispatch('notifDrawer/notificationDrawer', !this.notifDrawer)
+      await this.$store.dispatch('notifications/getListNotifications', params)
     }
   }
 };
