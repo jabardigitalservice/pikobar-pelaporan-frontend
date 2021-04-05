@@ -171,6 +171,10 @@
       :form-riwayat-pasien="formRiwayatPasien"
       :form-pasien="formPasien"
     />
+    <dialog-export-form
+      :show-dialog="dialogExportCase"
+      :show.sync="dialogExportCase"
+    />
     <v-dialog v-model="failedDialog" persistent max-width="30%">
       <v-card>
         <v-card-title class="headline"><v-icon x-large color="red" left>mdi-close-circle</v-icon>{{ $t('errors.file_failed_upload') }}</v-card-title>
@@ -338,7 +342,8 @@ export default {
       dialogTransmissionArea: false,
       dialogHistoryTravel: false,
       dialogInspectionSupport: false,
-      dialogPublicPlace: false
+      dialogPublicPlace: false,
+      dialogExportCase: false
     }
   },
   computed: {
@@ -452,10 +457,11 @@ export default {
       this.totalCloseCase = data ? data.closeContact : 0
     },
     async onExportCase() {
-      const response = await this.$store.dispatch('exportReports/exportExcelCase', this.listQuery)
-      const dateNow = Date.now()
-      const fileName = `Data Pasien ${this.fullName} - ${formatDatetime(dateNow, 'DD/MM/YYYY HH:mm')} WIB.xlsx`
-      FileSaver.saveAs(response, fileName)
+      this.dialogExportCase = true
+      // const response = await this.$store.dispatch('exportReports/exportExcelCase', this.listQuery)
+      // const dateNow = Date.now()
+      // const fileName = `Data Pasien ${this.fullName} - ${formatDatetime(dateNow, 'DD/MM/YYYY HH:mm')} WIB.xlsx`
+      // FileSaver.saveAs(response, fileName)
     },
     async onExportHistoryCase() {
       const response = await this.$store.dispatch('exportReports/exportExcelHistory', this.listQuery)
