@@ -11,7 +11,7 @@
         <v-icon @click="show = false">mdi-close</v-icon>
       </v-card-title>
       <v-divider class="py-0" />
-      <v-container v-if="!isSuccsess" fluid class="pb-0 px-6">
+      <v-container v-if="!isSuccess" fluid class="pb-0 px-6">
         <p class="text--primary">
           {{ $t('label.queue_case_label_1') }}
         </p>
@@ -87,7 +87,7 @@ export default {
   data() {
     return {
       show: this.showDialog,
-      isSuccsess: false,
+      isSuccess: false,
       loading: false,
       email: ''
     }
@@ -95,7 +95,7 @@ export default {
   watch: {
     showDialog(value) {
       this.show = value
-      this.isSuccsess = !value
+      this.isSuccess = !value
     },
     show(value) {
       if (!value) this.email = ''
@@ -115,7 +115,7 @@ export default {
       delete this.listQuery['email']
       if (response) {
         this.loading = false
-        this.isSuccsess = true
+        this.isSuccess = true
       }
       if (this.$refs.observer) this.$refs.observer.reset()
     },
