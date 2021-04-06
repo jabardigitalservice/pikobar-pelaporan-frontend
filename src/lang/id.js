@@ -44,7 +44,8 @@ export default {
     dashboard_case: 'Kasus Lama',
     dashboard_case_new: 'Kasus Baru',
     dashboard_test_result: 'Hasil Tes',
-    detail_case: 'Detail Kasus'
+    detail_case: 'Detail Kasus',
+    queue: 'Queue'
   },
   label: {
     username: 'Username',
@@ -181,6 +182,7 @@ export default {
     discarded: 'Discarded',
     rapid_test: 'Rapid Test',
     rapid_test_id: 'Rapid Tes',
+    export_history: 'Riwayat Ekspor',
     rapid: 'Rapid',
     radiologi: 'Radiologi',
     pcr: 'PCR',
@@ -220,6 +222,7 @@ export default {
     patients_under_supervision: 'Pasien Dalam Pengawasan',
     case_data: 'Data Kasus',
     view_detail: 'Lihat Detail',
+    see_delivery_process: 'Lihat Proses Pengiriman',
     deleted_case: 'Hapus Kasus',
     deleted_user: 'Hapus Pengguna',
     choose_action: 'Pilih aksi',
@@ -765,6 +768,7 @@ export default {
     apd_goggle_glasses: 'Kacamata Pelindung Goggle',
     apd_not_at_all: 'Tidak Sama Sekali',
     not: 'Tidak',
+    processed: 'Diproses',
     not_earning: 'Tidak Berpenghasilan',
     sedenter: 'Sedenter',
     physical_exercise_less_than_150_minutes: 'Latihan Fisik < 150 menit/minggu (3 x 50 menit/minggu atau 5 x 30 menit/minggu)',
@@ -920,6 +924,7 @@ export default {
     usage_guide_import_6: '3. Import akan gagal jika terdapat ketidaksesuaian format dalam file. Perbaiki data sesuai pesan error yang ditampilkan.',
     usage_guide_import_7: '4. Jika proses import berhasil, data akan tersimpan secara otomatis pada list kasus.',
     import_loading: 'Impor...',
+    failed: 'Gagal',
     failed_import: 'Impor Gagal',
     success_import: 'Impor Berhasil',
     terms_and_conditions_import_1: '1. Data kasus wajib memiliki NIK',
@@ -950,7 +955,9 @@ export default {
     part_one_of_two: 'Bagian 1 dari 2',
     part_two_of_two: 'Bagian 2 dari 2',
     fill_in_identity_criteria_and_clinical_information: 'Isikan Identitas, kriteria dan informasi klinis',
-    case_has_been_rejected: 'Kasus telah ditolak'
+    case_has_been_rejected: 'Kasus telah ditolak',
+    queue_case_label_1: 'Data hasil ekspor, akan kami kirimkan ke email bawah ini',
+    queue_case_label_2: 'Terima Kasih! Data Anda sedang diproses dan akan dikirimkan melalui {email}. Apabila belum menerima email setelah 10 menit, silakan hubungi tim Pikobar'
   },
   success: {
     login_success: 'Login Berhasil',
@@ -970,6 +977,7 @@ export default {
   },
   errors: {
     create_data_errors: 'Data Gagal Dibuat',
+    email_must_be_filled: 'Email harus diisi',
     username_must_be_filled: 'Username harus diisi',
     password_must_be_filled: 'Password harus diisi',
     new_password_must_be_filled: 'Password baru harus diisi',

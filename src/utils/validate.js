@@ -25,3 +25,9 @@ export function noAlphabet(str) {
 
   return reg.test(str)
 }
+
+export function isEmail(str) {
+  const reg = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
+
+  return reg.test(str)
+}
