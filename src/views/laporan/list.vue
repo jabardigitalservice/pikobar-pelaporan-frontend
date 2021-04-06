@@ -82,6 +82,9 @@
                 <v-list-item @click="onExportHistoryCase">
                   {{ $t('label.export_clinical_history') }}
                 </v-list-item>
+                <v-list-item @click="handleToListQueue">
+                  {{ $t('label.export_history') }}
+                </v-list-item>
               </v-card>
             </v-menu>
           </v-card-actions>
@@ -174,38 +177,20 @@
     <dialog-export-form
       :show-dialog="dialogExportCase"
       :show.sync="dialogExportCase"
+      :list-query="listQuery"
     />
-    <v-dialog v-model="failedDialog" persistent max-width="30%">
-      <v-card>
-        <v-card-title class="headline"><v-icon x-large color="red" left>mdi-close-circle</v-icon>{{ $t('errors.file_failed_upload') }}</v-card-title>
-        <v-card-text>{{ errorMessage }}</v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="green darken-1" text @click="failedDialog = false">{{ $t('label.ok') }}</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <v-dialog v-model="successDialog" max-width="40%">
-      <v-card class="container">
-        <v-row class="mx-0" align="center" justify="center">
-          <v-card-title><v-icon size="80px" color="success">mdi-checkbox-marked-circle</v-icon></v-card-title>
-        </v-row>
-        <v-row class="mx-0" align="center" justify="center">
-          <v-card-title class="display-1 font-weight-bold pt-0 success-message">{{ $t('label.congratulation') }}</v-card-title>
-        </v-row>
-        <v-row class="mx-0" align="center" justify="center">
-          <v-card-text
-            :class="{'subtitle-1': $vuetify.breakpoint. mdAndDown, 'headline': $vuetify.breakpoint. lgAndUp}"
-            class="pt-0 text-center success-message"
-          >
-            {{ $t('label.import_success_message') }}
-          </v-card-text>
-        </v-row>
-        <v-row class="mx-0" align="center" justify="center">
-          <v-btn color="green darken-1" text @click="successDialog = false">{{ $t('label.ok') }}</v-btn>
-        </v-row>
-      </v-card>
-    </v-dialog>
+    <dialog-failed
+      :show-dialog="failedDialog"
+      :show.sync="failedDialog"
+      :title="$t('errors.file_failed_upload')"
+      :message="errorMessage"
+    />
+    <dialog-succsess
+      :show-dialog="successDialog"
+      :show.sync="successDialog"
+      :title="$t('label.congratulation')"
+      :message="$t('label.import_success_message')"
+    />
     <import-form
       :show-import-form="showImportForm"
       :refresh-page="handleSearch"
@@ -458,10 +443,9 @@ export default {
     },
     async onExportCase() {
       this.dialogExportCase = true
-      // const response = await this.$store.dispatch('exportReports/exportExcelCase', this.listQuery)
-      // const dateNow = Date.now()
-      // const fileName = `Data Pasien ${this.fullName} - ${formatDatetime(dateNow, 'DD/MM/YYYY HH:mm')} WIB.xlsx`
-      // FileSaver.saveAs(response, fileName)
+    },
+    handleToListQueue() {
+      this.$router.push('/laporan/queue-list-all')
     },
     async onExportHistoryCase() {
       const response = await this.$store.dispatch('exportReports/exportExcelHistory', this.listQuery)
@@ -509,9 +493,6 @@ export default {
   }
   .table-divider {
     margin: 15px 0px 0px 0px;
-  }
-  .success-message {
-    color: #27ae60;
   }
   .multiple-action {
     position: fixed;

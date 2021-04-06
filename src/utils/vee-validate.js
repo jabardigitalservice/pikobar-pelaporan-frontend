@@ -4,7 +4,8 @@ import {
   isPhoneNumber,
   noWhiteSpaces,
   noAlphabet
-} from '@/utils/validate'
+  // isEmail
+} from './validate'
 import { extend, setInteractionMode } from 'vee-validate'
 import i18n from '@/lang'
 import store from '@/store'

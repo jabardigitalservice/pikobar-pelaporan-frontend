@@ -66,5 +66,21 @@ export default {
     } catch (error) {
       return error.response
     }
+  },
+  async exportCaseQueue({ commit }, params) {
+    try {
+      const response = await requestServer(`/api/queue/cases`, 'GET', params)
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
+  async getListQueue({ commit }, params) {
+    try {
+      const response = await requestServer(`/api/queue`, 'GET', params)
+      return response
+    } catch (error) {
+      return error.response
+    }
   }
 }
