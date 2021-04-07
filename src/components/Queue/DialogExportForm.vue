@@ -24,7 +24,7 @@
               <v-col cols="12" md="10" sm="12" :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}">
                 <ValidationProvider v-slot="{ errors }" rules="required|email">
                   <v-text-field
-                    v-model="email"
+                    v-model="form.email"
                     :label="$t('label.email')"
                     :error-messages="errors"
                     type="text"
@@ -49,11 +49,11 @@
       </v-container>
       <v-container v-else fluid class="pb-0 px-6">
         <p class="text--primary">
-          {{ $t('label.queue_case_label_2', { email: email }) }}
+          {{ $t('label.queue_case_label_2', { email: form.email }) }}
         </p>
         <v-row class="pt-1 pb-4">
           <v-col class="text-right">
-            <v-btn :loading="loading" bottom class="ml-2 btn-small text-capitalize" @click="handleToListQueue">
+            <v-btn v-if="!isResend" :loading="loading" bottom class="ml-2 btn-small text-capitalize" @click="handleToListQueue">
               {{ $t('label.see_delivery_process') }}
             </v-btn>
             <v-btn color="success" :loading="loading" bottom class="ml-2 btn-small text-capitalize" @click="show = false">
@@ -82,14 +82,21 @@ export default {
     listQuery: {
       type: Object,
       default: null
+    },
+    isResend: {
+      type: Boolean,
+      default: false
+    },
+    form: {
+      type: Object,
+      default: null
     }
   },
   data() {
     return {
       show: this.showDialog,
       isSuccess: false,
-      loading: false,
-      email: ''
+      loading: false
     }
   },
   watch: {
@@ -98,7 +105,7 @@ export default {
       this.isSuccess = !value
     },
     show(value) {
-      if (!value) this.email = ''
+      if (!value) this.form.email = ''
       this.$emit('update:show', value)
     }
   },
@@ -110,10 +117,19 @@ export default {
         this.loading = false
         return
       }
-      this.listQuery.email = this.email
-      const response = await this.$store.dispatch('exportReports/exportCaseQueue', this.listQuery)
-      delete this.listQuery['email']
-      if (response) {
+      let resp
+      if (this.isResend) {
+        const data = {
+          jobID: this.form.job_id,
+          body: this.form
+        }
+        resp = await this.$store.dispatch('exportReports/resendEmailQueue', data)
+      } else {
+        this.listQuery.email = this.form.email
+        resp = await this.$store.dispatch('exportReports/exportCaseQueue', this.listQuery)
+        delete this.listQuery['email']
+      }
+      if (resp) {
         this.loading = false
         this.isSuccess = true
       }

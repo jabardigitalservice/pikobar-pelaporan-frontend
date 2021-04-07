@@ -34,9 +34,8 @@
             <v-card-actions>
               <v-menu
                 :close-on-content-click="false"
-                :nudge-width="100"
-                :nudge-left="220"
-                :nudge-top="40"
+                :nudge-width="120"
+                :nudge-left="200"
                 offset-y
               >
                 <template v-slot:activator="{ on }">
@@ -53,12 +52,33 @@
                     </v-icon>
                   </v-btn>
                 </template>
+                <v-card>
+                  <v-list-item :disabled="item.job_progress < 100" @click="handleResend(item)">
+                    Resend Ekspor File
+                  </v-list-item>
+                  <v-divider class="mx-4 my-1" />
+                  <v-list-item @click="handleListEmailRecipient(item.job_id)">
+                    Lihat Riwayat Email
+                  </v-list-item>
+                </v-card>
               </v-menu>
             </v-card-actions>
           </td>
         </tr>
       </template>
     </v-data-table>
+    <dialog-export-form
+      :show-dialog="dialogExportCase"
+      :show.sync="dialogExportCase"
+      :is-resend="isResend"
+      :form="formResend"
+    />
+    <list-email-recipient
+      :show-dialog="dialogListEmailRecipient"
+      :show.sync="dialogListEmailRecipient"
+      :is-loading="loadingListEmailRecipient"
+      :list-email-recipient="listEmailRecipient"
+    />
   </v-col>
 </template>
 
@@ -84,6 +104,12 @@ export default {
   },
   data() {
     return {
+      dialogExportCase: false,
+      dialogListEmailRecipient: false,
+      loadingListEmailRecipient: false,
+      listEmailRecipient: [],
+      isResend: false,
+      formResend: {},
       headers: [
         { text: '#', value: '_id', sortable: false, width: 50 },
         { text: 'Nama File', value: 'file_name', width: 300 },
@@ -119,6 +145,28 @@ export default {
       } else {
         return this.$t('label.done')
       }
+    },
+    handleResend(val) {
+      val.name = val.job_name
+
+      // delete value not use on form resend email
+      delete val['job_name']
+      delete val['email']
+      delete val['_id']
+      delete val['job_status']
+      delete val['job_progress']
+      delete val['createdAt']
+
+      this.formResend = val
+      this.dialogExportCase = true
+      this.isResend = true
+    },
+    async handleListEmailRecipient(jobID) {
+      this.dialogListEmailRecipient = true
+      this.loadingListEmailRecipient = true
+      const resp = await this.$store.dispatch('exportReports/getListEmailRecipientQueue', jobID)
+      this.listEmailRecipient = resp?.data?.history || []
+      this.loadingListEmailRecipient = false
     }
   }
 }

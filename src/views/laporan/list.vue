@@ -138,67 +138,6 @@
         />
       </v-row>
     </v-card>
-    <pagination
-      :total="totalList"
-      :page.sync="listQuery.page"
-      :limit.sync="listQuery.limit"
-      :on-next="onNext"
-    />
-    <dialog-delete
-      :dialog="dialog"
-      :data-deleted="dataDelete"
-      :dialog-delete.sync="dialog"
-      :delete-date.sync="dataDelete"
-      :store-path-delete="`reports/deleteReportCase`"
-      :store-path-get-list="`reports/listReportCase`"
-      :list-query="listQuery"
-    />
-    <dialog-detail-case
-      :show-dialog="dialogDetailCase"
-      :show.sync="dialogDetailCase"
-      :detail-case="detailCase"
-      :close-contact-case="closeContactCase"
-      :case-detail.sync="detailCase"
-      :list-history-case="listHistoryCase"
-      :referral-history-case="referralHistoryCase"
-      :title-detail="$t('label.detail_case')"
-    />
-    <dialog-update-case
-      :show-dialog="dialogUpdateCase"
-      :show.sync="dialogUpdateCase"
-      :form-pasien="formPasien"
-    />
-    <dialog-update-history-case
-      :show-dialog="dialogHistoryCase"
-      :show.sync="dialogHistoryCase"
-      :form-riwayat-pasien="formRiwayatPasien"
-      :form-pasien="formPasien"
-    />
-    <dialog-export-form
-      :show-dialog="dialogExportCase"
-      :show.sync="dialogExportCase"
-      :list-query="listQuery"
-    />
-    <dialog-failed
-      :show-dialog="failedDialog"
-      :show.sync="failedDialog"
-      :title="$t('errors.file_failed_upload')"
-      :message="errorMessage"
-    />
-    <dialog-succsess
-      :show-dialog="successDialog"
-      :show.sync="successDialog"
-      :title="$t('label.congratulation')"
-      :message="$t('label.import_success_message')"
-    />
-    <import-form
-      :show-import-form="showImportForm"
-      :refresh-page="handleSearch"
-      :show.sync="showImportForm"
-      :failed.sync="failedDialog"
-      :success.sync="successDialog"
-      :message.sync="errorMessage"
-    />
     <v-toolbar
       v-if="multipleSelect"
       color="primary"
@@ -247,6 +186,68 @@
         </v-col>
       </v-row>
     </v-toolbar>
+    <pagination
+      :total="totalList"
+      :page.sync="listQuery.page"
+      :limit.sync="listQuery.limit"
+      :on-next="onNext"
+    />
+    <dialog-delete
+      :dialog="dialog"
+      :data-deleted="dataDelete"
+      :dialog-delete.sync="dialog"
+      :delete-date.sync="dataDelete"
+      :store-path-delete="`reports/deleteReportCase`"
+      :store-path-get-list="`reports/listReportCase`"
+      :list-query="listQuery"
+    />
+    <dialog-detail-case
+      :show-dialog="dialogDetailCase"
+      :show.sync="dialogDetailCase"
+      :detail-case="detailCase"
+      :close-contact-case="closeContactCase"
+      :case-detail.sync="detailCase"
+      :list-history-case="listHistoryCase"
+      :referral-history-case="referralHistoryCase"
+      :title-detail="$t('label.detail_case')"
+    />
+    <dialog-update-case
+      :show-dialog="dialogUpdateCase"
+      :show.sync="dialogUpdateCase"
+      :form-pasien="formPasien"
+    />
+    <dialog-update-history-case
+      :show-dialog="dialogHistoryCase"
+      :show.sync="dialogHistoryCase"
+      :form-riwayat-pasien="formRiwayatPasien"
+      :form-pasien="formPasien"
+    />
+    <dialog-export-form
+      :show-dialog="dialogExportCase"
+      :show.sync="dialogExportCase"
+      :list-query="listQuery"
+      :form="{}"
+    />
+    <dialog-failed
+      :show-dialog="failedDialog"
+      :show.sync="failedDialog"
+      :title="$t('errors.file_failed_upload')"
+      :message="errorMessage"
+    />
+    <dialog-succsess
+      :show-dialog="successDialog"
+      :show.sync="successDialog"
+      :title="$t('label.congratulation')"
+      :message="$t('label.import_success_message')"
+    />
+    <import-form
+      :show-import-form="showImportForm"
+      :refresh-page="handleSearch"
+      :show.sync="showImportForm"
+      :failed.sync="failedDialog"
+      :success.sync="successDialog"
+      :message.sync="errorMessage"
+    />
     <dialog-update-status-case
       :show-dialog="dialogUpdateMultiple"
       :show.sync="dialogUpdateMultiple"
