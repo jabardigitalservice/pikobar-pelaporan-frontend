@@ -82,5 +82,22 @@ export default {
     } catch (error) {
       return error.response
     }
+  },
+  async resendEmailQueue({ commit }, data) {
+    const { jobID, body } = data
+    try {
+      const response = await requestServer(`/api/queue/${jobID}`, 'PUT', body)
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
+  async getListEmailRecipientQueue({ commit }, jobID) {
+    try {
+      const response = await requestServer(`/api/queue/list-email/${jobID}`, 'GET')
+      return response
+    } catch (error) {
+      return error.response
+    }
   }
 }
