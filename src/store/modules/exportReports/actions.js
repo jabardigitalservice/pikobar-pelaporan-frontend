@@ -75,6 +75,14 @@ export default {
       return error.response
     }
   },
+  async exportHistoryCaseQueue({ commit }, params) {
+    try {
+      const response = await requestServer(`/api/queue/histories`, 'GET', params)
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
   async getListQueue({ commit }, params) {
     try {
       const response = await requestServer(`/api/queue`, 'GET', params)
