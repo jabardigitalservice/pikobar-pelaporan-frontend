@@ -87,6 +87,10 @@ export default {
       type: Boolean,
       default: false
     },
+    isHistoryCase: {
+      type: Boolean,
+      default: false
+    },
     form: {
       type: Object,
       default: null
@@ -126,7 +130,11 @@ export default {
         resp = await this.$store.dispatch('exportReports/resendEmailQueue', data)
       } else {
         this.listQuery.email = this.form.email
-        resp = await this.$store.dispatch('exportReports/exportCaseQueue', this.listQuery)
+        if (this.isHistoryCase) {
+          resp = await this.$store.dispatch('exportReports/exportHistoryCaseQueue', this.listQuery)
+        } else {
+          resp = await this.$store.dispatch('exportReports/exportCaseQueue', this.listQuery)
+        }
         delete this.listQuery['email']
       }
       if (resp) {

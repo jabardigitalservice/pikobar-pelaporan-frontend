@@ -225,6 +225,7 @@
     <dialog-export-form
       :show-dialog="dialogExportCase"
       :show.sync="dialogExportCase"
+      :is-history-case="isHistoryCase"
       :list-query="listQuery"
       :form="{}"
     />
@@ -329,7 +330,8 @@ export default {
       dialogHistoryTravel: false,
       dialogInspectionSupport: false,
       dialogPublicPlace: false,
-      dialogExportCase: false
+      dialogExportCase: false,
+      isHistoryCase: false
     }
   },
   computed: {
@@ -443,16 +445,15 @@ export default {
       this.totalCloseCase = data ? data.closeContact : 0
     },
     async onExportCase() {
+      this.isHistoryCase = false
       this.dialogExportCase = true
     },
     handleToListQueue() {
       this.$router.push('/laporan/queue-list-all')
     },
     async onExportHistoryCase() {
-      const response = await this.$store.dispatch('exportReports/exportExcelHistory', this.listQuery)
-      const dateNow = Date.now()
-      const fileName = `Data Riwayat Klinis ${this.fullName} - ${formatDatetime(dateNow, 'DD/MM/YYYY HH:mm')} WIB.xlsx`
-      FileSaver.saveAs(response, fileName)
+      this.isHistoryCase = true
+      this.dialogExportCase = true
     },
     handleUpdateMultipleStatusCase() {
       this.formStatusCase.status = ''
