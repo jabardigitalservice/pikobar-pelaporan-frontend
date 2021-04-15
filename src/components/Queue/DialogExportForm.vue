@@ -137,10 +137,8 @@ export default {
         }
         delete this.listQuery['email']
       }
-      if (resp) {
-        this.loading = false
-        this.isSuccess = true
-      }
+      this.loading = false
+      if (resp.data.status !== 422) this.isSuccess = true
       if (this.$refs.observer) this.$refs.observer.reset()
     },
     handleToListQueue() {
