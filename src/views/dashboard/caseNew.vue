@@ -8,7 +8,26 @@
     class="dashboard-case-new"
   >
     <h3><strong>{{ `${$t('label.dashboard')} ${$t('label.case')} ${$t('label.covid19')}` }}</strong></h3>
-    <v-row class="mb-3">
+    <v-card
+      class="warning-background"
+      outlined
+      color="#6FCF97"
+      min-height="90px"
+    >
+      <div
+        class="white--text ml-8 mt-6"
+      >
+        <div class="font-weight-bold">
+          Pengumuman:
+          <br>
+          Versi Tanggal 01 - 04 - 2021 | 11:28:00
+        </div>
+        <div class="my-8">
+          Sistem mungkin mengalami keterlambatan dalam menampilkan data terbaru. Tunggu 5-10 menit setelah Anda input data baru dan lakukan muat ulang.
+        </div>
+      </div>
+    </v-card>
+    <!-- <v-row class="mb-3">
       <v-col cols="12">
         <v-card
           class="chart mx-auto"
@@ -25,7 +44,7 @@
           </v-card-text>
         </v-card>
       </v-col>
-    </v-row>
+    </v-row> -->
     <v-row class="case-new-filter mb-3">
       <v-col
         cols="12"
@@ -404,34 +423,39 @@ export default {
 </script>
 
 <style lang="scss">
-.dashboard-case-new {
-  .disclaimer {
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 24px;
-    background: linear-gradient(80.13deg, #27ae60 0%, #6fcf97 100%);
-    padding: 24px;
+  .warning-background {
+    background-image: url('../../static/warning_green_icon.svg');
+    // background: linear-gradient(88.9deg, #27AE60 0%, #6FCF97 100%);
+    // border-radius: 8px;
   }
+  .dashboard-case-new {
+    .disclaimer {
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
+      background: linear-gradient(80.13deg, #27ae60 0%, #6fcf97 100%);
+      padding: 24px;
+    }
 
-  .disclaimer .help {
-    font-size: 16px;
-    text-decoration: underline;
-  }
+    .disclaimer .help {
+      font-size: 16px;
+      text-decoration: underline;
+    }
 
-  .v-text-field.v-text-field--enclosed .v-text-field__details {
-    display: none !important;
-  }
+    .v-text-field.v-text-field--enclosed .v-text-field__details {
+      display: none !important;
+    }
 
-  .button {
-    height: 46px !important;
-    text-transform: none;
-  }
+    .button {
+      height: 46px !important;
+      text-transform: none;
+    }
 
-  .row-eq-height {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
+    .row-eq-height {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+    }
   }
-}
 </style>
