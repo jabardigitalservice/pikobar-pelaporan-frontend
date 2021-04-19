@@ -3,23 +3,13 @@ const pkg = require('./package.json')
 const vueEnverywere = require('vue-enverywhere')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const PurgecssPlugin = require('purgecss-webpack-plugin')
-const glob = require('glob-all')
 
 let plugins = [
   new vueEnverywere({ filename: 'env-vars.js' }),
   new MiniCssExtractPlugin({ filename: "[name].[hash].css" }),
   new webpack.IgnorePlugin(
     /^\.\/locale$/, /moment$/
-  ),
-  new PurgecssPlugin({
-    paths: glob.sync([
-      path.join(__dirname, './src/**/*.vue'),
-      path.join(__dirname, './public/index.html'),
-      path.join(__dirname, './node_modules/vuetify/src/**/*.js'),
-    ]),
-    whitelist: ['html', 'body']
-  })
+  )
 ]
 
 function resolve(dir) {
@@ -86,6 +76,12 @@ module.exports = {
       })
       .end()
 
+      config.module
+      .rule('vue')
+      .use('vuetify-loader')
+      .loader('vuetify-loader')
+      .end()
+
     config.when(process.env.NODE_ENV === 'development', config =>
       config.devtool('cheap-source-map')
     )
@@ -101,7 +97,7 @@ module.exports = {
           },
           vuetify: {
             name: 'chunk-vuetify', // split vuetify into a single package
-            priority: 40, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+            priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
             test: /[\\/]node_modules[\\/]vuetify[\\/]/
           },
           commons: {
