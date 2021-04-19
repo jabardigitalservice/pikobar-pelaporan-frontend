@@ -18,33 +18,15 @@
         class="white--text ml-8 mt-6"
       >
         <div class="font-weight-bold">
-          Pengumuman:
+          {{ $t('label.announcement') }}:
           <br>
           Versi Tanggal 01 - 04 - 2021 | 11:28:00
         </div>
         <div class="my-8">
-          Sistem mungkin mengalami keterlambatan dalam menampilkan data terbaru. Tunggu 5-10 menit setelah Anda input data baru dan lakukan muat ulang.
+          {{ $t('label.dashboard_disclaimer_2') }}
         </div>
       </div>
     </v-card>
-    <!-- <v-row class="mb-3">
-      <v-col cols="12">
-        <v-card
-          class="chart mx-auto"
-          outlined
-        >
-          <v-card-text class="white--text disclaimer">
-            {{ $t('label.dashboard_disclaimer') }}
-            <a
-              class="white--text help"
-              @click="handleHelp"
-            >
-              {{ $t('label.disclaimer_help') }}
-            </a>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row> -->
     <v-row class="case-new-filter mb-3">
       <v-col
         cols="12"

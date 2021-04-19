@@ -308,6 +308,7 @@ export default {
     redaction_list_user: 'Untuk menambahkan pengguna baru anda dapat menekan tombol “Tambah Pengguna” disamping',
     import: 'Impor',
     guidance: 'Panduan',
+    announcement: 'Pengumuman',
     import_instruction: 'Untuk menggunakan fitur impor, diwajibkan menggunakan template excel yang sudah kami berikan, jika belum punya bisa',
     download_here: 'download disini!',
     drop_file_here: 'Pilih berkas atau jatuhkan berkas disini',
@@ -950,7 +951,8 @@ export default {
     part_one_of_two: 'Bagian 1 dari 2',
     part_two_of_two: 'Bagian 2 dari 2',
     fill_in_identity_criteria_and_clinical_information: 'Isikan Identitas, kriteria dan informasi klinis',
-    case_has_been_rejected: 'Kasus telah ditolak'
+    case_has_been_rejected: 'Kasus telah ditolak',
+    dashboard_disclaimer_2: 'Sistem mungkin mengalami keterlambatan dalam menampilkan data terbaru. Tunggu 5-10 menit setelah Anda input data baru dan lakukan muat ulang.'
   },
   success: {
     login_success: 'Login Berhasil',
