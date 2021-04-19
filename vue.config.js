@@ -80,6 +80,10 @@ module.exports = {
       .rule('vue')
       .use('vuetify-loader')
       .loader('vuetify-loader')
+      .tap(options => {
+        options.progressiveImages = true
+        return options
+      })
       .end()
 
     config.when(process.env.NODE_ENV === 'development', config =>
