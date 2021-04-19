@@ -75,16 +75,10 @@ module.exports = {
         return options
       })
       .end()
-
-      config.module
-      .rule('vue')
-      .use('vuetify-loader')
-      .loader('vuetify-loader')
-      .tap(options => {
-        options.progressiveImages = true
-        return options
-      })
-      .end()
+      
+    config.plugin('VuetifyLoaderPlugin').tap(args => [{
+      progressiveImages: true
+    }])
 
     config.when(process.env.NODE_ENV === 'development', config =>
       config.devtool('cheap-source-map')
