@@ -3,15 +3,23 @@ const pkg = require('./package.json')
 const vueEnverywere = require('vue-enverywhere')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const PurgecssPlugin = require('purgecss-webpack-plugin')
+const glob = require('glob-all')
 
 let plugins = [
   new vueEnverywere({ filename: 'env-vars.js' }),
-  new MiniCssExtractPlugin({
-    filename: "[name].css",
-  }),
+  new MiniCssExtractPlugin({ filename: "[name].[hash].css" }),
   new webpack.IgnorePlugin(
     /^\.\/locale$/, /moment$/
   ),
+  new PurgecssPlugin({
+    paths: glob.sync([
+      path.join(__dirname, './src/**/*.vue'),
+      path.join(__dirname, './public/index.html'),
+      path.join(__dirname, './node_modules/vuetify/src/**/*.js'),
+    ]),
+    whitelist: ['html', 'body']
+  })
 ]
 
 function resolve(dir) {
