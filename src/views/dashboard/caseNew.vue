@@ -412,8 +412,6 @@ export default {
 <style lang="scss">
   .warning-background {
     background-image: url('../../static/warning_green_icon.svg');
-    // background: linear-gradient(88.9deg, #27AE60 0%, #6FCF97 100%);
-    // border-radius: 8px;
   }
   .dashboard-case-new {
     .disclaimer {
