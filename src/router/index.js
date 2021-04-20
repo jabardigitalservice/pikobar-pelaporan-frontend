@@ -15,7 +15,7 @@ import distributionCaseRouter from './modules/distributionCase'
 import submissionLogistikRouter from './modules/submissionLogistik'
 import dailyReportRouter from './modules/dailyReport'
 import hospitalReferralRouter from './modules/hospitalReferral'
-// import closeContactCase from './modules/closeContactCase'
+// import closeContactCase from './modules/CloseContactCase'
 
 /**
  * constantRoutes
@@ -91,6 +91,22 @@ export const constantRoutes = [
       hidden: true,
       meta: {
         title: 'notification'
+      }
+    }]
+  },
+  {
+    path: '/laporan/queue',
+    component: Layout,
+    hidden: true,
+    meta: {
+      title: 'queue'
+    },
+    children: [{
+      path: '/laporan/queue-list-all',
+      component: () => import('@/views/laporan/listQueue'),
+      hidden: true,
+      meta: {
+        title: 'queue'
       }
     }]
   }

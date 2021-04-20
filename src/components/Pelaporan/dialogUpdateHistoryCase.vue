@@ -8,7 +8,7 @@
           <v-icon @click="show = false">mdi-close</v-icon>
         </v-card-title>
         <v-divider />
-        <v-container>
+        <v-container fluid>
           <ValidationObserver ref="observer">
             <v-form
               ref="form"
