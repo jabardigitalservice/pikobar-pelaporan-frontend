@@ -93,8 +93,8 @@ export default {
         commit('SET_TOTAL_LIST_USER', 1)
         commit('SET_LIST_USER', [])
       } else {
-        commit('SET_TOTAL_LIST_USER', response.data._meta.totalPages)
-        commit('SET_LIST_USER', response.data.users)
+        commit('SET_TOTAL_LIST_USER', response.data?._meta?.totalPages || 0)
+        commit('SET_LIST_USER', response.data?.users || [])
       }
       return response
     } catch (error) {
