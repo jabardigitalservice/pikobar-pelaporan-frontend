@@ -20,7 +20,7 @@
         <div class="font-weight-bold">
           {{ $t('label.announcement') }}:
           <br>
-          Versi Tanggal 01 - 04 - 2021 | 11:28:00
+          {{ $t('label.version_date') }} {{ formatDatetime(dateUpdateData, 'DD-MM-YYYY | HH:mm') }}
         </div>
         <div class="my-8">
           {{ $t('label.dashboard_disclaimer_2') }}
@@ -178,6 +178,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { formatDatetime } from '@/utils/parseDatetime'
 import { rolesWidget } from '@/utils/constantVariable'
 
 export default {
@@ -250,7 +251,8 @@ export default {
           quarantine: 0,
           discarded: 0
         }
-      }
+      },
+      dateUpdateData: null
     }
   },
   computed: {
@@ -304,6 +306,7 @@ export default {
     this.clearVillage()
   },
   methods: {
+    formatDatetime,
     async onSelectDistrict(value) {
       this.districtCity = value
       this.clearDistrict()
@@ -376,6 +379,8 @@ export default {
       const res = await this.$store.dispatch('statistic/countCaseNew', params)
 
       if (res) this.loadingStatistic = false
+
+      this.dateUpdateData = res?.data[0].date_version || null
 
       this.statistic.confirmed = {
         sick_home: res.data[0].confirmed[0].sick_home || 0,
