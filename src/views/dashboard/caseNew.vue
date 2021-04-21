@@ -8,24 +8,25 @@
     class="dashboard-case-new"
   >
     <h3><strong>{{ `${$t('label.dashboard')} ${$t('label.case')} ${$t('label.covid19')}` }}</strong></h3>
-    <v-row class="mb-3">
-      <v-col cols="12">
-        <v-card
-          class="chart mx-auto"
-          outlined
-        >
-          <v-card-text class="white--text disclaimer">
-            {{ $t('label.dashboard_disclaimer') }}
-            <a
-              class="white--text help"
-              @click="handleHelp"
-            >
-              {{ $t('label.disclaimer_help') }}
-            </a>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+    <v-card
+      class="warning-background"
+      outlined
+      color="#6FCF97"
+      min-height="90px"
+    >
+      <div
+        class="white--text ml-8 mt-6"
+      >
+        <div class="font-weight-bold">
+          {{ $t('label.announcement') }}:
+          <br>
+          {{ $t('label.version_date') }} {{ formatDatetime(dateUpdateData, 'DD-MM-YYYY | HH:mm') }}
+        </div>
+        <div class="my-8">
+          {{ $t('label.dashboard_disclaimer_2') }}
+        </div>
+      </div>
+    </v-card>
     <v-row class="case-new-filter mb-3">
       <v-col
         cols="12"
@@ -177,6 +178,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { formatDatetime } from '@/utils/parseDatetime'
 import { rolesWidget } from '@/utils/constantVariable'
 
 export default {
@@ -249,7 +251,8 @@ export default {
           quarantine: 0,
           discarded: 0
         }
-      }
+      },
+      dateUpdateData: null
     }
   },
   computed: {
@@ -303,6 +306,7 @@ export default {
     this.clearVillage()
   },
   methods: {
+    formatDatetime,
     async onSelectDistrict(value) {
       this.districtCity = value
       this.clearDistrict()
@@ -376,6 +380,8 @@ export default {
 
       if (res) this.loadingStatistic = false
 
+      this.dateUpdateData = res?.data[0].date_version || null
+
       this.statistic.confirmed = {
         sick_home: res.data[0].confirmed[0].sick_home || 0,
         sick_hospital: res.data[0].confirmed[0].sick_hospital || 0,
@@ -404,6 +410,9 @@ export default {
 </script>
 
 <style lang="scss">
+.warning-background {
+  background-image: url('../../static/warning_green_icon.svg');
+}
 .dashboard-case-new {
   .disclaimer {
     font-weight: bold;
