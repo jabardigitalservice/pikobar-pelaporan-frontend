@@ -45,7 +45,7 @@ export default {
     dashboard_case_new: 'Kasus Baru',
     dashboard_test_result: 'Hasil Tes',
     detail_case: 'Detail Kasus',
-    queue: 'Queue'
+    case_list_export_history: 'Riwayat Ekspor List Kasus'
   },
   label: {
     username: 'Username',

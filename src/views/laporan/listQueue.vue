@@ -5,10 +5,32 @@
       class="mt-2"
     >
       <v-card-title class="pb-0">
-        {{ $t('route.queue') }}
+        {{ $t('route.case_list_export_history') }}
         <v-spacer />
       </v-card-title>
       <v-divider />
+      <v-row justify="center">
+        <v-col cols="12" md="6" sm="6">
+          <v-text-field
+            v-model="listQuery.search"
+            solo
+            :label="$t('label.search')"
+            prepend-inner-icon="search"
+            class="ml-4"
+          />
+        </v-col>
+        <v-col cols="12" md="6" sm="6">
+          <v-btn
+            color="primary"
+            class="mr-4 float-right"
+            @click="handleFilter"
+          >
+            {{ $t('label.filter') }}
+            <v-icon v-if="!showFilter">mdi-chevron-right</v-icon>
+            <v-icon v-else>mdi-chevron-down</v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
       <v-row>
         <table-queue
           :is-loading="isLoading"
@@ -34,7 +56,9 @@ export default {
       queueList: [],
       isLoading: false,
       totalPages: 0,
+      showFilter: false,
       listQuery: {
+        search: '',
         page: 1,
         limit: 30
       }
@@ -67,6 +91,9 @@ export default {
     },
     async onNext() {
       await this.getListQueue()
+    },
+    handleFilter() {
+      //
     }
   }
 }
