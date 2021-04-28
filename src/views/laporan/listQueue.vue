@@ -107,9 +107,6 @@ export default {
     },
     async onNext() {
       await this.getListQueue()
-    },
-    handleFilter() {
-      //
     }
   }
 }
