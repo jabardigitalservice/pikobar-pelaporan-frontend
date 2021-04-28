@@ -189,3 +189,18 @@ export const statusNotification = [
     value: 'ClosecContactFinishedQuarantine'
   }
 ]
+
+export const queueStatusLabel = [
+  {
+    label: i18n.t('label.processed'),
+    value: 'Progress'
+  },
+  {
+    label: i18n.t('label.done'),
+    value: 'Sent'
+  },
+  {
+    label: i18n.t('label.failed'),
+    value: 'Error'
+  }
+]

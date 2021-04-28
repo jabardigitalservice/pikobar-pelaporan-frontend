@@ -10,7 +10,7 @@
       </v-card-title>
       <v-divider />
       <v-row justify="center">
-        <v-col cols="12" md="6" sm="6">
+        <v-col cols="12" md="4" sm="4">
           <v-text-field
             v-model="listQuery.search"
             solo
@@ -19,16 +19,25 @@
             class="ml-4"
           />
         </v-col>
-        <v-col cols="12" md="6" sm="6">
-          <v-btn
-            color="primary"
-            class="mr-4 float-right"
-            @click="handleFilter"
-          >
-            {{ $t('label.filter') }}
-            <v-icon v-if="!showFilter">mdi-chevron-right</v-icon>
-            <v-icon v-else>mdi-chevron-down</v-icon>
-          </v-btn>
+        <v-spacer />
+        <v-col cols="12" md="3" sm="3">
+          <v-select
+            v-model="listQuery.status"
+            :items="queueStatusLabel"
+            :label="$t('label.all_status')"
+            item-value="value"
+            item-text="label"
+            solo
+          />
+        </v-col>
+        <v-col cols="12" md="3" sm="3" :class="{'mr-4': $vuetify.breakpoint. mdAndUp}">
+          <input-date-picker
+            :format-date="formatDate"
+            :label="$t('label.choose_download_date')"
+            :date-value="listQuery.date"
+            :value-date.sync="listQuery.date"
+            @changeDate="listQuery.date = $event"
+          />
         </v-col>
       </v-row>
       <v-row>
@@ -48,17 +57,22 @@
   </div>
 </template>
 <script>
+import { queueStatusLabel } from '@/utils/constantOption'
 
 export default {
   name: 'Queue',
   data() {
     return {
+      formatDate: 'YYYY-MM-DD',
       queueList: [],
       isLoading: false,
       totalPages: 0,
       showFilter: false,
+      queueStatusLabel: queueStatusLabel,
       listQuery: {
         search: '',
+        status: '',
+        date: '',
         page: 1,
         limit: 30
       }
@@ -67,11 +81,14 @@ export default {
   watch: {
     'listQuery': {
       handler: function(value) {
-        if (value && value.length >= 2) {
+        console.log(value)
+        if (value && value.search.length >= 2) {
           this.listQuery.page = 1
           this.getListQueue()
-        } else if (value && value.length === 0) {
+        } else if (value && value.search.length === 0) {
           this.listQuery.page = 1
+          this.getListQueue()
+        } else {
           this.getListQueue()
         }
       },
@@ -83,6 +100,7 @@ export default {
   },
   methods: {
     async getListQueue() {
+      console.log('cok')
       this.isLoading = true
       const resp = await this.$store.dispatch('exportReports/getListQueue', this.listQuery)
       this.queueList = resp?.data?.history || []
