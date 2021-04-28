@@ -81,11 +81,10 @@ export default {
   watch: {
     'listQuery': {
       handler: function(value) {
-        console.log(value)
-        if (value && value.search.length >= 2) {
+        if (value.search.length >= 2) {
           this.listQuery.page = 1
           this.getListQueue()
-        } else if (value && value.search.length === 0) {
+        } else if (value.search.length === 0) {
           this.listQuery.page = 1
           this.getListQueue()
         } else {
@@ -100,7 +99,6 @@ export default {
   },
   methods: {
     async getListQueue() {
-      console.log('cok')
       this.isLoading = true
       const resp = await this.$store.dispatch('exportReports/getListQueue', this.listQuery)
       this.queueList = resp?.data?.history || []
