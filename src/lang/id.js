@@ -44,7 +44,8 @@ export default {
     dashboard_case: 'Kasus Lama',
     dashboard_case_new: 'Kasus Baru',
     dashboard_test_result: 'Hasil Tes',
-    detail_case: 'Detail Kasus'
+    detail_case: 'Detail Kasus',
+    inspection_report: 'Laporan Pemeriksaan',
   },
   label: {
     username: 'Username',

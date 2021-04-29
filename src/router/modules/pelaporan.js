@@ -15,6 +15,17 @@ const reportRouter = {
   active: false,
   children: [
     {
+      path: '/laporan/inspection-report',
+      component: () => import('@/views/laporan/listInspectionReport'),
+      meta: {
+        title: 'inspection_report',
+        icon: 'library_books',
+        child: true,
+        noCache: true,
+        roles: [rolesPerm.ADMIN, rolesPerm.DINKESKOTA, rolesPerm.FASKES]
+      }
+    },
+    {
       path: '/laporan/create-report',
       component: () => import('@/views/laporan/newFormCreateReport'),
       meta: {
