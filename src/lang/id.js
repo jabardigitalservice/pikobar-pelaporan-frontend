@@ -45,7 +45,7 @@ export default {
     dashboard_case_new: 'Kasus Baru',
     dashboard_test_result: 'Hasil Tes',
     detail_case: 'Detail Kasus',
-    queue: 'Queue'
+    case_list_export_history: 'Riwayat Ekspor List Kasus'
   },
   label: {
     username: 'Username',
@@ -395,6 +395,7 @@ export default {
     add_history: 'Tambah Histori',
     view_case_detail: 'Lihat Detail Kasus',
     all: 'Semua',
+    all_status: 'Semua Status',
     waiting_for_verification: 'Menunggu Diverifikasi',
     patient_recap: 'Rekap Pasien ',
     data_case_rejected: 'Data Kasus Ditolak',
@@ -817,6 +818,7 @@ export default {
     patient_status_update: 'Update Status Pasien',
     status_update: 'Update Status',
     choose_patient: 'Pasien dipilih',
+    choose_download_date: 'Pilih Tanggal Unduh',
     patient_condition_update: 'Update Kondisi Pasien',
     data_transmission_type_and_cluster_type: 'Data jenis transmisi dan jenis klaster',
     recap_close_suspect_possible_confirmed_contacts: 'Rekap Kontak Erat, Suspek, Probable & Terkonfirmasi',

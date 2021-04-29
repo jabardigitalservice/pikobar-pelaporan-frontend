@@ -99,14 +99,14 @@ export const constantRoutes = [
     component: Layout,
     hidden: true,
     meta: {
-      title: 'queue'
+      title: 'list_case'
     },
     children: [{
       path: '/laporan/queue-list-all',
       component: () => import('@/views/laporan/listQueue'),
       hidden: true,
       meta: {
-        title: 'queue'
+        title: 'list_case'
       }
     }]
   }
