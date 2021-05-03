@@ -79,17 +79,20 @@ export default {
     }
   },
   watch: {
-    'listQuery': {
+    'listQuery.search': {
       handler: function(value) {
-        if (value.search.length >= 2) {
+        if (value.length >= 2) {
           this.listQuery.page = 1
           this.getListQueue()
-        } else if (value.search.length === 0) {
+        } else if (!value.length) {
           this.listQuery.page = 1
-          this.getListQueue()
-        } else {
           this.getListQueue()
         }
+      }
+    },
+    'listQuery': {
+      handler: function() {
+        this.getListQueue()
       },
       deep: true
     }
