@@ -19,18 +19,21 @@ import * as firebase from './plugins/firebase'
 import vuetify from './plugins/vuetify'
 Vue.config.performance = process.env.NODE_ENV === 'development'
 
-import * as Sentry from '@sentry/browser'
-import * as Integrations from '@sentry/integrations'
+import * as Sentry from '@sentry/vue'
+import { Integrations } from '@sentry/tracing'
 
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
-    environment: process.env.VUE_APP_ERROR_ENVIRONMENT,
+    Vue,
     dsn: process.env.VUE_APP_SENTRY_DSN,
     release: process.env.VUE_APP_VERSION,
-    integrations: [new Integrations.Vue({
-      Vue,
-      attachProps: true
-    })]
+    environment: process.env.VUE_APP_ERROR_ENVIRONMENT,
+    integrations: [new Integrations.BrowserTracing()],
+
+    // Set tracesSampleRate to 1.0 to capture 100%
+    // of transactions for performance monitoring.
+    // We recommend adjusting this value in production
+    tracesSampleRate: 1.0
   })
 }
 

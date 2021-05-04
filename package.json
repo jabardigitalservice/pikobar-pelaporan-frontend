@@ -10,8 +10,8 @@
     "lint:fix": "vue-cli-service lint --fix"
   },
   "dependencies": {
-    "@sentry/browser": "^5.18.0",
-    "@sentry/integrations": "^5.18.0",
+    "@sentry/tracing": "^6.3.5",
+    "@sentry/vue": "^6.3.5",
     "@turf/boolean-point-in-polygon": "^6.0.1",
     "@turf/turf": "^5.1.6",
     "axios": "^0.19.2",
