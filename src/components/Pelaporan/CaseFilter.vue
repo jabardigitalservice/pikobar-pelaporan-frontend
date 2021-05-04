@@ -65,8 +65,8 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" sm="8" />
-      <v-col class="pt-0 float-right">
+      <v-spacer />
+      <v-col cols="12" md="2" sm="2" class="pt-0 float-right">
         <v-btn
           block
           color="#4f4f4f"
@@ -76,7 +76,7 @@
           {{ $t('label.reset') }}
         </v-btn>
       </v-col>
-      <v-col class="pt-0">
+      <v-col cols="12" md="2" sm="2" class="pt-0">
         <v-btn
           block
           color="success"

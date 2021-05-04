@@ -24,6 +24,7 @@
           <v-btn
             color="primary"
             block
+            @click="showFilter = !showFilter"
           >
             {{ $t('label.filter') }}
             <v-icon v-if="!showFilter">mdi-chevron-right</v-icon>
@@ -31,6 +32,16 @@
           </v-btn>
         </v-col>
       </v-row>
+      <div
+        v-if="showFilter"
+        class="ma-2"
+      >
+        <inspection-report-filter
+          :list-query="listQuery"
+          :query-list.sync="listQuery"
+          :on-search="handleSearch"
+        />
+      </div>
       <v-row>
         <table-inspection-report
           :is-loading="isLoading"
@@ -93,6 +104,12 @@ export default {
     },
     async onNext() {
       await this.getListQueue()
+    },
+    async handleSearch() {
+      this.listQuery.page = 1
+      this.loadingTable = true
+      await this.getListQueue()
+      this.loadingTable = false
     }
   }
 }

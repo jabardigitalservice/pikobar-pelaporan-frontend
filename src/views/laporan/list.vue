@@ -90,7 +90,7 @@
           <v-btn
             color="primary"
             block
-            @click="handleFilter"
+            @click="showFilter = !showFilter"
           >
             {{ $t('label.filter') }}
             <v-icon v-if="!showFilter">mdi-chevron-right</v-icon>
@@ -402,9 +402,6 @@ export default {
     },
     handleNewDetail(item, id) {
       this.$router.push(`/laporan/detail-report/${id}`)
-    },
-    handleFilter() {
-      this.showFilter = !this.showFilter
     },
     async handlePrintPEForm(id, caseCode) {
       const response = await this.$store.dispatch('exportReports/printPEForm', id)
