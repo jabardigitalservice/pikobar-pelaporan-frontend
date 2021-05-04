@@ -23,7 +23,6 @@
             <v-dialog
               ref="dialog"
               v-model="modal"
-              :return-value.sync="dateActive"
               persistent
               width="291"
             >
@@ -40,6 +39,7 @@
               </template>
               <v-date-picker
                 v-model="dateActive"
+                :allowed-dates="disablePastDates"
                 range
                 scrollable
                 locale="id"
@@ -48,6 +48,14 @@
                   class="d-flex justify-end"
                   style="width: 100%"
                 >
+                  <v-btn
+                    color="grey darken-3"
+                    class="button white--text mr-3"
+                    min-width="auto"
+                    @click="dateActive = []"
+                  >
+                    {{ $t('label.reset') }}
+                  </v-btn>
                   <v-btn
                     color="grey darken-3"
                     class="button white--text mr-3"
@@ -306,7 +314,17 @@
     </v-tabs>
     <v-row class="mb-1">
       <v-col cols="12">
-        <chart-test-daily :tab-active="tabActive" />
+        <chart-test-monthly
+          :tab-active="tabActive"
+          :test-tools="filterActive.test_tools"
+          :filter-test-tools.sync="filterActive.test_tools"
+          :data-test-monthly="summaryTestResultMonthly"
+          :test-monthly-data.sync="summaryTestResultMonthly"
+          :data-test-monthly-rdt="summaryTestResultMonthlyRDT"
+          :data-test-monthly-pcr="summaryTestResultMonthlyPCR"
+          :test-monthly-rdt-data.sync="summaryTestResultMonthlyRDT"
+          :test-monthly-pcr-data.sync="summaryTestResultMonthlyPCR"
+        />
       </v-col>
     </v-row>
     <v-row class="mb-1">
@@ -315,14 +333,22 @@
         lg="6"
         sm="12"
       >
-        <chart-test-area :tab-active="tabActive" />
+        <chart-test-area
+          :tab-active="tabActive"
+          :data-test-region="summaryTestResultRegion"
+          :test-region-data.sync="summaryTestResultRegion"
+        />
       </v-col>
       <v-col
         cols="12"
         lg="6"
         sm="12"
       >
-        <chart-test-target :tab-active="tabActive" />
+        <chart-test-target
+          :tab-active="tabActive"
+          :data-test-target="summaryTestResultTargets"
+          :test-target-data.sync="summaryTestResultTargets"
+        />
       </v-col>
     </v-row>
     <v-row class="mb-1">
@@ -331,14 +357,20 @@
         lg="4"
         sm="12"
       >
-        <chart-test-gender :tab-active="tabActive" />
+        <chart-test-gender
+          :tab-active="tabActive"
+          :params="filterActive"
+        />
       </v-col>
       <v-col
         cols="12"
         lg="8"
         sm="12"
       >
-        <chart-test-age :tab-active="tabActive" />
+        <chart-test-age
+          :tab-active="tabActive"
+          :params="filterActive"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -400,7 +432,9 @@ export default {
         address_subdistrict_code: null,
         address_village_code: null,
         min_date: null,
-        max_date: null
+        max_date: null,
+        test_tools: ['vena', 'kapiler']
+
       },
       tabActive: 'all',
       statistic: {
@@ -413,7 +447,12 @@ export default {
         totalPcrPositif: 0,
         totalPcrNegatif: 0,
         totalPcrInvalid: 0
-      }
+      },
+      summaryTestResultMonthly: [],
+      summaryTestResultMonthlyRDT: [],
+      summaryTestResultMonthlyPCR: [],
+      summaryTestResultRegion: [],
+      summaryTestResultTargets: []
     }
   },
   computed: {
@@ -446,13 +485,17 @@ export default {
         desa_kode: value,
         desa_nama: this.villageName
       }
+    },
+    'filterActive': {
+      async handler(value) {
+        await this.getStatisticTestResult()
+        await this.getSummaryTestResult()
+        await this.getSummaryTestResultLocation()
+      },
+      deep: true
     }
   },
-  async beforeMount() {
-    // if (this.roles[0] === 'faskes') {
-    //   this.display = false
-    // }
-
+  async mounted() {
     if (rolesWidget['dinkesKotaAndFaskes'].includes(this.roles[0])) {
       this.disabledDistrict = true
       this.filterActive.address_district_code = this.district_user
@@ -463,7 +506,9 @@ export default {
       kota_nama: this.district_name_user
     }
 
-    this.getStatisticTestResult()
+    await this.getStatisticTestResult()
+    await this.getSummaryTestResult()
+    await this.getSummaryTestResultLocation()
   },
   beforeDestroy() {
     this.clearCity()
@@ -473,6 +518,12 @@ export default {
   methods: {
     filterTab(value) {
       this.tabActive = value
+    },
+    disablePastDates(val) {
+      if (this.dateActive.length > 0) {
+        return val >= new Date(this.dateActive[0]).toISOString().substr(0, 10)
+      }
+      return val
     },
     async onSelectDate(event) {
       this.$refs.dialog.save(event)
@@ -490,7 +541,6 @@ export default {
           this.filterActive.max_date = event[1]
         }
       }
-      this.getStatisticTestResult()
     },
     async onSelectDistrict(value) {
       this.districtCity = value
@@ -500,7 +550,6 @@ export default {
       this.$emit('update:nameDistrict', value.kota_nama || null)
 
       this.filterActive.address_district_code = value.kota_kode
-      this.getStatisticTestResult()
     },
     async onSelectSubDistrict(value) {
       this.subDistrict = value
@@ -509,7 +558,6 @@ export default {
       this.$emit('update:nameSubDistrict', value.kecamatan_nama || null)
 
       this.filterActive.address_subdistrict_code = value.kecamatan_kode
-      this.getStatisticTestResult()
     },
     async onSelectVillage(value) {
       this.village = value
@@ -517,7 +565,6 @@ export default {
       this.$emit('update:nameVillage', value.desa_nama || null)
 
       this.filterActive.address_village_code = value.desa_kode
-      this.getStatisticTestResult()
     },
     async onReset() {
       if (rolesWidget['superadmin'].includes(this.roles[0])) {
@@ -531,8 +578,6 @@ export default {
       this.filterActive.address_village_code = null
       this.filterActive.min_date = null
       this.filterActive.max_date = null
-
-      this.getStatisticTestResult()
     },
     clearDate() {
       this.dateActive = []
@@ -560,15 +605,7 @@ export default {
     },
     async getStatisticTestResult() {
       this.loadingStatistic = true
-
-      const params = {
-        address_district_code: this.filterActive.address_district_code,
-        address_subdistrict_code: this.filterActive.address_subdistrict_code,
-        address_village_code: this.filterActive.address_village_code,
-        min_date: this.filterActive.min_date,
-        max_date: this.filterActive.max_date
-      }
-      const res = await this.$store.dispatch('statistic/countTestResult', params)
+      const res = await this.$store.dispatch('statistic/countTestResult', this.filterActive)
 
       if (res) this.loadingStatistic = false
 
@@ -597,6 +634,19 @@ export default {
           totalPcrInvalid: 0
         }
       }
+    },
+    async getSummaryTestResult() {
+      const res = await this.$store.dispatch('statistic/summaryTestResult', this.filterActive)
+      const { data } = res
+      this.summaryTestResultMonthly = Array.isArray(data) ? data[0].month : []
+      this.summaryTestResultMonthlyRDT = Array.isArray(data) ? data[0].month_rdt : []
+      this.summaryTestResultMonthlyPCR = Array.isArray(data) ? data[0].month_pcr : []
+    },
+    async getSummaryTestResultLocation() {
+      const res = await this.$store.dispatch('statistic/summaryTestResultLocation', this.filterActive)
+      const { data } = res
+      this.summaryTestResultRegion = Array.isArray(data) ? data[0].summary : []
+      this.summaryTestResultTargets = Array.isArray(data) ? data[0].targets : []
     }
   }
 }

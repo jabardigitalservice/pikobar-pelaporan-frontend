@@ -66,5 +66,46 @@ export default {
     } catch (error) {
       return error.response
     }
+  },
+  async exportCaseQueue({ commit }, params) {
+    try {
+      const response = await requestServer(`/api/queue/cases`, 'GET', params)
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
+  async exportHistoryCaseQueue({ commit }, params) {
+    try {
+      const response = await requestServer(`/api/queue/histories`, 'GET', params)
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
+  async getListQueue({ commit }, params) {
+    try {
+      const response = await requestServer(`/api/queue`, 'GET', params)
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
+  async resendEmailQueue({ commit }, data) {
+    const { jobID, body } = data
+    try {
+      const response = await requestServer(`/api/queue/${jobID}`, 'PUT', body)
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
+  async getListEmailRecipientQueue({ commit }, jobID) {
+    try {
+      const response = await requestServer(`/api/queue/list-email/${jobID}`, 'GET')
+      return response
+    } catch (error) {
+      return error.response
+    }
   }
 }

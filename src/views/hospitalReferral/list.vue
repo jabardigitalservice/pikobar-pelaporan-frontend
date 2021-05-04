@@ -171,8 +171,8 @@ export default {
         }
       }
       const response = await this.$store.dispatch('reports/caseHospitalReferralInOut', data)
-      this.listReferral = response ? response.data.cases : []
-      this.totalList = response ? response.data._meta.totalPages : 0
+      this.listReferral = response.data?.cases || []
+      this.totalList = response.data?._meta?.totalPages || 0
     },
     async handleSummary() {
       let data

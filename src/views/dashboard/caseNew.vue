@@ -410,37 +410,37 @@ export default {
 </script>
 
 <style lang="scss">
-.warning-background {
-  background-image: url('../../static/warning_green_icon.svg');
-}
-.dashboard-case-new {
-  .disclaimer {
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 24px;
-    background: linear-gradient(80.13deg, #27ae60 0%, #6fcf97 100%);
-    padding: 24px;
+  .warning-background {
+    background-image: url('../../static/warning_green_icon.svg');
   }
+  .dashboard-case-new {
+    .disclaimer {
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
+      background: linear-gradient(80.13deg, #27ae60 0%, #6fcf97 100%);
+      padding: 24px;
+    }
 
-  .disclaimer .help {
-    font-size: 16px;
-    text-decoration: underline;
-  }
+    .disclaimer .help {
+      font-size: 16px;
+      text-decoration: underline;
+    }
 
-  .v-text-field.v-text-field--enclosed .v-text-field__details {
-    display: none !important;
-  }
+    .v-text-field.v-text-field--enclosed .v-text-field__details {
+      display: none !important;
+    }
 
-  .button {
-    height: 46px !important;
-    text-transform: none;
-  }
+    .button {
+      height: 46px !important;
+      text-transform: none;
+    }
 
-  .row-eq-height {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
+    .row-eq-height {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+    }
   }
-}
 </style>
