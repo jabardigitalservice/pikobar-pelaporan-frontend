@@ -19,8 +19,8 @@
             <v-row>
               <v-col>
                 <v-progress-linear
-                  v-model="item.job_progress"
                   :color="colorProgressBar(item.job_progress)"
+                  :value="item.job_progress"
                   height="15"
                   rounded
                 />
