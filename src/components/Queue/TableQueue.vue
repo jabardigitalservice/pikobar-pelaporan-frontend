@@ -154,7 +154,6 @@ export default {
       delete val['email']
       delete val['_id']
       delete val['job_status']
-      delete val['job_progress']
       delete val['createdAt']
 
       this.formResend = val
