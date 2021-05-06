@@ -1,11 +1,30 @@
 <template>
   <div>
+    <v-card class="pa-1 mt-1 mx-auto header-detail-case">
+      <v-row justify="space-between">
+        <v-col cols="12" md="8" sm="8">
+          <v-card-text class="font-weight-bold">
+            <v-card-title class="pt-0 text-header-detail-case">
+              {{ $t('label.new_positive_case') }} : 20
+            </v-card-title>
+            <v-card-subtitle class="text-sub-header-detail-case">
+              {{ $t('label.last_updated') }}: 2021/03/31 10:00
+            </v-card-subtitle>
+          </v-card-text>
+        </v-col>
+        <v-col cols="12" md="4" sm="4">
+          <div
+            class="background-card-test-labkes"
+          />
+        </v-col>
+      </v-row>
+    </v-card>
     <v-card
       outlined
       class="mt-2"
     >
       <v-card-title class="pb-0">
-        {{ $t('label.list_positive_examination_results') }}
+        {{ $t('label.list_labkes_report_data') }}
         <v-spacer />
       </v-card-title>
       <v-divider />
@@ -114,3 +133,11 @@ export default {
   }
 }
 </script>
+<style scoped>
+.background-card-test-labkes {
+  background-image: url('../../static/icon-check-covid.svg');
+  min-height: 100%;
+  position: relative;
+  left: calc(100% - 120px);
+}
+</style>

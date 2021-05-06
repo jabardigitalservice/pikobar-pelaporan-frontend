@@ -960,6 +960,9 @@ export default {
     case_has_been_rejected: 'Kasus telah ditolak',
     version_date: 'Versi Tanggal',
     dashboard_disclaimer_2: 'Sistem mungkin mengalami keterlambatan dalam menampilkan data terbaru. Tunggu 5-10 menit setelah Anda input data baru dan lakukan muat ulang.',
+    list_labkes_report_data: 'List Data Laporan LABKES',
+    new_positive_case: 'Kasus positif baru',
+    last_updated: 'Terakhir Diperbarui'
   },
   success: {
     login_success: 'Login Berhasil',

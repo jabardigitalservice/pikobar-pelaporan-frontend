@@ -26,7 +26,7 @@
               size="125"
               tile
             >
-              <v-img src="@/static/hospital_reference_1.svg" />
+              <v-img src="@/static/hospital-reference-1.svg" />
             </v-avatar>
             <v-list-item-content class="flex-wrap pos-center">
               <v-list-item-title class="font-weight-bold" style="font-size: 16px">
@@ -59,7 +59,7 @@
               size="125"
               tile
             >
-              <v-img src="@/static/hospital_reference_2.svg" />
+              <v-img src="@/static/hospital-reference-2.svg" />
             </v-avatar>
             <v-list-item-content class="pos-center">
               <v-list-item-title class="flex-nowrap font-weight-bold" style="font-size: 16px">

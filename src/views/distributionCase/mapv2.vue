@@ -313,7 +313,7 @@
       <div class="modal-disclaimer">
         <div class="text-center pb-5">
           <v-img
-            src="@/static/modal-disclaimer.svg"
+            src="@/static/confirmation-logo.svg"
             width="75%"
             class="img-center"
           />

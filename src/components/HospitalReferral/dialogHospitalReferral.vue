@@ -10,7 +10,7 @@
           v-if="!isEdit"
         >
           <v-card-title class="justify-center">
-            <img src="@/static/hospital_reference_1.svg">
+            <img src="@/static/hospital-reference-1.svg">
           </v-card-title>
           <v-card-title class="justify-center">
             <div class="font-weight-bold" style="font-size: 16px">
@@ -205,6 +205,6 @@ export default {
 
 <style scoped>
  .warning-background {
-   background-image: url('../../static/warning_red_icon.svg')
+   background-image: url('../../static/icon-warning-red.svg')
  }
 </style>

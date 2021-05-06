@@ -411,7 +411,7 @@ export default {
 
 <style lang="scss">
 .warning-background {
-  background-image: url('../../static/warning_green_icon.svg');
+  background-image: url('../../static/icon-warning-green.svg');
 }
 .dashboard-case-new {
   .disclaimer {

@@ -6,7 +6,7 @@
 
 <script>
 import Lottie from 'vue-lottie'
-import animationLoading from '@/static/logistik_loader.json'
+import animationLoading from '@/static/loader.svg'
 
 export default {
   name: 'LoadingLottie',
