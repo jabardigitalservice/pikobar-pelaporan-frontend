@@ -160,7 +160,7 @@ export default {
   },
   data() {
     return {
-      formatDate: 'YYYY-MM-DD',
+      formatDate: 'YYYY/MM/DD',
       disabledDistrict: false,
       codeDistrict: '',
       nameVillage: '',
