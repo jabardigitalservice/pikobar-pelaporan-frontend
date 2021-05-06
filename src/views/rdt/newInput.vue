@@ -28,7 +28,7 @@
             <div
               v-if="singleEntry"
             >
-              <formRapid />
+              <form-rapid />
             </div>
             <div
               v-else
@@ -46,11 +46,11 @@
 </template>
 
 <script>
-import formRapid from './formRapid'
+import FormRapid from './formRapid'
 export default {
   name: 'NewInput',
   components: {
-    formRapid
+    FormRapid
   },
   data() {
     return {

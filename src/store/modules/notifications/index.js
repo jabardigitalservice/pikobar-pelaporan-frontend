@@ -22,8 +22,8 @@ const actions = {
   async getListNotifications({ commit }, params) {
     try {
       const response = await requestServer(`/api/notifications`, 'GET', params)
-      const listNotification = response.data ? response.data.itemsList : []
-      const totalPages = response.data ? response.data._meta.totalPages : 0
+      const listNotification = response.data?.itemsList || []
+      const totalPages = response.data?._meta?.totalPages || 0
       commit('NOTIFICATION_LIST', listNotification)
       if (!params.onSideBar) commit('TOTAL_PAGES', totalPages)
       return response
