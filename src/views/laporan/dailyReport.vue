@@ -97,7 +97,7 @@ export default {
   data() {
     return {
       rolesWidget,
-      formatDate: 'YYYY-MM-DD',
+      formatDate: 'YYYY/MM/DD',
       reportingDate: this.$moment().format('DD MMMM YYYY'),
       loading: false,
       headers: [
