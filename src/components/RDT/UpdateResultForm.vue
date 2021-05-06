@@ -292,7 +292,7 @@ export default {
   data() {
     return {
       loading: false,
-      formatDate: 'YYYY-MM-DD',
+      formatDate: 'YYYY/MM/DD',
       formRapid: {
         tool_tester: '',
         test_location_type: ''
