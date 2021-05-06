@@ -341,7 +341,7 @@ export default {
       detailAddres: '',
       testAddres: '',
       loading: false,
-      formatDate: 'YYYY-MM-DD',
+      formatDate: 'YYYY/MM/DD',
       listLab: [],
       isInitialState: true,
       districtCode: null,
