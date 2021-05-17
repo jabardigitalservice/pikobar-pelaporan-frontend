@@ -29,11 +29,7 @@ if (process.env.NODE_ENV === 'production') {
     release: process.env.VUE_APP_VERSION,
     environment: process.env.VUE_APP_ERROR_ENVIRONMENT,
     integrations: [new Integrations.BrowserTracing()],
-
-    // Set tracesSampleRate to 1.0 to capture 100%
-    // of transactions for performance monitoring.
-    // We recommend adjusting this value in production
-    tracesSampleRate: 1.0
+    tracesSampleRate: 0.2
   })
 }
 
