@@ -37,21 +37,21 @@
       <v-col cols="12" md="2" sm="2" class="pt-0 float-right">
         <v-btn
           block
-          color="#4f4f4f"
-          class="btn-reset"
-          @click="onReset"
-        >
-          {{ $t('label.reset') }}
-        </v-btn>
-      </v-col>
-      <v-col cols="12" md="2" sm="2" class="pt-0">
-        <v-btn
-          block
           color="success"
           class="btn-cari"
           @click="onSearch"
         >
           {{ $t('label.look_for_it') }}
+        </v-btn>
+      </v-col>
+      <v-col cols="12" md="2" sm="2" class="pt-0">
+        <v-btn
+          block
+          color="#4f4f4f"
+          class="btn-reset white--text"
+          @click="onReset"
+        >
+          {{ $t('label.reset') }}
         </v-btn>
       </v-col>
     </v-row>
