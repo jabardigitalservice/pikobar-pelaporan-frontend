@@ -157,6 +157,7 @@ export default {
       }
       delete this.formPasien['_id']
       delete this.formPasien['id_case']
+      this.isLoading = true
       try {
         this.formPasien.input_source = 'form app'
         let response
