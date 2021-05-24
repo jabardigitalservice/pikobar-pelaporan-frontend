@@ -82,6 +82,7 @@
                 <img
                   :src="getImgUrl()"
                   width="60px"
+                  alt="Img-Url"
                 >
               </div>
               <div>

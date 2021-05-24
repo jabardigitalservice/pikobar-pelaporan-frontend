@@ -11,8 +11,8 @@
         <v-row>
           <v-col cols="12" sm="12" md="12">
             <center>
-              <img v-if="!isUpload" height="140" src="../../../static/upload_no_dokumen.svg">
-              <img v-if="isUpload" height="140" src="../../../static/upload_dokumen.svg">
+              <img v-if="!isUpload" height="140" src="../../../static/upload_no_dokumen.svg" alt="upload-no-dokumen">
+              <img v-if="isUpload" height="140" src="../../../static/upload_dokumen.svg" alt="upload-dokumen">
             </center>
           </v-col>
           <v-col cols="12" sm="12" md="6" offset-md="3">

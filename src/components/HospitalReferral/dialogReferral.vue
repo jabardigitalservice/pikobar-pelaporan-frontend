@@ -2,7 +2,7 @@
   <v-dialog v-model="show" persistent max-width="32%">
     <v-card class="pa-7">
       <v-row class="mx-0 mb-8" justify="center" align="center">
-        <img src="@/static/hospital_referral_succses.svg">
+        <img src="@/static/hospital_referral_succses.svg" alt="hospital-referral-succses">
       </v-row>
       <v-row class="mx-0 mb-5 text-center" justify="center">
         {{ message }}

@@ -13,7 +13,7 @@ const CACHE_MAX_AGE = 2 * 60 * 1000
 
 // Extracting 'axios-cache-adapter/src/exclude' as importing it leads to webpack not compiling it.
 function excludeChace(config, req) {
-  const { exclude = {}, debug } = config
+  const { exclude = {}} = config
 
   if (typeof exclude.filter === 'function' && exclude.filter(req)) {
     debug(`Excluding request by filter ${req.url}`)

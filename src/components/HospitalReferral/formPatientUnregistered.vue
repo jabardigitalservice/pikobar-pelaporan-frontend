@@ -15,7 +15,7 @@
       >
         <v-expansion-panel>
           <v-expansion-panel-header style="color: #27AE60;">
-            <img src="@/static/hospital_refferal.svg" style="max-width: 30px;">
+            <img src="@/static/hospital_refferal.svg" alt="hospital-refferal" style="max-width: 30px;">
             {{ $t('label.choose_referral_hospital') }}
             <v-divider />
           </v-expansion-panel-header>

@@ -3,12 +3,12 @@
     <template v-slot:default>
       <thead>
         <tr>
-          <th class="text-left">{{ $t('label.results').toUpperCase() }}</th>
-          <th class="text-left">{{ $t('label.method').toUpperCase() }}</th>
-          <th class="text-left">{{ $t('label.sampling').toUpperCase() }}</th>
-          <th class="text-left">{{ $t('label.test_place').toUpperCase() }}</th>
-          <th class="text-left">{{ $t('label.test_date').toUpperCase() }}</th>
-          <th class="text-left">{{ $t('label.update_date').toUpperCase() }}</th>
+          <th scope="col" class="text-left">{{ $t('label.results').toUpperCase() }}</th>
+          <th scope="col" class="text-left">{{ $t('label.method').toUpperCase() }}</th>
+          <th scope="col" class="text-left">{{ $t('label.sampling').toUpperCase() }}</th>
+          <th scope="col" class="text-left">{{ $t('label.test_place').toUpperCase() }}</th>
+          <th scope="col" class="text-left">{{ $t('label.test_date').toUpperCase() }}</th>
+          <th scope="col" class="text-left">{{ $t('label.update_date').toUpperCase() }}</th>
         </tr>
       </thead>
       <tbody>
