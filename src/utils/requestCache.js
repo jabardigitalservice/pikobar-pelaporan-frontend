@@ -13,7 +13,7 @@ const CACHE_MAX_AGE = 2 * 60 * 1000
 
 // Extracting 'axios-cache-adapter/src/exclude' as importing it leads to webpack not compiling it.
 function excludeChace(config, req) {
-  const { exclude = {}, debug } = config
+  const { exclude = {}, debug = {}} = config
 
   if (typeof exclude.filter === 'function' && exclude.filter(req)) {
     debug(`Excluding request by filter ${req.url}`)
@@ -150,16 +150,16 @@ const purgeCache = async function() {
 
 const isSecure = String(process.env.VUE_APP_SECURE) === 'true'
 const method = isSecure ? 'https' : 'http'
-let url
+let urlHost
 if (process.env.VUE_APP_PORT !== undefined && process.env.VUE_APP_PORT.length > 0) {
-  url = `${method}://${process.env.VUE_APP_URL}:${process.env.VUE_APP_PORT}`
+  urlHost = `${method}://${process.env.VUE_APP_URL}:${process.env.VUE_APP_PORT}`
 } else {
-  url = `${method}://${process.env.VUE_APP_URL}`
+  urlHost = `${method}://${process.env.VUE_APP_URL}`
 }
 
 const service = axios.create({
   // The cache adapter.
-  baseURL: url, // api base_url
+  baseURL: urlHost, // api base_url
   adapter: myAdapter(cacheAdapter.adapter),
   cache: {
     key: null,
@@ -221,7 +221,7 @@ service.interceptors.response.use(
   }
 )
 
-const get = async function(url = '', config) {
+const get = async function(url, config) {
   return service.get(url, config)
 }
 
