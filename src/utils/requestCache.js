@@ -12,7 +12,7 @@ import { ResponseRequest } from '@/utils/constantVariable'
 const CACHE_MAX_AGE = 2 * 60 * 1000
 
 // Extracting 'axios-cache-adapter/src/exclude' as importing it leads to webpack not compiling it.
-function excludeChace(config = {}, req) {
+function excludeChace(config, req) {
   const { exclude = {}, debug } = config
 
   if (typeof exclude.filter === 'function' && exclude.filter(req)) {
@@ -221,7 +221,7 @@ service.interceptors.response.use(
   }
 )
 
-const get = async function(url, config) {
+const get = async function(url = '', config) {
   return service.get(url, config)
 }
 
