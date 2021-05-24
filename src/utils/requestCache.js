@@ -157,7 +157,7 @@ if (process.env.VUE_APP_PORT !== undefined && process.env.VUE_APP_PORT.length > 
   urlHost = `${method}://${process.env.VUE_APP_URL}`
 }
 
-const service = axios.create({
+const serviceCache = axios.create({
   // The cache adapter.
   baseURL: urlHost, // api base_url
   adapter: myAdapter(cacheAdapter.adapter),
@@ -168,7 +168,7 @@ const service = axios.create({
 })
 
 // request interceptor
-service.interceptors.request.use(
+serviceCache.interceptors.request.use(
   config => {
     // Do something before request is sent
     if (store.getters['user/token']) {
@@ -184,7 +184,7 @@ service.interceptors.request.use(
 )
 
 // response interceptor
-service.interceptors.response.use(
+serviceCache.interceptors.response.use(
   /**
    * If you want to get information such as headers or status
    * Please return  response => response
@@ -222,7 +222,7 @@ service.interceptors.response.use(
 )
 
 const get = async function(url, config) {
-  return service.get(url, config)
+  return serviceCache.get(url, config)
 }
 
 export default { get, clearCacheByKey, clearCacheByGroup, clearCacheByGroups, purgeCache }
