@@ -13,10 +13,10 @@ const CACHE_MAX_AGE = 2 * 60 * 1000
 
 // Extracting 'axios-cache-adapter/src/exclude' as importing it leads to webpack not compiling it.
 function excludeChace(config, req) {
-  const { exclude = {}, debug_ } = config
+  const { exclude = {}, debug } = config
 
   if (typeof exclude.filter === 'function' && exclude.filter(req)) {
-    debug_(`Excluding request by filter ${req.url}`)
+    debug(`Excluding request by filter ${req.url}`)
 
     return true
   }
@@ -25,7 +25,7 @@ function excludeChace(config, req) {
   const hasQueryParams = req.url.match(/\?.*$/) || !isEmpty(req.params)
 
   if (exclude.query && hasQueryParams) {
-    debug_(`Excluding request by query ${req.url}`)
+    debug(`Excluding request by query ${req.url}`)
 
     return true
   }
@@ -34,7 +34,7 @@ function excludeChace(config, req) {
   const found = find(paths, regexp => req.url.match(regexp))
 
   if (found) {
-    debug_(`Excluding request by url match ${req.url}`)
+    debug(`Excluding request by url match ${req.url}`)
 
     return true
   }

@@ -78,11 +78,11 @@ module.exports = {
       })
       .end()
 
-    config.when(process.env.NODE_ENV === 'development', config =>
-      config.devtool('cheap-source-map')
+    config.when(process.env.NODE_ENV === 'development', configDev =>
+      configDev.devtool('cheap-source-map')
     )
-    config.when(process.env.NODE_ENV === 'production', config => {
-      config.optimization.splitChunks({
+    config.when(process.env.NODE_ENV === 'production', configOpt => {
+      configOpt.optimization.splitChunks({
         chunks: 'all',
         cacheGroups: {
           libs: {

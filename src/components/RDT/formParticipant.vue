@@ -42,18 +42,6 @@
                 solo-inverted
               />
             </ValidationProvider>
-            <!--            <ValidationProvider-->
-            <!--              v-slot="{ errors }"-->
-            <!--              rules="required"-->
-            <!--            >-->
-            <!--              <label class="required">{{ $t('label.mechanism') }}</label>-->
-            <!--              <v-select-->
-            <!--                v-model="formRapid.mechanism"-->
-            <!--                :error-messages="errors"-->
-            <!--                :items="mechanismOptions"-->
-            <!--                solo-->
-            <!--              />-->
-            <!--            </ValidationProvider>-->
             <ValidationProvider
               v-slot="{ errors }"
               :rules="isNikNull ? 'numeric' : 'required|numeric|sixteenDigits'"
@@ -121,22 +109,6 @@
                 type="number"
               />
             </ValidationProvider>
-            <!-- Sementara fitur kategori di hide -->
-            <!-- <ValidationProvider
-              v-slot="{ errors }"
-              rules="required"
-            >
-              <label class="required">{{ $t('label.category') }}</label>
-              <v-select
-                v-model="formRapid.category"
-                :error-messages="errors"
-                :items="categoryItems"
-                item-text="label"
-                item-value="value"
-                solo
-                @change="onChangeCategory"
-              />
-            </ValidationProvider> -->
             <ValidationProvider
               v-slot="{ errors }"
               rules="required"
