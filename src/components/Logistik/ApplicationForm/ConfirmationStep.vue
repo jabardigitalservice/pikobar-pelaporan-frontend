@@ -321,9 +321,6 @@ export default {
   .margin-top-10-data-confirmation {
     margin-top: 10px;
   }
-  .padding-100-data-confirmation {
-    padding: 100px 100px;
-  }
   .save-style-data-confirmation {
     margin-top: 20px;
     font-size: 20px;

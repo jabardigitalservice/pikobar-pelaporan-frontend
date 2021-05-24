@@ -30,24 +30,6 @@
           </v-col>
           <v-col auto />
         </v-row>
-        <!-- Sementara field kategori di hide -->
-        <!-- <v-row>
-            <v-col
-              cols="12"
-              md="3"
-              sm="12"
-            >
-              <label>{{ $t('label.category') }}</label>
-            </v-col>
-            <v-col auto>
-              <v-text-field
-                v-model="detailData.category"
-                disabled
-                hide-details
-                solo-inverted
-              />
-            </v-col>
-        </v-row>-->
         <v-row>
           <v-col cols="12" md="3" sm="12">
             <label>{{ $t('label.goals') }}</label>
