@@ -12,7 +12,7 @@ import { ResponseRequest } from '@/utils/constantVariable'
 const CACHE_MAX_AGE = 2 * 60 * 1000
 
 // Extracting 'axios-cache-adapter/src/exclude' as importing it leads to webpack not compiling it.
-function exclude(config = {}, req) {
+function excludeChace(config = {}, req) {
   const { exclude = {}, debug } = config
 
   if (typeof exclude.filter === 'function' && exclude.filter(req)) {
@@ -73,7 +73,7 @@ const debug = cacheAdapter.config.debug
 // Our adapter factory which handles network errors, and groups.
 const myAdapter = function(adapter) {
   return async function(req) {
-    const isExcluded = exclude(cacheAdapter.config, req)
+    const isExcluded = excludeChace(cacheAdapter.config, req)
     const key = getKey(req)
 
     // Add the key to the groups.

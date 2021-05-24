@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - master
+      - hotfix/reduce-code-smells
     pull_request:
       types: [assigned, opened, synchronize, reopened]
 name: Run SonarCloud Scan

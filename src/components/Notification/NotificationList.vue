@@ -117,8 +117,8 @@ export default {
     },
     async isSubmit(value) {
       if (value) {
-        const response = await this.$store.dispatch('reports/verifyCase', this.verificationQuery)
-        if (response.status === 200 || response.status === 201) {
+        const responseVerifyCase = await this.$store.dispatch('reports/verifyCase', this.verificationQuery)
+        if (responseVerifyCase.status === 200 || responseVerifyCase.status === 201) {
           await this.$store.dispatch('toast/successToast', this.verificationQuery.data.verified_status === 'verified' ? this.$t('success.verification_success') : this.$t('success.rejection_success'))
           this.getListNotifications()
         }
@@ -147,22 +147,22 @@ export default {
       this.isLoading = false
     },
     async handleDetail(id, eventType) {
-      const response = await this.$store.dispatch('reports/detailReportCase', id)
-      if (!response?.data) return this.showDialogFailed(true, this.$t('label.data_not_found'))
+      const responseDetailReportCase = await this.$store.dispatch('reports/detailReportCase', id)
+      if (!responseDetailReportCase?.data) return this.showDialogFailed(true, this.$t('label.data_not_found'))
       if (eventType !== 'CaseCreated') {
         const path = `/laporan/detail-report/${id}`
         if (this.$route.path !== path) this.$router.push(path)
       } else {
         this.$store.commit('animationLottie/SET_LOADING', true)
         const path = `/laporan/detail-report/${id}`
-        if (this.roles[0] === 'faskes' && response.data.verified_status === 'declined' && this.$route.path !== path) this.$router.push(path)
+        if (this.roles[0] === 'faskes' && responseDetailReportCase.data.verified_status === 'declined' && this.$route.path !== path) this.$router.push(path)
         const responseCloseContact = await this.$store.dispatch('closeContactCase/getListCloseContactByCase', id)
-        if ((this.roles[0] !== 'faskes' && response.data.verified_status === 'declined')) {
+        if ((this.roles[0] !== 'faskes' && responseDetailReportCase.data.verified_status === 'declined')) {
           this.showDialogFailed(true, this.$t('label.case_has_been_rejected'))
-        } else if (response.data.verified_status === 'verified') {
+        } else if (responseDetailReportCase.data.verified_status === 'verified') {
           this.showDialogFailed(true, this.$t('label.verification_expired_title'))
         } else {
-          this.caseDetail = response.data
+          this.caseDetail = responseDetailReportCase.data
           this.closeContactDetail = responseCloseContact.data
           this.showVerificationForm = true
         }
