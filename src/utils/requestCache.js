@@ -191,33 +191,33 @@ serviceCache.interceptors.response.use(
    */
   async(response) => {
     // store.commit('animationLottie/SET_LOADING', false)
-    const res = response.data
+    const resChache = response.data
 
-    return res
+    return resChache
   },
-  async(error) => {
+  async(error_) => {
     // await store.dispatch('animationLottie/setLoading', false)
-    if (!error.response.data.errors) {
-      const status = await error.response.status
+    if (!error_.response.data.errors) {
+      const status = await error_.response.status
       switch (status) {
         case ResponseRequest.NOTFOUND:
-          await store.dispatch('toast/errorToast', error.response.data.message)
+          await store.dispatch('toast/errorToast', error_.response.data.message)
           break
         case ResponseRequest.SERVERERROR:
-          await store.dispatch('toast/errorToast', error.response.data.message)
+          await store.dispatch('toast/errorToast', error_.response.data.message)
           break
         case ResponseRequest.UNAUTHORIZED:
-          await store.dispatch('toast/errorToast', error.response.data.message)
+          await store.dispatch('toast/errorToast', error_.response.data.message)
           break
         case ResponseRequest.UNPROCESSABLE:
-          await store.dispatch('toast/errorToast', error.response.data.message)
+          await store.dispatch('toast/errorToast', error_.response.data.message)
           break
         default:
-          await store.dispatch('toast/errorToast', error.message)
+          await store.dispatch('toast/errorToast', error_.message)
           break
       }
     }
-    return Promise.reject(error)
+    return Promise.reject(error_)
   }
 )
 
