@@ -917,6 +917,7 @@ export default {
     usage_guide: 'Panduan Penggunaan',
     terms_and_conditions: 'Syarat & Ketentuan',
     close_contact_finished_quarantine: 'Kontak Erat Selesai Karantina',
+    positive_health_laboratory_results: 'Hasil positif laboratorium kesehatan',
     no_status: 'Tidak Ada Status',
     import_results: 'Hasil Impor',
     usage_guide_import_1: '1. Siapkan data yang akan diimport',
