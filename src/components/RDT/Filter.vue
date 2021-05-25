@@ -135,7 +135,7 @@ export default {
   },
   data() {
     return {
-      formatDate: 'YYYY-MM-DD',
+      formatDate: 'YYYY/MM/DD',
       districtCity: {
         kota_kode: ''
       },
