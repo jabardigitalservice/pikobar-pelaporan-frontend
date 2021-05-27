@@ -176,14 +176,6 @@ export const healthWorkerList = [
 ]
 
 export const statusNotification = [
-  // {
-  //   label: i18n.t('route.dashboard_case_new'),
-  //   value: 'CaseCreated'
-  // },
-  // {
-  //   label: i18n.t('label.waiting_for_verification'),
-  //   value: 'CasePending'
-  // },
   {
     label: i18n.t('label.verification_expired_title'),
     value: 'CaseVerified'
@@ -195,5 +187,20 @@ export const statusNotification = [
   {
     label: i18n.t('label.close_contact_finished_quarantine'),
     value: 'ClosecContactFinishedQuarantine'
+  }
+]
+
+export const queueStatusLabel = [
+  {
+    label: i18n.t('label.processed'),
+    value: 'Progress'
+  },
+  {
+    label: i18n.t('label.done'),
+    value: 'Sent'
+  },
+  {
+    label: i18n.t('label.failed'),
+    value: 'Error'
   }
 ]

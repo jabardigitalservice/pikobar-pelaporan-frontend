@@ -82,6 +82,9 @@
                 <v-list-item @click="onExportHistoryCase">
                   {{ $t('label.export_clinical_history') }}
                 </v-list-item>
+                <v-list-item @click="handleToListQueue">
+                  {{ $t('label.export_history') }}
+                </v-list-item>
               </v-card>
             </v-menu>
           </v-card-actions>
@@ -135,81 +138,6 @@
         />
       </v-row>
     </v-card>
-    <pagination
-      :total="totalList"
-      :page.sync="listQuery.page"
-      :limit.sync="listQuery.limit"
-      :on-next="onNext"
-    />
-    <dialog-delete
-      :dialog="dialog"
-      :data-deleted="dataDelete"
-      :dialog-delete.sync="dialog"
-      :delete-date.sync="dataDelete"
-      :store-path-delete="`reports/deleteReportCase`"
-      :store-path-get-list="`reports/listReportCase`"
-      :list-query="listQuery"
-    />
-    <dialog-detail-case
-      :show-dialog="dialogDetailCase"
-      :show.sync="dialogDetailCase"
-      :detail-case="detailCase"
-      :close-contact-case="closeContactCase"
-      :case-detail.sync="detailCase"
-      :list-history-case="listHistoryCase"
-      :referral-history-case="referralHistoryCase"
-      :title-detail="$t('label.detail_case')"
-    />
-    <dialog-update-case
-      :show-dialog="dialogUpdateCase"
-      :show.sync="dialogUpdateCase"
-      :form-pasien="formPasien"
-    />
-    <dialog-update-history-case
-      :show-dialog="dialogHistoryCase"
-      :show.sync="dialogHistoryCase"
-      :form-riwayat-pasien="formRiwayatPasien"
-      :form-pasien="formPasien"
-    />
-    <v-dialog v-model="failedDialog" persistent max-width="30%">
-      <v-card>
-        <v-card-title class="headline"><v-icon x-large color="red" left>mdi-close-circle</v-icon>{{ $t('errors.file_failed_upload') }}</v-card-title>
-        <v-card-text>{{ errorMessage }}</v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="green darken-1" text @click="failedDialog = false">{{ $t('label.ok') }}</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <v-dialog v-model="successDialog" max-width="40%">
-      <v-card class="container">
-        <v-row class="mx-0" align="center" justify="center">
-          <v-card-title><v-icon size="80px" color="success">mdi-checkbox-marked-circle</v-icon></v-card-title>
-        </v-row>
-        <v-row class="mx-0" align="center" justify="center">
-          <v-card-title class="display-1 font-weight-bold pt-0 success-message">{{ $t('label.congratulation') }}</v-card-title>
-        </v-row>
-        <v-row class="mx-0" align="center" justify="center">
-          <v-card-text
-            :class="{'subtitle-1': $vuetify.breakpoint. mdAndDown, 'headline': $vuetify.breakpoint. lgAndUp}"
-            class="pt-0 text-center success-message"
-          >
-            {{ $t('label.import_success_message') }}
-          </v-card-text>
-        </v-row>
-        <v-row class="mx-0" align="center" justify="center">
-          <v-btn color="green darken-1" text @click="successDialog = false">{{ $t('label.ok') }}</v-btn>
-        </v-row>
-      </v-card>
-    </v-dialog>
-    <import-form
-      :show-import-form="showImportForm"
-      :refresh-page="handleSearch"
-      :show.sync="showImportForm"
-      :failed.sync="failedDialog"
-      :success.sync="successDialog"
-      :message.sync="errorMessage"
-    />
     <v-toolbar
       v-if="multipleSelect"
       color="primary"
@@ -258,6 +186,69 @@
         </v-col>
       </v-row>
     </v-toolbar>
+    <pagination
+      :total="totalList"
+      :page.sync="listQuery.page"
+      :limit.sync="listQuery.limit"
+      :on-next="onNext"
+    />
+    <dialog-delete
+      :dialog="dialog"
+      :data-deleted="dataDelete"
+      :dialog-delete.sync="dialog"
+      :delete-date.sync="dataDelete"
+      :store-path-delete="`reports/deleteReportCase`"
+      :store-path-get-list="`reports/listReportCase`"
+      :list-query="listQuery"
+    />
+    <dialog-detail-case
+      :show-dialog="dialogDetailCase"
+      :show.sync="dialogDetailCase"
+      :detail-case="detailCase"
+      :close-contact-case="closeContactCase"
+      :case-detail.sync="detailCase"
+      :list-history-case="listHistoryCase"
+      :referral-history-case="referralHistoryCase"
+      :title-detail="$t('label.detail_case')"
+    />
+    <dialog-update-case
+      :show-dialog="dialogUpdateCase"
+      :show.sync="dialogUpdateCase"
+      :form-pasien="formPasien"
+    />
+    <dialog-update-history-case
+      :show-dialog="dialogHistoryCase"
+      :show.sync="dialogHistoryCase"
+      :form-riwayat-pasien="formRiwayatPasien"
+      :form-pasien="formPasien"
+    />
+    <dialog-export-form
+      :show-dialog="dialogExportCase"
+      :show.sync="dialogExportCase"
+      :is-history-case="isHistoryCase"
+      :list-query="listQuery"
+      :form="{}"
+    />
+    <dialog-failed
+      :show-dialog="failedDialog"
+      :show.sync="failedDialog"
+      :title="$t('errors.file_failed_upload')"
+      :message="errorMessage"
+    />
+    <dialog-succsess
+      :show-dialog="successDialog"
+      :show.sync="successDialog"
+      :title="$t('label.congratulation')"
+      :message="$t('label.import_success_message')"
+    />
+    <import-form
+      :show-import-form="showImportForm"
+      :refresh-page="handleSearch"
+      :show.sync="showImportForm"
+      :failed.sync="failedDialog"
+      :success.sync="successDialog"
+      :message.sync="errorMessage"
+    />
     <dialog-update-status-case
       :show-dialog="dialogUpdateMultiple"
       :show.sync="dialogUpdateMultiple"
@@ -338,7 +329,9 @@ export default {
       dialogTransmissionArea: false,
       dialogHistoryTravel: false,
       dialogInspectionSupport: false,
-      dialogPublicPlace: false
+      dialogPublicPlace: false,
+      dialogExportCase: false,
+      isHistoryCase: false
     }
   },
   computed: {
@@ -452,16 +445,15 @@ export default {
       this.totalCloseCase = data ? data.closeContact : 0
     },
     async onExportCase() {
-      const response = await this.$store.dispatch('exportReports/exportExcelCase', this.listQuery)
-      const dateNow = Date.now()
-      const fileName = `Data Pasien ${this.fullName} - ${formatDatetime(dateNow, 'DD/MM/YYYY HH:mm')} WIB.xlsx`
-      FileSaver.saveAs(response, fileName)
+      this.isHistoryCase = false
+      this.dialogExportCase = true
+    },
+    handleToListQueue() {
+      this.$router.push('/laporan/queue-list-all')
     },
     async onExportHistoryCase() {
-      const response = await this.$store.dispatch('exportReports/exportExcelHistory', this.listQuery)
-      const dateNow = Date.now()
-      const fileName = `Data Riwayat Klinis ${this.fullName} - ${formatDatetime(dateNow, 'DD/MM/YYYY HH:mm')} WIB.xlsx`
-      FileSaver.saveAs(response, fileName)
+      this.isHistoryCase = true
+      this.dialogExportCase = true
     },
     handleUpdateMultipleStatusCase() {
       this.formStatusCase.status = ''
@@ -503,9 +495,6 @@ export default {
   }
   .table-divider {
     margin: 15px 0px 0px 0px;
-  }
-  .success-message {
-    color: #27ae60;
   }
   .multiple-action {
     position: fixed;

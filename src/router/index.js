@@ -93,6 +93,22 @@ export const constantRoutes = [
         title: 'notification'
       }
     }]
+  },
+  {
+    path: '/laporan/queue',
+    component: Layout,
+    hidden: true,
+    meta: {
+      title: 'list_case'
+    },
+    children: [{
+      path: '/laporan/queue-list-all',
+      component: () => import('@/views/laporan/listQueue'),
+      hidden: true,
+      meta: {
+        title: 'list_case'
+      }
+    }]
   }
 ]
 
