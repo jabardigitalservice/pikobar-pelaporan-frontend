@@ -19,7 +19,7 @@ export default {
         commit('SET_TOKEN', token)
         commit('SET_USER_ID', id)
         setToken(token)
-        setUserSurvey(true)
+        setUserSurvey(false)
         setTokenFirebase()
         resolve(response.data)
       }).catch((error) => {

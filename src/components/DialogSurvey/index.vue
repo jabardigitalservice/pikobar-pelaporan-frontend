@@ -6,7 +6,7 @@
         <v-icon @click="show = false">mdi-close</v-icon>
       </v-card-title>
       <v-row class="mx-0 mb-5 text-center" justify="center">
-        <img src="../../static/survey-img.svg">
+        <img src="../../static/survey-img.svg" alt="survey-img">
       </v-row>
       <v-row class="mx-10" justify="center">
         <p class="font-weight-bold text-center">{{ $t('label.hello') }}, {{ fullName }}</p>

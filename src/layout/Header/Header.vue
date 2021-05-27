@@ -21,6 +21,7 @@
         <img
           height="50"
           src="../../static/login/logo.svg"
+          alt="logo"
         >
       </div>
       <v-app-bar-nav-icon
@@ -62,7 +63,7 @@
             v-on="on"
           >
             <div class="drop-menu">
-              <img width="30px" height="30px" src="https://picsum.photos/200/300?grayscale" class="rounded-circle">
+              <img width="30px" height="30px" src="https://picsum.photos/200/300?grayscale" alt="rounded-photos" class="rounded-circle">
             </div>
           </v-btn>
         </template>

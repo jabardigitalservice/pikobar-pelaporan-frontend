@@ -23,7 +23,7 @@
     </v-main>
     <!-- App Back To Top -->
     <vm-back-top style="bottom: 10px;" />
-    <!-- <dialog-survey :show-dialog="getUserSurvey()" /> -->
+    <dialog-survey :show-dialog="getUserSurvey()" />
   </div>
 </template>
 

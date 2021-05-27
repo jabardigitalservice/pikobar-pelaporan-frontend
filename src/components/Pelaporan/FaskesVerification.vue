@@ -2,7 +2,7 @@
   <v-dialog v-model="show" :max-width="maxWidthDialog">
     <v-card class="pa-7">
       <v-row class="mx-0 mb-6" justify="center">
-        <img src="@/static/confirmation-logo.svg">
+        <img src="@/static/confirmation-logo.svg" alt="confirmation-logo">
       </v-row>
       <v-row class="mx-0 mb-6 text-center" justify="center">
         {{ content }}

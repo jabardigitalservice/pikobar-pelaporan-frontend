@@ -3,7 +3,7 @@
     <div class="negative-landing-page main-page-data-confirmation">
       <div v-if="isLoading" class="padding-100-data-confirmation">
         <v-row align="center" justify="center">
-          <img height="200" src="../../../static/mengirim.svg">
+          <img height="200" src="../../../static/mengirim.svg" alt="mengirim">
         </v-row>
         <v-row align="center" justify="center" class="margin-wait-data-confirmation">
           {{ $t('label.wait') }}
@@ -17,7 +17,7 @@
       </div>
       <div v-else-if="isDone" class="padding-100-data-confirmation">
         <v-row align="center" justify="center">
-          <img height="200" src="../../../static/berhasil.svg">
+          <img height="200" src="../../../static/berhasil.svg" alt="berhasil">
         </v-row>
         <v-row align="center" justify="center">
           <div class="save-style-data-confirmation">{{ $t('label.save_success') }}</div>
@@ -93,7 +93,7 @@
             <v-col>
               <v-row class="main-color-data-confirmation">{{ $t('label.applicant_ktp') }}</v-row>
               <v-row>
-                <img class="image-style-data-confirmation" :src="url">
+                <img class="image-style-data-confirmation" :src="url" alt="data-confirmation">
               </v-row>
             </v-col>
           </v-row>
@@ -105,13 +105,13 @@
             <template v-slot:default>
               <thead>
                 <tr>
-                  <th class="text-left">{{ $t('label.number').toUpperCase() }}</th>
-                  <th class="text-left">{{ $t('label.apd_name_specification') }}</th>
-                  <th class="text-left">{{ $t('label.brand') }}</th>
-                  <th class="text-left">{{ $t('label.total') }}</th>
-                  <th class="text-left">{{ $t('label.unit') }}</th>
-                  <th class="text-left">{{ $t('label.purpose') }}</th>
-                  <th class="text-left">{{ $t('label.urgency_level') }}</th>
+                  <th scope="col" class="text-left">{{ $t('label.number').toUpperCase() }}</th>
+                  <th scope="col" class="text-left">{{ $t('label.apd_name_specification') }}</th>
+                  <th scope="col" class="text-left">{{ $t('label.brand') }}</th>
+                  <th scope="col" class="text-left">{{ $t('label.total') }}</th>
+                  <th scope="col" class="text-left">{{ $t('label.unit') }}</th>
+                  <th scope="col" class="text-left">{{ $t('label.purpose') }}</th>
+                  <th scope="col" class="text-left">{{ $t('label.urgency_level') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -320,9 +320,6 @@ export default {
   }
   .margin-top-10-data-confirmation {
     margin-top: 10px;
-  }
-  .padding-100-data-confirmation {
-    padding: 100px 100px;
   }
   .save-style-data-confirmation {
     margin-top: 20px;

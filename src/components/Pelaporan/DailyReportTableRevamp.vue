@@ -27,11 +27,11 @@
       <template v-slot:default>
         <thead>
           <tr>
-            <th class="text-left">&nbsp;</th>
-            <th class="text-left font-weight-bold subtitle-">{{ $t('label.status') }}</th>
-            <th class="text-left font-weight-bold subtitle-2">{{ $t('label.today') }}</th>
-            <th class="text-left font-weight-bold subtitle-2">{{ $t('label.amount_in_the_past_1_week') }}</th>
-            <th class="text-left font-weight-bold subtitle-2">{{ $t('label.amount_in_the_past_1_month') }}</th>
+            <th scope="col" class="text-left">&nbsp;</th>
+            <th scope="col" class="text-left font-weight-bold subtitle-">{{ $t('label.status') }}</th>
+            <th scope="col" class="text-left font-weight-bold subtitle-2">{{ $t('label.today') }}</th>
+            <th scope="col" class="text-left font-weight-bold subtitle-2">{{ $t('label.amount_in_the_past_1_week') }}</th>
+            <th scope="col" class="text-left font-weight-bold subtitle-2">{{ $t('label.amount_in_the_past_1_month') }}</th>
           </tr>
         </thead>
         <tbody>

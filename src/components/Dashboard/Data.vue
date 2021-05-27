@@ -36,30 +36,6 @@
         </v-col>
       </v-row>
       <v-row>
-        <!--        <v-col-->
-        <!--          cols="12"-->
-        <!--          md="3"-->
-        <!--          sm="6"-->
-        <!--        >-->
-        <!--          <v-skeleton-loader-->
-        <!--            :loading="loading"-->
-        <!--            type="article"-->
-        <!--          >-->
-        <!--            <v-card-->
-        <!--              color="#fcdfe0"-->
-        <!--              style="border-color:#ffb4b5; border-radius: .5rem"-->
-        <!--            >-->
-        <!--              <v-card-title class="body-1 font-weight-bold text&#45;&#45;secondary">-->
-        <!--                {{ $t('label.positif_covid19') }}-->
-        <!--              </v-card-title>-->
-
-        <!--              <v-spacer />-->
-
-        <!--              <v-card-subtitle class="display-2 font-weight-bold text&#45;&#45;primary pt-0 mb-4"> {{ totalConfirmation }} <span class="display-1 font-weight-medium text&#45;&#45;secondary pl-4">{{ $t('label.people') }}</span></v-card-subtitle>-->
-
-        <!--            </v-card>-->
-        <!--          </v-skeleton-loader>-->
-        <!--        </v-col>-->
         <v-col
           cols="12"
           md="4"

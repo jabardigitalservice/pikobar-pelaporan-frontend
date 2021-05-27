@@ -27,15 +27,6 @@
               item-value="value"
             />
           </v-col>
-          <!-- Sementara field mekanisme di hide -->
-          <!-- <v-col cols="12" sm="4">
-            <v-label class="title">{{ $t('label.mechanism') }}:</v-label>
-            <v-select
-              v-model="listQuery.mechanism"
-              :items="mechanismOptions"
-              solo
-            />
-          </v-col> -->
           <v-col cols="12" sm="6">
             <v-label class="title">{{ $t('label.method_used') }}:</v-label>
             <v-select
@@ -56,17 +47,6 @@
           </v-col>
         </v-row>
         <v-row>
-          <!-- Sementara field kategori di hide -->
-          <!-- <v-col cols="12" sm="3">
-            <v-label class="title">{{ $t('label.goal_category') }}:</v-label>
-            <v-select
-              v-model="listQuery.category"
-              :items="categoryList"
-              solo
-              item-text="label"
-              item-value="value"
-            />
-          </v-col> -->
           <v-col cols="12" sm="4">
             <v-label class="title">{{ $t('label.inspection_date') }}:</v-label>
             <input-date-picker

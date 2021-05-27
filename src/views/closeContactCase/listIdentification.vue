@@ -19,7 +19,7 @@
               </v-card-text>
             </v-col>
             <v-col>
-              <img class="float-right" src="@/static/survey-list-icon.svg">
+              <img class="float-right" src="@/static/survey-list-icon.svg" alt="survey-list-icon">
             </v-col>
           </v-row>
         </v-container>

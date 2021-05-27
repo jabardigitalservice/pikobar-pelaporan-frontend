@@ -12,8 +12,6 @@ const getDefaultState = () => {
   }
 }
 
-const state = getDefaultState()
-
 const mutations = {
   resetState(state) {
     Object.assign(state, getDefaultState())
@@ -22,7 +20,7 @@ const mutations = {
 
 export default {
   namespaced: true,
-  state,
+  state: getDefaultState(),
   mutations,
   actions,
   getters

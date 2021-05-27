@@ -91,8 +91,8 @@ export default {
               var total = dataset.data.reduce((previousValue, currentValue, currentIndex, array) => {
                 return previousValue + currentValue
               })
-              var currentValue = dataset.data[tooltipItem.index]
-              var percentage = Math.floor(((currentValue / total) * 100) + 0.5)
+              var newValue = dataset.data[tooltipItem.index]
+              var percentage = Math.floor(((newValue / total) * 100) + 0.5)
               return 'Persen: ' + percentage + '%'
             }
           }
