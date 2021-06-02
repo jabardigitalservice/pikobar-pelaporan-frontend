@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'production') {
         return {
           ...context,
           // parameter replacements.
-          name: location.pathname.replace(/\/[a-f0-9]{32}/g, '/<hash>')
+          name: location.hash.replace(/#/g, '')
         }
       }
     })],
