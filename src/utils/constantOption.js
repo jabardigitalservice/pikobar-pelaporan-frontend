@@ -177,8 +177,8 @@ export const healthWorkerList = [
 
 export const statusNotification = [
   {
-    label: i18n.t('label.verification_expired_title'),
-    value: 'CaseVerified'
+    label: i18n.t('route.dashboard_case_new'),
+    value: 'CaseCreated'
   },
   {
     label: i18n.t('label.case_rejected'),

@@ -63,7 +63,7 @@ export default {
   name: 'Queue',
   data() {
     return {
-      formatDate: 'YYYY-MM-DD',
+      formatDate: 'YYYY/MM/DD',
       queueList: [],
       isLoading: false,
       totalPages: 0,
