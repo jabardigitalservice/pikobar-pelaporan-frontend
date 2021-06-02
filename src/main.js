@@ -29,7 +29,10 @@ if (process.env.NODE_ENV === 'production') {
     release: process.env.VUE_APP_VERSION,
     environment: process.env.VUE_APP_ERROR_ENVIRONMENT,
     integrations: [new Integrations.BrowserTracing()],
-    tracesSampleRate: 0.2
+    tracesSampleRate: 0.25,
+    tracingOptions: {
+      trackComponents: true
+    }
   })
 }
 
