@@ -69,7 +69,7 @@ export default {
   methods: {
     getUserSurvey() {
       const isUserSurvey = String(getUserSurvey()) === 'true'
-      return !isUserSurvey
+      return isUserSurvey
     }
   }
 };

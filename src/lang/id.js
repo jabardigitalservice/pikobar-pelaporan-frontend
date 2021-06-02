@@ -963,6 +963,7 @@ export default {
     queue_case_label_2: 'Terima Kasih! Data Anda sedang diproses dan akan dikirimkan melalui {email}. Apabila belum menerima email setelah 10 menit, silakan hubungi tim Pikobar',
     version_date: 'Versi Tanggal',
     dashboard_disclaimer_2: 'Sistem mungkin mengalami keterlambatan dalam menampilkan data terbaru. Tunggu 5-10 menit setelah Anda input data baru dan lakukan muat ulang.',
+    positive_health_laboratory_results: 'Hasil positif laboratorium kesehatan',
   },
   success: {
     login_success: 'Login Berhasil',
