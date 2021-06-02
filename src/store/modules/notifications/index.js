@@ -8,7 +8,6 @@ const getDefaultState = () => {
     notificationList: []
   }
 }
-const state = getDefaultState()
 
 const actions = {
   async setNotificationToken({ commit }, { user_id, data }) {
@@ -77,7 +76,7 @@ const mutations = {
 
 export default {
   namespaced: true,
-  state,
+  state: getDefaultState(),
   actions,
   mutations,
   getters

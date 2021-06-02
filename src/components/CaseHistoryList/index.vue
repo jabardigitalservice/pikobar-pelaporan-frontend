@@ -3,11 +3,11 @@
     <template v-slot:default>
       <thead>
         <tr>
-          <th class="text-left">#</th>
-          <th class="text-left">{{ $t('label.criteria').toUpperCase() }}</th>
-          <th class="text-left">{{ $t('label.results').toUpperCase() }}</th>
-          <th class="text-left">{{ $t('label.current_location').toUpperCase() }}</th>
-          <th class="text-left">{{ $t('label.update_date').toUpperCase() }}</th>
+          <th scope="col" class="text-left">#</th>
+          <th scope="col" class="text-left">{{ $t('label.criteria').toUpperCase() }}</th>
+          <th scope="col" class="text-left">{{ $t('label.results').toUpperCase() }}</th>
+          <th scope="col" class="text-left">{{ $t('label.current_location').toUpperCase() }}</th>
+          <th scope="col" class="text-left">{{ $t('label.update_date').toUpperCase() }}</th>
         </tr>
       </thead>
       <tbody>

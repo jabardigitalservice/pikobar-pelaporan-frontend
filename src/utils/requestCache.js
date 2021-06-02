@@ -12,8 +12,8 @@ import { ResponseRequest } from '@/utils/constantVariable'
 const CACHE_MAX_AGE = 2 * 60 * 1000
 
 // Extracting 'axios-cache-adapter/src/exclude' as importing it leads to webpack not compiling it.
-function exclude(config = {}, req) {
-  const { exclude = {}, debug } = config
+function excludeChace(config, req) {
+  const { exclude = {}} = config
 
   if (typeof exclude.filter === 'function' && exclude.filter(req)) {
     debug(`Excluding request by filter ${req.url}`)
@@ -73,7 +73,7 @@ const debug = cacheAdapter.config.debug
 // Our adapter factory which handles network errors, and groups.
 const myAdapter = function(adapter) {
   return async function(req) {
-    const isExcluded = exclude(cacheAdapter.config, req)
+    const isExcluded = excludeChace(cacheAdapter.config, req)
     const key = getKey(req)
 
     // Add the key to the groups.
@@ -150,16 +150,16 @@ const purgeCache = async function() {
 
 const isSecure = String(process.env.VUE_APP_SECURE) === 'true'
 const method = isSecure ? 'https' : 'http'
-let url
+let urlHost
 if (process.env.VUE_APP_PORT !== undefined && process.env.VUE_APP_PORT.length > 0) {
-  url = `${method}://${process.env.VUE_APP_URL}:${process.env.VUE_APP_PORT}`
+  urlHost = `${method}://${process.env.VUE_APP_URL}:${process.env.VUE_APP_PORT}`
 } else {
-  url = `${method}://${process.env.VUE_APP_URL}`
+  urlHost = `${method}://${process.env.VUE_APP_URL}`
 }
 
-const service = axios.create({
+const serviceCache = axios.create({
   // The cache adapter.
-  baseURL: url, // api base_url
+  baseURL: urlHost, // api base_url
   adapter: myAdapter(cacheAdapter.adapter),
   cache: {
     key: null,
@@ -168,7 +168,7 @@ const service = axios.create({
 })
 
 // request interceptor
-service.interceptors.request.use(
+serviceCache.interceptors.request.use(
   config => {
     // Do something before request is sent
     if (store.getters['user/token']) {
@@ -184,45 +184,45 @@ service.interceptors.request.use(
 )
 
 // response interceptor
-service.interceptors.response.use(
+serviceCache.interceptors.response.use(
   /**
    * If you want to get information such as headers or status
    * Please return  response => response
    */
   async(response) => {
     // store.commit('animationLottie/SET_LOADING', false)
-    const res = response.data
+    const resChache = response.data
 
-    return res
+    return resChache
   },
-  async(error) => {
+  async(error_) => {
     // await store.dispatch('animationLottie/setLoading', false)
-    if (!error.response.data.errors) {
-      const status = await error.response.status
+    if (!error_.response.data.errors) {
+      const status = await error_.response.status
       switch (status) {
         case ResponseRequest.NOTFOUND:
-          await store.dispatch('toast/errorToast', error.response.data.message)
+          await store.dispatch('toast/errorToast', error_.response.data.message)
           break
         case ResponseRequest.SERVERERROR:
-          await store.dispatch('toast/errorToast', error.response.data.message)
+          await store.dispatch('toast/errorToast', error_.response.data.message)
           break
         case ResponseRequest.UNAUTHORIZED:
-          await store.dispatch('toast/errorToast', error.response.data.message)
+          await store.dispatch('toast/errorToast', error_.response.data.message)
           break
         case ResponseRequest.UNPROCESSABLE:
-          await store.dispatch('toast/errorToast', error.response.data.message)
+          await store.dispatch('toast/errorToast', error_.response.data.message)
           break
         default:
-          await store.dispatch('toast/errorToast', error.message)
+          await store.dispatch('toast/errorToast', error_.message)
           break
       }
     }
-    return Promise.reject(error)
+    return Promise.reject(error_)
   }
 )
 
 const get = async function(url, config) {
-  return service.get(url, config)
+  return serviceCache.get(url, config)
 }
 
 export default { get, clearCacheByKey, clearCacheByGroup, clearCacheByGroups, purgeCache }

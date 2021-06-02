@@ -12,17 +12,17 @@
       >
         <template slot="body.append">
           <tr class="footer-totals">
-            <th class="footer-title">Total</th>
-            <th class="footer-title">{{ sumField('otg_proses') }}</th>
-            <th class="footer-title">{{ sumField('otg_selesai') }}</th>
-            <th class="footer-title">{{ sumField('odp_proses') }}</th>
-            <th class="footer-title">{{ sumField('odp_selesai') }}</th>
-            <th class="footer-title">{{ sumField('pdp_proses') }}</th>
-            <th class="footer-title">{{ sumField('pdp_selesai') }}</th>
-            <th class="footer-title">{{ sumField('positif_aktif_proses') }}</th>
-            <th class="footer-title">{{ sumField('positif_sembuh_selesai') }}</th>
-            <th class="footer-title">{{ sumField('positif_meninggal_selesai') }}</th>
-            <th class="footer-title">{{ sumField('grand_total') }}</th>
+            <th scope="col" class="footer-title">Total</th>
+            <th scope="col" class="footer-title">{{ sumField('otg_proses') }}</th>
+            <th scope="col" class="footer-title">{{ sumField('otg_selesai') }}</th>
+            <th scope="col" class="footer-title">{{ sumField('odp_proses') }}</th>
+            <th scope="col" class="footer-title">{{ sumField('odp_selesai') }}</th>
+            <th scope="col" class="footer-title">{{ sumField('pdp_proses') }}</th>
+            <th scope="col" class="footer-title">{{ sumField('pdp_selesai') }}</th>
+            <th scope="col" class="footer-title">{{ sumField('positif_aktif_proses') }}</th>
+            <th scope="col" class="footer-title">{{ sumField('positif_sembuh_selesai') }}</th>
+            <th scope="col" class="footer-title">{{ sumField('positif_meninggal_selesai') }}</th>
+            <th scope="col" class="footer-title">{{ sumField('grand_total') }}</th>
           </tr>
         </template>
       </v-data-table>

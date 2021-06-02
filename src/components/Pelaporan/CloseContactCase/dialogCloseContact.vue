@@ -114,13 +114,6 @@
         :id-case.sync="idCase"
         :form-body.sync="formBody"
       />
-    <!-- <dialog-delete
-      :dialog="dialogDelete"
-      :dialog-delete.sync="dialogDelete"
-      :data-deleted="dataDelete"
-      :delete-date.sync="dataDelete"
-      :store-path-delete="`closeContactCase/deleteCloseContact`"
-    /> -->
     </v-dialog>
   </v-row>
 </template>

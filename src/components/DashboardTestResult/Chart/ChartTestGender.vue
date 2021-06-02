@@ -73,9 +73,9 @@ export default {
               var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
                 return previousValue + currentValue
               })
-              var currentValue = dataset.data[tooltipItem.index]
-              var percentage = Math.floor(((currentValue / total) * 100) + 0.5)
-              return percentage + '%'
+              var value = dataset.data[tooltipItem.index]
+              var percentage = Math.floor(((value / total) * 100) + 0.5)
+              return 'Persen: ' + percentage + '%'
             }
           }
         },

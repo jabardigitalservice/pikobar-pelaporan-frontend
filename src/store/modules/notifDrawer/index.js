@@ -4,7 +4,6 @@ const getDefaultState = () => {
     notifDrawer: null
   }
 }
-const state = getDefaultState()
 
 const actions = {
   notificationDrawer({ commit }, drawer) {
@@ -22,7 +21,7 @@ const mutations = {
 
 export default {
   namespaced: true,
-  state,
+  state: getDefaultState(),
   actions,
   mutations,
   getters

@@ -9,14 +9,6 @@
         >
           {{ $t('label.single_entry') }}
         </v-btn>
-        <!-- Sementara tombol multiple entry di hide -->
-        <!-- <v-btn
-          :color="singleEntry ? '':'success'"
-          style="text-transform: none;height: 46px;min-width: 100px;"
-          @click="singleEntry = false"
-        >
-          {{ $t('label.multiple_entry') }}
-        </v-btn> -->
       </v-col>
     </v-row>
     <v-row>

@@ -10,7 +10,7 @@
           v-if="!isEdit"
         >
           <v-card-title class="justify-center">
-            <img src="@/static/hospital_reference_1.svg">
+            <img src="@/static/hospital_reference_1.svg" alt="hospital-reference">
           </v-card-title>
           <v-card-title class="justify-center">
             <div class="font-weight-bold" style="font-size: 16px">

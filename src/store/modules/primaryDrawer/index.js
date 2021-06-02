@@ -10,7 +10,6 @@ const getDefaultState = () => {
     }
   }
 }
-const state = getDefaultState()
 
 const mutations = {
   resetState(state) {
@@ -20,7 +19,7 @@ const mutations = {
 
 export default {
   namespaced: true,
-  state,
+  state: getDefaultState(),
   mutations,
   getters
 }

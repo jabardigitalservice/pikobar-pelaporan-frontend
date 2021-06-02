@@ -7,7 +7,7 @@
     >
       <v-card>
         <div class="justify-center dialog-img-delete">
-          <img src="../../static/image-delete-dialog.svg">
+          <img src="../../static/image-delete-dialog.svg" alt="image-delete-dialog">
         </div>
         <v-card-text v-if="dataDeleted" class="dialog-delete-title font-weight-bold">
           {{ $t('label.delete_dialog') }} <br>

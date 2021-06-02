@@ -1,7 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
 import { ResponseRequest } from '@/utils/constantVariable'
-
 import { getToken } from '@/utils/cookies'
 
 const isSecure = String(process.env.VUE_APP_SECURE) === 'true'
@@ -44,9 +43,9 @@ service.interceptors.response.use(
    * If you want to get information such as headers or status
    * Please return  response => response
    */
-  async(response) => {
+  async(resp) => {
     // store.commit('animationLottie/SET_LOADING', false)
-    const res = response.data
+    const res = resp.data
 
     return res
   },

@@ -18,19 +18,7 @@
         <v-container fluid>
           <v-row class="survey-bottom-form">
             <v-col cols="" md="4" sm="0" />
-            <v-col cols="12" md="3" sm="12">
-              <!-- Sementara button ini di hide -->
-              <!-- <v-btn
-                color="blue"
-                :disabled="formResult.final_result !== 'POSITIF'"
-                :loading="loading"
-                bottom
-                style="float: left; color: white"
-                @click="saveRdtAndCase"
-              >
-                {{ $t('label.save_and_add_to_report_case') }}
-              </v-btn> -->
-            </v-col>
+            <v-spacer />
             <v-col cols="12" md="5" sm="12">
               <v-btn
                 color="success"
