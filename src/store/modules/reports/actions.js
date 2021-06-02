@@ -9,9 +9,9 @@ export default {
         commit('SET_TOTAL_DATA_PASIEN', 0)
         commit('SET_LIST_PASIEN', [])
       } else {
-        commit('SET_TOTAL_LIST_PASIEN', response.data._meta.totalPages)
-        commit('SET_TOTAL_DATA_PASIEN', response.data._meta.itemCount)
-        commit('SET_LIST_PASIEN', response.data.cases)
+        commit('SET_TOTAL_LIST_PASIEN', response.data?._meta?.totalPages || 0)
+        commit('SET_TOTAL_DATA_PASIEN', response.data?._meta?.itemCount || 0)
+        commit('SET_LIST_PASIEN', response.data?.cases || [])
       }
 
       return response

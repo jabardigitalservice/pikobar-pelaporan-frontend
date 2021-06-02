@@ -27,6 +27,10 @@ export default {
       type: String,
       default: null
     },
+    params: {
+      type: Object,
+      default: null
+    },
     chartHeight: {
       type: Number,
       default: 300
@@ -37,15 +41,15 @@ export default {
       loaded: false,
       chartData: {
         labels: [
-          '<5',
-          '6 - 19',
-          '20 - 29',
-          '30 - 39',
-          '40 - 49',
-          '50 - 59',
-          '60 - 69',
-          '70 - 79',
-          '>80'
+          '0 - 10',
+          '10 - 20',
+          '20 - 30',
+          '30 - 40',
+          '40 - 50',
+          '50 - 60',
+          '60 - 70',
+          '70 - 80',
+          '90 - 100'
         ],
         datasets: [
           {
@@ -109,8 +113,15 @@ export default {
         },
         hover: {
           mode: 'nearest',
+          animationDuration: 0,
           intersect: true
-        }
+        },
+        animation: {
+          duration: 0,
+          animateScale: true,
+          animateRotate: true
+        },
+        responsiveAnimationDuration: 0
       }
     }
   },
@@ -127,12 +138,17 @@ export default {
       handler(value) {
         this.tabActive = value
         this.getDataAge()
-        this.$refs.horizontalBarChart.update()
+      },
+      deep: true
+    },
+    'params': {
+      handler(value) {
+        this.getDataAge()
       },
       deep: true
     },
     '$refs'() {
-      this.$refs.horizontalBarChart.update()
+      this.updateChart(this.chartData)
     }
   },
   mounted() {
@@ -140,25 +156,28 @@ export default {
   },
   methods: {
     async getDataAge() {
-      this.loaded = true
-
-      const male_age = []
-      const female_age = []
-
-      for (let index = 1; index <= 9; index++) {
-        female_age.push(this.randomNumberFemale())
-        male_age.push(-Math.abs(this.randomNumberMale()))
+      const res = await this.$store.dispatch('statistic/summaryTestResultAge', this.params)
+      const { data } = res
+      const list_male_age = Array.isArray(data) ? data[0].male : null
+      const list_female_age = Array.isArray(data) ? data[0].female : null
+      let set_negative_male_age = []
+      let female_age = []
+      if (list_male_age.length > 0) {
+        delete list_male_age[0]._id
+        const male_age = Object.values(list_male_age[0])
+        set_negative_male_age = male_age.map(x => -Math.abs(x))
       }
-
+      if (list_female_age.length > 0) {
+        delete list_female_age[0]._id
+        female_age = Object.values(list_female_age[0])
+      }
+      this.setDataAge(set_negative_male_age, female_age)
+    },
+    setDataAge(male_age = [], female_age = []) {
+      this.loaded = true
       this.chartData.datasets[0].data = female_age
       this.chartData.datasets[1].data = male_age
       this.setMinMax(female_age, male_age)
-    },
-    randomNumberMale() {
-      return Math.floor(Math.random() * 501)
-    },
-    randomNumberFemale() {
-      return Math.floor(Math.random() * 1001)
     },
     setMinMax(female, male) {
       const maxFemale = Math.max(...female)
@@ -180,6 +199,13 @@ export default {
 
       this.chartOptions.scales.xAxes[0].ticks.min = -Math.abs(max + plus)
       this.chartOptions.scales.xAxes[0].ticks.max = max + plus
+      this.updateChart(this.chartData)
+    },
+    updateChart(data) {
+      if (this.$refs.horizontalBarChart) {
+        this.$refs.horizontalBarChart.renderChart(data, this.chartOptions)
+        this.$refs.horizontalBarChart.update()
+      }
     }
   }
 }

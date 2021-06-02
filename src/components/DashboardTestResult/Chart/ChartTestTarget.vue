@@ -4,7 +4,7 @@
     outlined
   >
     <v-card-title class="title ml-0 black--text">
-      {{ $t('label.total_test_result') }} {{ $t('label.based').toLowerCase() }} {{ $t('label.target') }}
+      {{ $t('label.total_test_result') }} {{ $t('label.based') }} {{ $t('label.target') }}
     </v-card-title>
     <v-divider class="mt-0 mb-2" />
     <v-card-text>
@@ -17,7 +17,7 @@
             :options="chartOptions"
             :styles="chartStyles"
             :name="'chart-test-target'"
-            @callbackChart="setChart"
+            @callbackFooter="setFooter"
           />
         </div>
         <div
@@ -51,6 +51,10 @@ export default {
     tabActive: {
       type: String,
       default: null
+    },
+    dataTestTarget: {
+      type: Array,
+      default: function() { return [] }
     }
   },
   data() {
@@ -70,16 +74,12 @@ export default {
           xAxes: [
             {
               gridLines: {
-                display: false,
                 drawBorder: false
               },
               scaleLabel: {
                 display: false
               },
               ticks: {
-                display: false,
-                beginAtZero: true,
-                max: 100,
                 precision: 0
               },
               stacked: true
@@ -88,10 +88,6 @@ export default {
           yAxes: [
             {
               gridLines: {
-                display: false,
-                drawBorder: false
-              },
-              ticks: {
                 display: false
               },
               stacked: true
@@ -113,13 +109,7 @@ export default {
           displayColors: false,
           mode: 'index',
           intersect: false,
-          tooltipCaretSize: 0,
-          callbacks: {
-            label: (tooltipItem, data) => {
-              const dataset = data.datasets[tooltipItem.datasetIndex]
-              return dataset.label + ': ' + dataset.data[tooltipItem.index] + '%'
-            }
-          }
+          tooltipCaretSize: 0
         },
         hover: {
           mode: 'nearest',
@@ -127,10 +117,19 @@ export default {
         },
         layout: {
           padding: {
-            top: 5,
-            right: 20
+            right: 50
           }
         }
+      }
+    }
+  },
+  computed: {
+    optionsData: {
+      get: function() {
+        return this.dataTestTarget
+      },
+      set: function(value) {
+        this.$emit('update:testTargetData', value)
       }
     }
   },
@@ -139,12 +138,14 @@ export default {
       handler(value) {
         this.tabActive = value
         this.filterTab()
-        this.$refs.horizontalBarChart.update()
       },
       deep: true
     },
     '$refs'() {
-      this.$refs.horizontalBarChart.update()
+      this.updateChart(this.chartData)
+    },
+    optionsData(value) {
+      if (value) this.getDataAll()
     }
   },
   mounted() {
@@ -162,34 +163,17 @@ export default {
       }
     },
     getDataAll() {
-      const area = [
-        'ODP',
-        'OTG',
-        'Pemuka Agama',
-        'Pusat Keramaian',
-        'Pelaku Perjalanan',
-        'Ulama',
-        'Pedagang Pasar',
-        'Tenaga Kesehatan',
-        'Kontak Erat',
-        'Pendaftar Pikobar',
-        'Asd',
-        'Dsa',
-        'sdjfh'
-      ]
-      const one = []
-      const two = []
+      const listTarget = []
+      const listSummaryTarget = []
 
-      this.setHeight(area.length)
+      this.setHeight(this.optionsData.length)
 
-      for (let index = 1; index <= 13; index++) {
-        const r = this.randomNumber()
-        const t = 100 - r
-        one.push(r)
-        two.push(t)
+      for (let index = 0; index < this.optionsData.length; index++) {
+        listTarget.push(this.optionsData[index]._id)
+        listSummaryTarget.push(this.optionsData[index].total)
       }
 
-      this.chartData.labels = area
+      this.chartData.labels = listTarget
 
       this.chartData.datasets = []
       this.chartData.datasets.push(
@@ -197,40 +181,26 @@ export default {
           label: this.$t('label.test_already'),
           backgroundColor: '#27AE60',
           hoverBackgroundColor: '#27AE60',
-          data: one,
-          hidden: false,
-          barThickness: 15
-        },
-        {
-          label: `${this.$t('label.total')} ${this.$t('label.goals')}`,
-          backgroundColor: '#E0E0E0',
-          hoverBackgroundColor: '#E0E0E0',
-          data: two,
+          data: listSummaryTarget,
           hidden: false,
           barThickness: 15
         }
       )
+      this.updateChart(this.chartData)
     },
     getDataRapid() { },
     getDataPCR() { },
     randomNumber() {
       return Math.floor(Math.random() * 101)
     },
-    setChart(chart) {
-      const ctx = chart.chart.ctx
-      ctx.font = 'normal 12px Arial'
-      ctx.textAlign = 'left'
-      ctx.textBaseline = 'bottom'
-
-      this.chartData.datasets.forEach((dataset) => {
-        for (var i = 0; i < dataset.data.length; i++) {
-          const model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model
-          const left = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._xScale.left
-          ctx.fillStyle = '#757575'
-          const label = model.label
-          ctx.fillText(label, left, model.y + -10)
-        }
-      })
+    setFooter(value) {
+      const targetCtx = this.$refs.chartXAxis.getContext('2d')
+      targetCtx.canvas.width = value.copyWidth
+      targetCtx.canvas.height = 350
+      targetCtx.fillStyle = '#ffffff'
+      targetCtx.fillRect(0, 325, value.copyWidth, 350)
+      targetCtx.drawImage(value.sourceCanvas, 0, value.copyHeight - (20 * value.scale), value.copyWidth * value.scale,
+        value.copyHeight * value.scale, 0, (350 - 20), value.copyWidth, value.copyHeight)
     },
     onClickLegend(datasetIndex) {
       const meta = this.charts.getDatasetMeta(0)
@@ -269,6 +239,12 @@ export default {
       this.chartStyles = {
         height,
         position: 'relative'
+      }
+    },
+    updateChart(data) {
+      if (this.$refs.horizontalBarChart) {
+        this.$refs.horizontalBarChart.renderChart(data, this.chartOptions)
+        this.$refs.horizontalBarChart.update()
       }
     }
   }

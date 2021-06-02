@@ -1,6 +1,6 @@
 import { format } from 'date-fns'
 import moment from 'moment'
-export const ISO_FORMAT = 'yyyy-MM-dd'
+export const ISO_FORMAT = 'yyyy/MM/dd'
 export const DEFAULT_DATE = format(new Date(), ISO_FORMAT)
 export const DEFAULT_ACTION_LABELS = {
   apply: 'Apply',
@@ -98,4 +98,3 @@ export const testResults = {
   'testResults2': ['pcr', 'tcm_sars_cov_2'],
   'testResults3': ['pcr', 'rapid', 'tcm_sars_cov_2']
 }
-
