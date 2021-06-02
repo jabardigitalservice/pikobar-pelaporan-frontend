@@ -44,11 +44,11 @@
     <v-chip
       v-else-if="status === 'CreateCaseIntegrationLabkes'"
       color="#263238"
-      class="text--white"
+      text-color="white"
       label
       small
     >
-      {{ $t('label.positive_health_laboratory_results') }}
+      {{ $t('label.labkes_west_java') }}
     </v-chip>
     <v-chip
       v-else

@@ -964,6 +964,7 @@ export default {
     version_date: 'Versi Tanggal',
     dashboard_disclaimer_2: 'Sistem mungkin mengalami keterlambatan dalam menampilkan data terbaru. Tunggu 5-10 menit setelah Anda input data baru dan lakukan muat ulang.',
     positive_health_laboratory_results: 'Hasil positif laboratorium kesehatan',
+    labkes_west_java: 'Labkes Jabar'
   },
   success: {
     login_success: 'Login Berhasil',
