@@ -4,29 +4,6 @@
       v-model="step"
       :alt-labels="altLabels"
     >
-      <!-- <v-stepper-header>
-        <template v-for="n in steps">
-          <v-stepper-step
-            :key="`${n}-step`"
-            :complete="step > n"
-            :step="n"
-            :editable="editable"
-          >
-            <template v-if="n == 1">
-              {{ $t('label.detail_profile_history') }}
-            </template>
-            <template v-else-if="n == 2">
-              {{ $t('label.case_history') }}
-            </template>
-          </v-stepper-step>
-
-          <v-divider
-            v-if="n !== steps"
-            :key="n"
-          />
-        </template>
-      </v-stepper-header> -->
-
       <v-stepper-items>
         <v-stepper-content
           v-for="n in steps"
@@ -226,10 +203,6 @@
                 </v-col>
               </v-row>
             </v-container>
-            <!-- <form-information-history
-              :form-pasien="formPasien"
-              :steps="n"
-            /> -->
           </template>
         </v-stepper-content>
       </v-stepper-items>
