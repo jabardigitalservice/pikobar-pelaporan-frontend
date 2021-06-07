@@ -28,8 +28,16 @@ if (process.env.NODE_ENV === 'production') {
     dsn: process.env.VUE_APP_SENTRY_DSN,
     release: process.env.VUE_APP_VERSION,
     environment: process.env.VUE_APP_ERROR_ENVIRONMENT,
-    integrations: [new Integrations.BrowserTracing()],
-    tracesSampleRate: 0.2
+    integrations: [new Integrations.BrowserTracing({
+      beforeNavigate: context => {
+        return {
+          ...context,
+          // parameter replacements.
+          name: location.hash.replace(/#/g, '')
+        }
+      }
+    })],
+    tracesSampleRate: process.env.TRACES_SAMPLE_RATE
   })
 }
 
