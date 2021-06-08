@@ -25,29 +25,6 @@ const reportRouter = {
         roles: [rolesPerm.ADMIN, rolesPerm.DINKESKOTA, rolesPerm.FASKES]
       }
     },
-    // {
-    //   path: '/laporan/create-stepper',
-    //   component: () => import('@/views/laporan/formStepper'),
-    //   meta: {
-    //     title: 'laporan_create',
-    //     icon: 'library_books',
-    //     child: true,
-    //     noCache: true,
-    //     roles: [rolesPerm.ADMIN, rolesPerm.DINKESKOTA, rolesPerm.FASKES]
-    //   }
-    // },
-    {
-      path: '/laporan/correct-case-report/:id',
-      component: () => import('@/views/laporan/formCreateReport'),
-      hidden: true,
-      meta: {
-        title: 'correct_case_report',
-        icon: 'library_books',
-        child: true,
-        noCache: true,
-        roles: [rolesPerm.ADMIN, rolesPerm.DINKESKOTA, rolesPerm.FASKES]
-      }
-    },
     {
       path: '/laporan/detail-report/:id',
       component: () => import('@/views/laporan/detailReportCase'),

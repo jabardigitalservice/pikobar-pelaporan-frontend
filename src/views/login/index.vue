@@ -65,9 +65,9 @@
 
 <script>
 import i18n from '@/lang'
+
 export default {
   name: 'Login',
-  components: { },
   data() {
     return {
       valid: true,

@@ -132,6 +132,7 @@
 import { mapGetters } from 'vuex'
 import { formatDatetime } from '@/utils/parseDatetime'
 import EventBus from '@/utils/eventBus'
+
 export default {
   name: 'RDTList',
   data() {
