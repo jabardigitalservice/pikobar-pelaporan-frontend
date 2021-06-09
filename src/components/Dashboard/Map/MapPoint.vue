@@ -69,13 +69,6 @@ export default {
     }
   },
   async mounted() {
-    const respVillage = await this.$store.dispatch('region/getGeoJsonVillage')
-    const respSubDistrict = await this.$store.dispatch('region/getGeoJsonSubDistrict')
-    const respCity = await this.$store.dispatch('region/getGeoJsonCity')
-    this.jsonVillage = respVillage?.data || []
-    this.jsonSubDistrict = respSubDistrict?.data || []
-    this.jsonCity = respCity?.data || []
-
     this.initMap()
 
     if (this.roles[0] === 'dinkesprov') {
@@ -85,10 +78,19 @@ export default {
     }
   },
   methods: {
-    initMap() {
+    async initMap() {
       this.map = L.map('map', {
         zoomControl: false
       }).setView(this.center, this.zoom)
+
+      this.map.spin(true)
+      const respVillage = await this.$store.dispatch('region/getGeoJsonVillage')
+      const respSubDistrict = await this.$store.dispatch('region/getGeoJsonSubDistrict')
+      const respCity = await this.$store.dispatch('region/getGeoJsonCity')
+      this.jsonVillage = respVillage?.data || []
+      this.jsonSubDistrict = respSubDistrict?.data || []
+      this.jsonCity = respCity?.data || []
+      this.map.spin(false)
 
       L.tileLayer(
         this.url,

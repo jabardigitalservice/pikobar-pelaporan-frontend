@@ -549,15 +549,8 @@ export default {
     }
   },
   async mounted() {
-    const respVillage = await this.$store.dispatch('region/getGeoJsonVillage')
-    const respSubDistrict = await this.$store.dispatch('region/getGeoJsonSubDistrict')
-    const respCity = await this.$store.dispatch('region/getGeoJsonCity')
-    this.jsonVillage = respVillage?.data || []
-    this.jsonSubDistrict = respSubDistrict?.data || []
-    this.jsonCity = respCity?.data || []
     this.initMap()
     this.getData('init')
-    // this.axios.get('')
   },
   beforeDestroy() {
     this.clearCity()
@@ -571,11 +564,20 @@ export default {
       this.initMap()
       this.getData('init')
     },
-    initMap() {
+    async initMap() {
       // Map
       this.map = L.map('map', {
         zoomControl: false
       }).setView(this.center, 8)
+
+      this.map.spin(true)
+      const respVillage = await this.$store.dispatch('region/getGeoJsonVillage')
+      const respSubDistrict = await this.$store.dispatch('region/getGeoJsonSubDistrict')
+      const respCity = await this.$store.dispatch('region/getGeoJsonCity')
+      this.jsonVillage = respVillage?.data || []
+      this.jsonSubDistrict = respSubDistrict?.data || []
+      this.jsonCity = respCity?.data || []
+      this.map.spin(false)
 
       // Copyright
       L.tileLayer(this.url, {
@@ -603,19 +605,6 @@ export default {
           }
         ]
       }).addTo(this.map)
-
-      // Filter
-      // L.easyButton({
-      //   position: 'topright',
-      //   states: [
-      //     {
-      //       icon: '<i class="material-icons">filter_list</i>',
-      //       onClick: () => {
-      //         this.isFilter = !this.isFilter
-      //       }
-      //     }
-      //   ]
-      // }).addTo(this.map)
 
       // Sidebar
       this.sidebar = L.control.sidebar('sidebar', {
