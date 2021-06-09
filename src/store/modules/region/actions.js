@@ -110,6 +110,30 @@ export default {
       return error.response
     }
   },
+  async getGeoJsonVillage({ commit }) {
+    try {
+      const response = await axios.get(process.env.VUE_APP_GEOJSON_VILLAGE)
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
+  async getGeoJsonSubDistrict({ commit }) {
+    try {
+      const response = await axios.get(process.env.VUE_APP_GEOJSON_SUBDISTRICT)
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
+  async getGeoJsonCity({ commit }) {
+    try {
+      const response = await axios.get(process.env.VUE_APP_GEOJSON_DISTRICT)
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
   async getListUnitLab({ commit }) {
     try {
       const response = await requestServer('/api/areas/list-unit-lab', 'GET')

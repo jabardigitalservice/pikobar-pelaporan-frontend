@@ -39,6 +39,7 @@
 
 <script>
 import formRapid from './formRapid'
+
 export default {
   name: 'NewInput',
   components: {

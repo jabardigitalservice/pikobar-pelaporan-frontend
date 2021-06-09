@@ -496,27 +496,27 @@ export default {
       this.districtCity = value
       this.clearDistrict()
       this.clearVillage()
-      this.$emit('update:codeDistrict', value.kota_kode || null)
-      this.$emit('update:nameDistrict', value.kota_nama || null)
+      this.$emit('update:codeDistrict', value?.kota_kode || null)
+      this.$emit('update:nameDistrict', value?.kota_nama || null)
 
-      this.filterActive.address_district_code = value.kota_kode
+      this.filterActive.address_district_code = value?.kota_kode || null
       this.getStatisticTestResult()
     },
     async onSelectSubDistrict(value) {
       this.subDistrict = value
       this.clearVillage()
-      this.$emit('update:codeSubDistrict', value.kecamatan_kode || null)
-      this.$emit('update:nameSubDistrict', value.kecamatan_nama || null)
+      this.$emit('update:codeSubDistrict', value?.kecamatan_kode || null)
+      this.$emit('update:nameSubDistrict', value?.kecamatan_nama || null)
 
-      this.filterActive.address_subdistrict_code = value.kecamatan_kode
+      this.filterActive.address_subdistrict_code = value?.kecamatan_kode || null
       this.getStatisticTestResult()
     },
     async onSelectVillage(value) {
       this.village = value
-      this.$emit('update:codeVillage', value.desa_kode || null)
-      this.$emit('update:nameVillage', value.desa_nama || null)
+      this.$emit('update:codeVillage', value?.desa_kode || null)
+      this.$emit('update:nameVillage', value?.desa_nama || null)
 
-      this.filterActive.address_village_code = value.desa_kode
+      this.filterActive.address_village_code = value?.desa_kode || null
       this.getStatisticTestResult()
     },
     async onReset() {

@@ -265,6 +265,7 @@ import EventBus from '@/utils/eventBus'
 import FileSaver from 'file-saver'
 import { rolesWidget } from '@/utils/constantVariable'
 import { formatDatetime } from '@/utils/parseDatetime'
+
 export default {
   name: 'LaporanList',
   data() {
@@ -438,11 +439,13 @@ export default {
 
       const response = await this.$store.dispatch('reports/countReportCase', listQueryStatistic)
       if (response) this.loading = false
-      const { data } = response || null
-      this.totalConfirmation = data ? data.confirmed : 0
-      this.totalProbable = data ? data.probable : 0
-      this.totalSuspect = data ? data.suspect : 0
-      this.totalCloseCase = data ? data.closeContact : 0
+
+      const data = response?.data || null
+
+      this.totalConfirmation = data?.confirmed || 0
+      this.totalProbable = data?.probable || 0
+      this.totalSuspect = data?.suspect || 0
+      this.totalCloseCase = data?.closeContact || 0
     },
     async onExportCase() {
       this.isHistoryCase = false

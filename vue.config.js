@@ -11,7 +11,7 @@ let plugins = [
   }),
   new webpack.IgnorePlugin(
     /^\.\/locale$/, /moment$/
-  ),
+  )
 ]
 
 function resolve(dir) {
