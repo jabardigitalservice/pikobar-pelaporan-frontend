@@ -87,9 +87,9 @@ export default {
       const respVillage = await this.$store.dispatch('region/getGeoJsonVillage')
       const respSubDistrict = await this.$store.dispatch('region/getGeoJsonSubDistrict')
       const respCity = await this.$store.dispatch('region/getGeoJsonCity')
-      this.jsonVillage = respVillage?.data || []
-      this.jsonSubDistrict = respSubDistrict?.data || []
-      this.jsonCity = respCity?.data || []
+      this.jsonVillage = respVillage || []
+      this.jsonSubDistrict = respSubDistrict || []
+      this.jsonCity = respCity || []
       this.map.spin(false)
 
       L.tileLayer(

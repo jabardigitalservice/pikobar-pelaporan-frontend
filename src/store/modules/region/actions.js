@@ -1,5 +1,6 @@
 import requestServer from '@/api'
 import axios from 'axios'
+import requestCache from '@/utils/requestCache'
 
 export default {
   async getListProvince({ commit }) {
@@ -112,7 +113,7 @@ export default {
   },
   async getGeoJsonVillage({ commit }) {
     try {
-      const response = await axios.get(process.env.VUE_APP_GEOJSON_VILLAGE)
+      const response = await requestCache.get(process.env.VUE_APP_GEOJSON_VILLAGE, { noAuth: true })
       return response
     } catch (error) {
       return error.response
@@ -120,7 +121,7 @@ export default {
   },
   async getGeoJsonSubDistrict({ commit }) {
     try {
-      const response = await axios.get(process.env.VUE_APP_GEOJSON_SUBDISTRICT)
+      const response = await requestCache.get(process.env.VUE_APP_GEOJSON_SUBDISTRICT, { noAuth: true })
       return response
     } catch (error) {
       return error.response
@@ -128,7 +129,7 @@ export default {
   },
   async getGeoJsonCity({ commit }) {
     try {
-      const response = await axios.get(process.env.VUE_APP_GEOJSON_DISTRICT)
+      const response = await requestCache.get(process.env.VUE_APP_GEOJSON_DISTRICT, { noAuth: true })
       return response
     } catch (error) {
       return error.response
