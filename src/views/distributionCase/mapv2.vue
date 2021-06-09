@@ -352,9 +352,6 @@ import 'leaflet.markercluster'
 import 'leaflet-sidebar'
 import 'leaflet-spin'
 import * as turf from '@turf/turf'
-import jsonCity from '../../json/kota.json'
-import jsonDistrict from '../../json/kecamatan.json'
-import jsonVillage from '../../json/kelurahan.json'
 
 export default {
   name: 'DistributionCaseMapV2',
@@ -387,9 +384,9 @@ export default {
   data() {
     return {
       jsonAll: [],
-      jsonCity,
-      jsonDistrict,
-      jsonVillage,
+      jsonCity: [],
+      jsonSubDistrict: [],
+      jsonVillage: [],
       disclaimer: 'none',
       disabledDistrict: false,
       dashboardMapPanel: [],
@@ -551,9 +548,16 @@ export default {
       kota_nama: this.district_name_user
     }
   },
-  mounted() {
+  async mounted() {
+    const respVillage = await this.$store.dispatch('region/getGeoJsonVillage')
+    const respSubDistrict = await this.$store.dispatch('region/getGeoJsonSubDistrict')
+    const respCity = await this.$store.dispatch('region/getGeoJsonCity')
+    this.jsonVillage = respVillage?.data || []
+    this.jsonSubDistrict = respSubDistrict?.data || []
+    this.jsonCity = respCity?.data || []
     this.initMap()
     this.getData('init')
+    // this.axios.get('')
   },
   beforeDestroy() {
     this.clearCity()
@@ -707,7 +711,7 @@ export default {
       this.map.fitBounds(geojsonLayer.getBounds())
     },
     createLayerDistrict(value = null) {
-      const geojsonLayer = L.geoJSON(this.jsonDistrict, {
+      const geojsonLayer = L.geoJSON(this.jsonSubDistrict, {
         style: feature => {
           return this.styleBorderline
         },
@@ -830,7 +834,7 @@ export default {
           this.centerCity = geojsonLayer.getBounds()
         }
       } else if (this.zoomNew === 2) {
-        geojsonLayer = L.geoJSON(this.jsonDistrict, {
+        geojsonLayer = L.geoJSON(this.jsonSubDistrict, {
           filter: (feature, layer) => {
             return feature.properties.kemendagri_kabupaten_kode === value
           }

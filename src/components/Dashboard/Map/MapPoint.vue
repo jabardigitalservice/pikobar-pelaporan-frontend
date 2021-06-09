@@ -10,9 +10,6 @@
 import { mapGetters } from 'vuex'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
-import jsonCity from '../../../json/kota.json'
-import jsonDistrict from '../../../json/kecamatan.json'
-import jsonVillage from '../../../json/kelurahan.json'
 
 export default {
   name: 'MapPoint',
@@ -24,9 +21,9 @@ export default {
   },
   data() {
     return {
-      jsonCity,
-      jsonDistrict,
-      jsonVillage,
+      jsonCity: [],
+      jsonSubDistrict: [],
+      jsonVillage: [],
       map: null,
       url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
       zoom: 8,
@@ -71,7 +68,14 @@ export default {
       deep: true
     }
   },
-  mounted() {
+  async mounted() {
+    const respVillage = await this.$store.dispatch('region/getGeoJsonVillage')
+    const respSubDistrict = await this.$store.dispatch('region/getGeoJsonSubDistrict')
+    const respCity = await this.$store.dispatch('region/getGeoJsonCity')
+    this.jsonVillage = respVillage?.data || []
+    this.jsonSubDistrict = respSubDistrict?.data || []
+    this.jsonCity = respCity?.data || []
+
     this.initMap()
 
     if (this.roles[0] === 'dinkesprov') {
@@ -99,19 +103,6 @@ export default {
           position: 'bottomright'
         })
         .addTo(this.map)
-
-      // this.map.on('zoomend', () => {
-      //   if (this.map.getZoom() <= 10) {
-      //     this.removeLayer()
-      //     this.createLayerCity()
-      //   } else if (this.map.getZoom() > 10 && this.map.getZoom() <= 13) {
-      //     this.removeLayer()
-      //     this.createLayerDistrict(this.district_user)
-      //   } else if (this.map.getZoom() > 13) {
-      //     this.removeLayer()
-      //     this.createLayerVillage()
-      //   }
-      // })
 
       this.layerGroup = L.layerGroup().addTo(this.map)
     },
@@ -142,7 +133,7 @@ export default {
       }
     },
     createLayerDistrict(value) {
-      const geojsonLayer = L.geoJSON(this.jsonDistrict, {
+      const geojsonLayer = L.geoJSON(this.jsonSubDistrict, {
         style: feature => {
           return this.styleBorderline
         },

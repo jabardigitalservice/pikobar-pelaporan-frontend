@@ -9,7 +9,6 @@ import occupation from './modules/occupation'
 import rdt from './modules/rdt'
 import animationLottie from './modules/animationLottie'
 import statistic from './modules/statistic'
-import logistic from './modules/logistic'
 import closeContactCase from './modules/closeContactCase'
 import primaryDrawer from './modules/primaryDrawer'
 import localTransmissionArea from './modules/localTransmissionArea'
@@ -34,7 +33,6 @@ const store = new Vuex.Store({
     rdt,
     animationLottie,
     statistic,
-    logistic,
     closeContactCase,
     hospitalReferral,
     primaryDrawer,
