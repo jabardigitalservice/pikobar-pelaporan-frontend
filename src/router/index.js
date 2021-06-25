@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import * as Sentry from '@sentry/vue'
+import * as Sentry from '@sentry/core'
 
 Vue.use(Router)
 
