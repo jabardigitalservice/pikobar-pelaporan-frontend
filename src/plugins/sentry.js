@@ -9,7 +9,10 @@ export default {
       release: process.env.VUE_APP_VERSION,
       environment: process.env.VUE_APP_ERROR_ENVIRONMENT,
       integrations: [new Integrations.BrowserTracing()],
-      tracesSampleRate: process.env.VUE_APP_TRACES_SAMPLE_RATE
+      tracesSampleRate: parseFloat(process.env.VUE_APP_TRACES_SAMPLE_RATE),
+      tracingOptions: {
+        trackComponents: true
+      }
     })
   }
 }
