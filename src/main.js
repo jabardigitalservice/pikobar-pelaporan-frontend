@@ -29,7 +29,7 @@ import './permission' // permission control
 import '@/utils/vee-validate' // include all validate form
 import i18n from './lang' // Internationalization
 import '@/helpers/filters' // include all filters
-import * as Sentry from './plugins/sentry' // sentry
+import Sentry from './plugins/sentry' // sentry
 import VueHtml2Canvas from 'vue-html2canvas'
 import './registerServiceWorker'
 
