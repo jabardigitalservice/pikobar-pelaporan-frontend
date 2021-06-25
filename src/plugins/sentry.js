@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/vue'
 import { BrowserTracing } from '@sentry/tracing/esm/browser'
 
 export default {
-  install(Vue) {
+  install(Vue, options) {
     Sentry.init({
       Vue,
       dsn: process.env.VUE_APP_SENTRY_DSN,
