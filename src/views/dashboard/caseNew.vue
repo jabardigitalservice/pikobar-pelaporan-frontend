@@ -410,9 +410,6 @@ export default {
 </script>
 
 <style lang="scss">
-.warning-background {
-  background-image: url('../../static/warning_green_icon.svg');
-}
 .dashboard-case-new {
   .disclaimer {
     font-weight: bold;

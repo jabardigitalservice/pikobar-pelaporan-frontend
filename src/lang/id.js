@@ -963,6 +963,8 @@ export default {
     queue_case_label_2: 'Terima Kasih! Data Anda sedang diproses dan akan dikirimkan melalui {email}. Apabila belum menerima email setelah 10 menit, silakan hubungi tim Pikobar',
     version_date: 'Versi Tanggal',
     dashboard_disclaimer_2: 'Sistem mungkin mengalami keterlambatan dalam menampilkan data terbaru. Tunggu 5-10 menit setelah Anda input data baru dan lakukan muat ulang.',
+    please_wait_and_refresh_this_page_to_update_the_data: 'Silahkan tunggu dan refresh halaman ini untuk memperbarui data',
+    last_update: 'Update terakhir'
   },
   success: {
     login_success: 'Login Berhasil',

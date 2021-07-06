@@ -8,6 +8,19 @@
     class="dashboard-test-result"
   >
     <h3><strong>{{ $t('label.dashboard') }} {{ $t('label.test_result_id') }}</strong></h3>
+    <v-card
+      class="warning-background"
+      outlined
+      min-height="75px"
+    >
+      <div
+        class="white--text ml-8 mt-6"
+      >
+        <div class="font-weight-bold">
+          {{ $t('label.last_update') }}: 7 Juli 2021 pukul 08:51 | {{ $t('label.please_wait_and_refresh_this_page_to_update_the_data') }}
+        </div>
+      </div>
+    </v-card>
     <v-row class="test-result-filter mb-3">
       <v-col
         cols="12"
