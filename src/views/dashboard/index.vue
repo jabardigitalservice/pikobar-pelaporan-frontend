@@ -566,19 +566,19 @@ export default {
       this.districtCity = value
       this.clearDistrict()
       this.clearVillage()
-      this.$emit('update:codeDistrict', value.kota_kode || null)
-      this.$emit('update:nameDistrict', value.kota_nama || null)
+      this.$emit('update:codeDistrict', value?.kota_kode || null)
+      this.$emit('update:nameDistrict', value?.kota_nama || null)
     },
     async onSelectSubDistrict(value) {
       this.subDistrict = value
       this.clearVillage()
-      this.$emit('update:codeSubDistrict', value.kecamatan_kode || null)
-      this.$emit('update:nameSubDistrict', value.kecamatan_nama || null)
+      this.$emit('update:codeSubDistrict', value?.kecamatan_kode || null)
+      this.$emit('update:nameSubDistrict', value?.kecamatan_nama || null)
     },
     async onSelectVillage(value) {
       this.village = value
-      this.$emit('update:codeVillage', value.desa_kode || null)
-      this.$emit('update:nameVillage', value.desa_nama || null)
+      this.$emit('update:codeVillage', value?.desa_kode || null)
+      this.$emit('update:nameVillage', value?.desa_nama || null)
     },
     async onReset() {
       if (this.roles[0] === 'dinkesprov' || this.roles[0] === 'superadmin') {

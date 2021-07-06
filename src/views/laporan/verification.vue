@@ -146,17 +146,6 @@
           </v-tab-item>
         </v-tabs>
       </v-row>
-      <!-- <verification-table
-        :table-headers="headers"
-        :list-kasus="listKasus"
-        :query="listQuery"
-        :show-failed-dialog.sync="showFailedDialog"
-        :show-verification-form.sync="showVerificationForm"
-        :case-detail.sync="caseDetail"
-        :close-contact-detail.sync="closeContactCase"
-        :refresh-page.sync="isRefresh"
-        :verification-query="verificationQuery"
-      /> -->
     </v-card>
     <pagination
       :total="totalList"

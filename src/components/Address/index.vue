@@ -132,8 +132,8 @@ export default {
   methods: {
     async onSelectDistrict(value) {
       this.districtCity = value
-      this.$emit('update:codeDistrict', value.kota_kode || null)
-      this.$emit('update:nameDistrict', value.kota_nama || null)
+      this.$emit('update:codeDistrict', value?.kota_kode || null)
+      this.$emit('update:nameDistrict', value?.kota_nama || null)
       this.$emit('update:codeSubDistrict', '')
       this.$emit('update:nameSubDistrict', '')
       this.$emit('update:codeVillage', '')
@@ -141,15 +141,15 @@ export default {
     },
     async onSelectSubDistrict(value) {
       this.subDistrict = value
-      this.$emit('update:codeSubDistrict', value.kecamatan_kode || null)
-      this.$emit('update:nameSubDistrict', value.kecamatan_nama || null)
+      this.$emit('update:codeSubDistrict', value?.kecamatan_kode || null)
+      this.$emit('update:nameSubDistrict', value?.kecamatan_nama || null)
       this.$emit('update:codeVillage', '')
       this.$emit('update:nameVillage', '')
     },
     async onSelectVillage(value) {
       this.village = value
-      this.$emit('update:codeVillage', value.desa_kode || null)
-      this.$emit('update:nameVillage', value.desa_nama || null)
+      this.$emit('update:codeVillage', value?.desa_kode || null)
+      this.$emit('update:nameVillage', value?.desa_nama || null)
     }
   }
 }

@@ -7,9 +7,7 @@
 </template>
 
 <script>
-// import { mapGetters } from 'vuex'
 import * as d3 from 'd3'
-// import jsonCase from '../../../json/test.json'
 import jsonCase from '../../../json/graph.json'
 
 export default {

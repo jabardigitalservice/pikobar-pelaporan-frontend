@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import * as Sentry from '@sentry/core'
 
 Vue.use(Router)
 
@@ -130,14 +131,26 @@ export const asyncRoutes = [
   { path: '*', redirect: '/', hidden: true }
 ]
 
-const createRouter = () => new Router({
+function createRouter() {
+  const router = new Router({
   // mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
-  routes: constantRoutes
-})
+    scrollBehavior: () => ({ y: 0 }),
+    routes: constantRoutes
+  })
+
+  router.beforeEach(beforeEach)
+
+  return router
+}
 
 const router = createRouter()
 
+async function beforeEach(to, from, next) {
+  Sentry.configureScope((scope) => {
+    scope.setTransactionName(to.path)
+  })
+  next()
+}
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
   const newRouter = createRouter()
