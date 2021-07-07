@@ -314,18 +314,12 @@
         <div class="text-center pb-5">
           <v-img
             src="@/static/modal-disclaimer.svg"
-            width="75%"
+            width="50%"
             class="img-center"
           />
         </div>
-        <div class="d-flex mb-1">
-          <div class="legend-color-title legend-description" />
-          <div class="legend-text-title">{{ $t('label.disclaimer') }}</div>
-        </div>
-        <ol class="text-description">
-          <li>{{ $t('label.map_disclaimer_step_1') }}</li>
-          <li>{{ $t('label.map_disclaimer_step_2') }}</li>
-        </ol>
+        <p class="text-center"><strong>{{ $t('label.disclaimer') }}</strong></p>
+        <p class="text-center">{{ $t('label.last_update') }}: {{ dataDateVersion ? formatDatetime(dataDateVersion, 'LLL'):'' }} | {{ $t('label.please_wait_and_refresh_this_page_to_update_the_data') }}</p>
         <div class="text-center pt-5">
           <v-btn
             color="success"
@@ -387,8 +381,9 @@ export default {
       jsonCity: [],
       jsonSubDistrict: [],
       jsonVillage: [],
-      disclaimer: 'none',
+      disclaimer: 'inline',
       disabledDistrict: false,
+      dataDateVersion: null,
       dashboardMapPanel: [],
       districtCity: {
         kota_kode: this.districtCode,
@@ -559,6 +554,7 @@ export default {
     this.filterLayer = null
   },
   methods: {
+    formatDatetime,
     async onDisclaimer() {
       this.disclaimer = 'none'
       this.initMap()
@@ -654,7 +650,7 @@ export default {
           params
         )
         this.stage[this.filterActive].data = res.data
-
+        this.dataDateVersion = res?.data.date_version || null
         if (type === 'init') {
           if (rolesWidget['superadmin'].includes(this.roles[0])) {
             this.zoomOld = 1
@@ -1738,7 +1734,7 @@ export default {
 .modal-disclaimer {
   position: absolute;
   background-color: #fff;
-  width: 400px;
+  width: 40%;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);

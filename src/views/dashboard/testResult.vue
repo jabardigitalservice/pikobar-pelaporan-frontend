@@ -8,6 +8,19 @@
     class="dashboard-test-result"
   >
     <h3><strong>{{ $t('label.dashboard') }} {{ $t('label.test_result_id') }}</strong></h3>
+    <v-card
+      class="warning-background"
+      outlined
+      min-height="75px"
+    >
+      <div
+        class="white--text ml-8 mt-6"
+      >
+        <div class="font-weight-bold">
+          {{ $t('label.last_update') }}: {{ dataDateVersion ? formatDatetime(dataDateVersion, 'LLL'):'' }} | {{ $t('label.please_wait_and_refresh_this_page_to_update_the_data') }}
+        </div>
+      </div>
+    </v-card>
     <v-row class="test-result-filter mb-3">
       <v-col
         cols="12"
@@ -379,6 +392,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { rolesWidget } from '@/utils/constantVariable'
+import { formatDatetime } from '@/utils/parseDatetime'
 
 export default {
   name: 'DashboardTestResult',
@@ -437,6 +451,7 @@ export default {
 
       },
       tabActive: 'all',
+      dataDateVersion: null,
       statistic: {
         total: 0,
         totalRdt: 0,
@@ -516,6 +531,7 @@ export default {
     this.clearVillage()
   },
   methods: {
+    formatDatetime,
     filterTab(value) {
       this.tabActive = value
     },
@@ -608,11 +624,21 @@ export default {
     },
     async getStatisticTestResult() {
       this.loadingStatistic = true
-      const res = await this.$store.dispatch('statistic/countTestResult', this.filterActive)
 
+      const params = {
+        address_district_code: this.filterActive.address_district_code,
+        address_subdistrict_code: this.filterActive.address_subdistrict_code,
+        address_village_code: this.filterActive.address_village_code,
+        min_date: this.filterActive.min_date,
+        max_date: this.filterActive.max_date
+      }
+  
+      const res = await this.$store.dispatch('statistic/countTestResult', params)
+     
       if (res) this.loadingStatistic = false
 
       if (res.data.length > 0) {
+        this.dataDateVersion = res?.data[0].date_version || null
         this.statistic = {
           total: res.data[0].TOTAL,
           totalRdt: res.data[0].RDT,

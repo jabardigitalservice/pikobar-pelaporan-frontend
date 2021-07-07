@@ -410,8 +410,13 @@ export default {
 </script>
 
 <style lang="scss">
-  .warning-background {
-    background-image: url('../../static/warning_green_icon.svg');
+.dashboard-case-new {
+  .disclaimer {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    background: linear-gradient(80.13deg, #27ae60 0%, #6fcf97 100%);
+    padding: 24px;
   }
   .dashboard-case-new {
     .disclaimer {
