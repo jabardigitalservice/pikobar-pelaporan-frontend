@@ -41,7 +41,7 @@
 
 <script>
 export default {
-  name: 'ChartTestDaily',
+  name: 'ChartTestMonthly',
   props: {
     tabActive: {
       type: String,
@@ -50,13 +50,28 @@ export default {
     chartHeight: {
       type: Number,
       default: 300
+    },
+    testTools: {
+      type: Array,
+      default: function() { return [] }
+    },
+    dataTestMonthly: {
+      type: Array,
+      default: function() { return [] }
+    },
+    dataTestMonthlyRdt: {
+      type: Array,
+      default: function() { return [] }
+    },
+    dataTestMonthlyPcr: {
+      type: Array,
+      default: function() { return [] }
     }
   },
   data() {
     return {
       loaded: false,
       label: null,
-      sampleActive: ['vena', 'kapiler'],
       chartData: {
         labels: [],
         datasets: []
@@ -68,12 +83,13 @@ export default {
           xAxes: [
             {
               gridLines: {
+                drawBorder: false
+              },
+              scaleLabel: {
                 display: false
               },
               ticks: {
-                callback: (label) => {
-                  return this.$moment(new Date(label)).format('DD/MM')
-                }
+                precision: 0
               }
             }
           ],
@@ -94,28 +110,57 @@ export default {
           ]
         },
         legend: {
-          display: true,
+          display: false,
           position: 'bottom',
           labels: {
             boxWidth: 10
           }
         },
+        legendCallback: (chart) => {
+          this.charts = chart
+          this.legends = chart.data.datasets
+        },
         tooltips: {
           displayColors: false,
-          callbacks: {
-            title: (item) => {
-              return this.$moment(item[0].label).format('DD/MM')
-            }
-          }
+          mode: 'index',
+          intersect: false,
+          tooltipCaretSize: 0
         }
-      }
+      },
+      chartStyles: {}
     }
   },
   computed: {
-    chartStyles() {
-      return {
-        height: `${this.chartHeight}px`,
-        position: 'relative'
+    optionsDataMontly: {
+      get: function() {
+        return this.dataTestMonthly
+      },
+      set: function(value) {
+        this.$emit('update:testMonthlyData', value)
+      }
+    },
+    sampleActive: {
+      get: function() {
+        return this.testTools
+      },
+      set: function(value) {
+        this.$emit('update:filterTestTools', value)
+      }
+    },
+    optionsDataMontlyRdt: {
+      get: function() {
+        return this.dataTestMonthlyRdt
+      },
+      set: function(value) {
+        this.$emit('update:testMonthlyRdtData', value)
+      }
+    },
+    optionsDataMontlyPcr: {
+      get: function() {
+        return this.dataTestMonthlyPcr
+      },
+      set: function(value) {
+        this.$emit('update:testMonthlyPcrData', value)
       }
     }
   },
@@ -124,12 +169,20 @@ export default {
       handler(value) {
         this.tabActive = value
         this.filterTab()
-        this.$refs.barChart.update()
       },
       deep: true
     },
     '$refs'() {
-      this.$refs.barChart.update()
+      if (this.$refs.barChart) this.$refs.barChart.update()
+    },
+    optionsDataMontly(val) {
+      this.filterTab()
+    },
+    optionsDataMontlyRdt() {
+      this.filterTab()
+    },
+    optionsDataMontlyPcr() {
+      this.filterTab()
     }
   },
   mounted() {
@@ -137,34 +190,36 @@ export default {
   },
   methods: {
     filterTab() {
-      this.loaded = true
-      if (this.tabActive === 'all') {
-        this.label = null
-        this.getDataAll()
-      } else if (this.tabActive === 'rapid') {
+      this.loaded = false
+      if (this.tabActive === 'rapid') {
         this.label = this.$t('label.rapid')
         this.getDataRapid()
       } else if (this.tabActive === 'pcr') {
         this.label = this.$t('label.pcr')
         this.getDataPCR()
+      } else {
+        this.label = null
+        this.getDataAll()
       }
+      this.loaded = true
     },
     filterSample() {
-      this.getDataRapid()
-      this.$refs.barChart.update()
+      this.updateChart(this.chartData)
     },
     getDataAll() {
-      const date = []
-      const one = []
-      const two = []
+      const listNameMonth = []
+      const listRdt = []
+      const listPcr = []
 
-      for (let index = 0; index <= 9; index++) {
-        date.push('2020-07-1' + index)
-        one.push(this.randomNumber())
-        two.push(this.randomNumber())
+      this.setHeight(this.chartHeight)
+
+      for (let index = 0; index < this.optionsDataMontly.length; index++) {
+        listNameMonth.push(this.optionsDataMontly[index].name)
+        listRdt.push(this.optionsDataMontly[index].rdt)
+        listPcr.push(this.optionsDataMontly[index].pcr)
       }
 
-      this.chartData.labels = date
+      this.chartData.labels = listNameMonth
 
       this.chartData.datasets = []
       this.chartData.datasets.push(
@@ -172,30 +227,34 @@ export default {
           label: this.$t('label.rapid_test_id'),
           backgroundColor: '#27AE60',
           hoverBackgroundColor: '#27AE60',
-          data: one
+          data: listRdt
         },
         {
           label: this.$t('label.pcr'),
           backgroundColor: '#F2C94C',
           hoverBackgroundColor: '#F2C94C',
-          data: two
+          data: listPcr
         }
       )
+
+      if (this.$refs.barChart) this.updateChart(this.chartData)
     },
     getDataRapid() {
-      const date = []
-      const one = []
-      const two = []
-      const three = []
+      if (this.$refs.barChart) this.$refs.barChart.$data._chart.destroy()
 
-      for (let index = 0; index <= 9; index++) {
-        date.push('2020-07-1' + index)
-        one.push(this.randomNumber())
-        two.push(this.randomNumber())
-        three.push(this.randomNumber())
+      const listNameMonth = []
+      const listReaktif = []
+      const listNonReaktif = []
+      const listInkonkuslif = []
+
+      for (let index = 0; index < this.optionsDataMontlyRdt.length; index++) {
+        listNameMonth.push(this.optionsDataMontlyRdt[index].name)
+        listReaktif.push(this.optionsDataMontlyRdt[index].reaktif)
+        listNonReaktif.push(this.optionsDataMontlyRdt[index].non_reaktif)
+        listInkonkuslif.push(this.optionsDataMontlyRdt[index].inkonkuslif)
       }
 
-      this.chartData.labels = date
+      this.chartData.labels = listNameMonth
 
       this.chartData.datasets = []
       this.chartData.datasets.push(
@@ -203,58 +262,87 @@ export default {
           label: this.$t('label.reaktif'),
           backgroundColor: '#27AE60',
           hoverBackgroundColor: '#27AE60',
-          data: one
+          data: listReaktif
         },
         {
           label: this.$t('label.non_reaktif'),
           backgroundColor: '#F2C94C',
           hoverBackgroundColor: '#F2C94C',
-          data: two
+          data: listNonReaktif
         },
         {
           label: this.$t('label.inkonklusif'),
           backgroundColor: '#2F80ED',
           hoverBackgroundColor: '#2F80ED',
-          data: two
+          data: listInkonkuslif
         }
       )
+
+      if (this.$refs.barChart) this.updateChart(this.chartData)
     },
     getDataPCR() {
-      const date = []
-      const one = []
-      const two = []
-      const three = []
+      if (this.$refs.barChart) this.$refs.barChart.$data._chart.destroy()
 
-      for (let index = 0; index <= 9; index++) {
-        date.push('2020-07-1' + index)
-        one.push(this.randomNumber())
-        two.push(this.randomNumber())
-        three.push(this.randomNumber())
+      const listNameMonth = []
+      const listPositif = []
+      const listNegaitf = []
+      const listInvalid = []
+
+      for (let index = 0; index < this.optionsDataMontlyPcr.length; index++) {
+        listNameMonth.push(this.optionsDataMontlyPcr[index].name)
+        listPositif.push(this.optionsDataMontlyPcr[index].positif)
+        listNegaitf.push(this.optionsDataMontlyPcr[index].negaitf)
+        listInvalid.push(this.optionsDataMontlyPcr[index].invalid)
       }
 
-      this.chartData.labels = date
-
+      this.chartData.labels = listNameMonth
       this.chartData.datasets = []
       this.chartData.datasets.push(
         {
           label: this.$t('label.positif'),
           backgroundColor: '#27AE60',
           hoverBackgroundColor: '#27AE60',
-          data: one
+          data: listPositif
         },
         {
           label: this.$t('label.negatif'),
           backgroundColor: '#F2C94C',
           hoverBackgroundColor: '#F2C94C',
-          data: two
+          data: listNegaitf
         },
         {
           label: this.$t('label.invalid'),
           backgroundColor: '#2F80ED',
           hoverBackgroundColor: '#2F80ED',
-          data: two
+          data: listInvalid
         }
       )
+      if (this.$refs.barChart) this.updateChart(this.chartData)
+    },
+    setHeight(total) {
+      const limit = 8
+
+      let height
+      if (total > 0 && total <= limit) {
+        height = '100%'
+      } else if (total > limit && total <= limit * 2) {
+        height = '200%'
+      } else if (total > limit * 2 && total <= limit * 3) {
+        height = '300%'
+      } else if (total > limit * 3 && total <= limit * 4) {
+        height = '400%'
+      }
+
+      this.chartStyles = {
+        height,
+        position: 'relative'
+      }
+    },
+    updateChart(data) {
+      if (this.$refs.barChart) {
+        this.$refs.barChart.renderChart(data, this.chartOptions)
+        this.$refs.barChart.update()
+      }
     },
     randomNumber() {
       return Math.floor(Math.random() * 101)

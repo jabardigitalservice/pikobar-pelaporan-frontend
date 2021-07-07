@@ -16,7 +16,7 @@ import distributionCaseRouter from './modules/distributionCase'
 import submissionLogistikRouter from './modules/submissionLogistik'
 import dailyReportRouter from './modules/dailyReport'
 import hospitalReferralRouter from './modules/hospitalReferral'
-// import closeContactCase from './modules/closeContactCase'
+// import closeContactCase from './modules/CloseContactCase'
 
 /**
  * constantRoutes
