@@ -319,7 +319,7 @@
           />
         </div>
         <p class="text-center"><strong>{{ $t('label.disclaimer') }}</strong></p>
-        <p class="text-center">{{ $t('label.last_update') }}: 7 Juli 2021 pukul 08:51 | {{ $t('label.please_wait_and_refresh_this_page_to_update_the_data') }}</p>
+        <p class="text-center">{{ $t('label.last_update') }}: {{ dataDateVersion ? formatDatetime(dataDateVersion, 'LLL'):'' }} | {{ $t('label.please_wait_and_refresh_this_page_to_update_the_data') }}</p>
         <div class="text-center pt-5">
           <v-btn
             color="success"
@@ -383,6 +383,7 @@ export default {
       jsonVillage: [],
       disclaimer: 'inline',
       disabledDistrict: false,
+      dataDateVersion: null,
       dashboardMapPanel: [],
       districtCity: {
         kota_kode: this.districtCode,
@@ -553,6 +554,7 @@ export default {
     this.filterLayer = null
   },
   methods: {
+    formatDatetime,
     async onDisclaimer() {
       this.disclaimer = 'none'
       this.initMap()
@@ -648,7 +650,7 @@ export default {
           params
         )
         this.stage[this.filterActive].data = res.data
-
+        this.dataDateVersion = res?.data.date_version || null
         if (type === 'init') {
           if (rolesWidget['superadmin'].includes(this.roles[0])) {
             this.zoomOld = 1

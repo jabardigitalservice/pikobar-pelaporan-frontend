@@ -17,7 +17,7 @@
         class="white--text ml-8 mt-6"
       >
         <div class="font-weight-bold">
-          {{ $t('label.last_update') }}: 7 Juli 2021 pukul 08:51 | {{ $t('label.please_wait_and_refresh_this_page_to_update_the_data') }}
+          {{ $t('label.last_update') }}: {{ dataDateVersion ? formatDatetime(dataDateVersion, 'LLL'):'' }} | {{ $t('label.please_wait_and_refresh_this_page_to_update_the_data') }}
         </div>
       </div>
     </v-card>
@@ -360,6 +360,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { rolesWidget } from '@/utils/constantVariable'
+import { formatDatetime } from '@/utils/parseDatetime'
 
 export default {
   name: 'DashboardTestResult',
@@ -416,6 +417,7 @@ export default {
         max_date: null
       },
       tabActive: 'all',
+      dataDateVersion: null,
       statistic: {
         total: 0,
         totalRdt: 0,
@@ -484,6 +486,7 @@ export default {
     this.clearVillage()
   },
   methods: {
+    formatDatetime,
     filterTab(value) {
       this.tabActive = value
     },
@@ -582,10 +585,11 @@ export default {
         max_date: this.filterActive.max_date
       }
       const res = await this.$store.dispatch('statistic/countTestResult', params)
-
+      console.log(res)
       if (res) this.loadingStatistic = false
 
       if (res.data.length > 0) {
+        this.dataDateVersion = res?.data[0].date_version || null
         this.statistic = {
           total: res.data[0].TOTAL,
           totalRdt: res.data[0].RDT,
