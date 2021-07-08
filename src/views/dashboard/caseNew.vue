@@ -448,4 +448,5 @@ export default {
       display: flex;
     }
   }
+}
 </style>
