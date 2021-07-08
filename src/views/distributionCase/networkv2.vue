@@ -152,6 +152,11 @@
             <div class="mt-3">Harap Tunggu</div>
           </div>
         </div>
+        <dialog-cache-disclaimer
+          :disclaimer="disclaimer"
+          :data-date-version="dataDateVersion"
+          :on-disclaimer="onDisclaimer"
+        />
       </div>
     </div>
   </div>
@@ -176,6 +181,7 @@ export default {
       isLoading: false,
       nameVillage: '',
       selected: 'all',
+      disclaimer: 'inline',
       listStatus: [
         {
           id: 'all',
@@ -237,6 +243,7 @@ export default {
         first_symptom_date: null,
         current_location_address: null
       },
+      dataDateVersion: null,
       listQuery: {
         address_district_code: ''
       }
@@ -268,6 +275,10 @@ export default {
     this.getData()
   },
   methods: {
+    async onDisclaimer() {
+      this.disclaimer = 'none'
+      this.getData()
+    },
     async getData() {
       const res = await this.$store.dispatch(
         'statistic/listCaseRelated',
@@ -276,6 +287,7 @@ export default {
 
       const nodes = res.data.edges
       const edges = res.data.nodes
+      this.dataDateVersion = res?.data.date_version || null
 
       const filteredNodes = nodes.reduce((acc, current) => {
         const x = acc.find(item => item.id === current.id)

@@ -632,9 +632,9 @@ export default {
         min_date: this.filterActive.min_date,
         max_date: this.filterActive.max_date
       }
-  
+
       const res = await this.$store.dispatch('statistic/countTestResult', params)
-     
+
       if (res) this.loadingStatistic = false
 
       if (res.data.length > 0) {

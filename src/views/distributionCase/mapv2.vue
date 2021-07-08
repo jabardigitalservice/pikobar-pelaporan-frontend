@@ -305,32 +305,11 @@
         </v-expansion-panels>
       </v-row>
     </div>
-    <div
-      class="disclaimer"
-      :style="{'display': disclaimer}"
-    >
-      <div class="backdrop" />
-      <div class="modal-disclaimer">
-        <div class="text-center pb-5">
-          <v-img
-            src="@/static/modal-disclaimer.svg"
-            width="50%"
-            class="img-center"
-          />
-        </div>
-        <p class="text-center"><strong>{{ $t('label.disclaimer') }}</strong></p>
-        <p class="text-center">{{ $t('label.last_update') }}: {{ dataDateVersion ? formatDatetime(dataDateVersion, 'LLL'):'' }} | {{ $t('label.please_wait_and_refresh_this_page_to_update_the_data') }}</p>
-        <div class="text-center pt-5">
-          <v-btn
-            color="success"
-            class="button button-action white--text"
-            @click="onDisclaimer"
-          >
-            {{ $t('label.understand') }}
-          </v-btn>
-        </div>
-      </div>
-    </div>
+    <dialog-cache-disclaimer
+      :disclaimer="disclaimer"
+      :data-date-version="dataDateVersion"
+      :on-disclaimer="onDisclaimer"
+    />
   </div>
 </template>
 
@@ -649,7 +628,7 @@ export default {
           'statistic/distributionCase',
           params
         )
-        this.stage[this.filterActive].data = res.data
+        this.stage[this.filterActive].data = res?.data.map || []
         this.dataDateVersion = res?.data.date_version || null
         if (type === 'init') {
           if (rolesWidget['superadmin'].includes(this.roles[0])) {
@@ -1720,31 +1699,6 @@ export default {
 
 .filter-layer .v-text-field__details {
   display: none;
-}
-
-.backdrop {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: #000;
-  opacity: 0.5;
-}
-.modal-disclaimer {
-  position: absolute;
-  background-color: #fff;
-  width: 40%;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  border-radius: 8px;
-  padding: 30px;
-}
-.img-center {
-  display: block;
-  margin: 0 auto;
 }
 .v-expansion-panel-header__icon {
     margin-left: 2% !important;
