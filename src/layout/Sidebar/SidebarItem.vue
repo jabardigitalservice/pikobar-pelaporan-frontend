@@ -38,6 +38,7 @@
         </div>
       </div>
       <div v-else>
+        <v-subheader v-if="item.meta.group">{{ item.meta.group }}</v-subheader>
         <v-list-group
           :key="itemPending"
           no-action
