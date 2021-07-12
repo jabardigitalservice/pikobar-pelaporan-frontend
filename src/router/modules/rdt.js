@@ -8,8 +8,9 @@ const rdtRouter = {
   component: Layout,
   redirect: '/rdt/list',
   meta: {
+    group: 'Testing',
     title: 'rdt',
-    icon: 'mdi-book-plus',
+    icon: 'mdi-clipboard-check',
     roles: [rolesPerm.ADMIN, rolesPerm.DINKESPROV, rolesPerm.DINKESKOTA, rolesPerm.FASKES]
   },
   active: false,

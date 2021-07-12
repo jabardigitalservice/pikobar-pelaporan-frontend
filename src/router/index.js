@@ -9,13 +9,15 @@ import Layout from '@/layout'
 
 /* Router Modules */
 import dashboardRouter from './modules/dashboard'
-import reportRouter from './modules/pelaporan'
+import createReportRouter from './modules/createReport'
+import listVerificationReportRouter from './modules/listVerificationReport'
+import listReportRouter from './modules/listReport'
 import rdtRouter from './modules/rdt'
 import settingRouter from './modules/setting'
 import distributionCaseRouter from './modules/distributionCase'
 import submissionLogistikRouter from './modules/submissionLogistik'
 import dailyReportRouter from './modules/dailyReport'
-import hospitalReferralRouter from './modules/hospitalReferral'
+// import hospitalReferralRouter from './modules/hospitalReferral'
 // import closeContactCase from './modules/closeContactCase'
 
 /**
@@ -118,14 +120,15 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
+  rdtRouter,
+  createReportRouter,
+  listVerificationReportRouter,
+  listReportRouter,
   dashboardRouter,
   distributionCaseRouter,
   dailyReportRouter,
-  reportRouter,
-  // closeContactCase,
-  rdtRouter,
   submissionLogistikRouter,
-  hospitalReferralRouter,
+  // hospitalReferralRouter,
   settingRouter,
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/', hidden: true }
