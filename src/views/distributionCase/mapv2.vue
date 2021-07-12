@@ -542,10 +542,10 @@ export default {
   },
   methods: {
     formatDatetime,
-    async onDisclaimer() {
+    onDisclaimer() {
       this.disclaimer = 'none'
-      await this.initMap()
-      await this.getData('init')
+      this.initMap()
+      this.getData('init')
     },
     async initMap() {
       // Map
