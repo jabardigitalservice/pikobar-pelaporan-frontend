@@ -5,7 +5,7 @@
       color="primary"
     >
       <div v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
-        <v-subheader v-if="item.meta.group" class="text-uppercase">{{ item.meta.group }}</v-subheader>
+        <v-subheader v-if="item.meta.group" class="text-uppercase text-menu-group">{{ item.meta.group }}</v-subheader>
         <v-list-item v-if="!onlyOneChild.hidden && !onlyOneChild.children && onlyOneChild.meta" :to="resolvePath(item.path)">
           <v-list-item-icon>
             <v-icon v-if="!item.meta.child" v-text="onlyOneChild.meta.icon" />
@@ -39,7 +39,7 @@
         </div>
       </div>
       <div v-else>
-        <v-subheader v-if="item.meta.group" class="text-uppercase">{{ item.meta.group }}</v-subheader>
+        <v-subheader v-if="item.meta.group" class="text-uppercase text-menu-group">{{ item.meta.group }}</v-subheader>
         <v-list-group
           :key="itemPending"
           no-action
@@ -129,3 +129,15 @@ export default {
   }
 }
 </script>
+<style scoped>
+.text-menu-group {
+    color: #BDBDBD !important;
+    font-family: Product Sans;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 15px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+</style>
