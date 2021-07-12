@@ -530,9 +530,9 @@ export default {
       kota_nama: this.district_name_user
     }
   },
-  async mounted() {
-    await this.initMap()
-    await this.getData('init')
+  mounted() {
+    this.initMap()
+    this.getData('init')
   },
   beforeDestroy() {
     this.clearCity()
