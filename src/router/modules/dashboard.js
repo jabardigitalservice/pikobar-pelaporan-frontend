@@ -6,6 +6,7 @@ const dashboardRouter = {
   component: Layout,
   redirect: '/',
   meta: {
+    group: 'Monitoring',
     title: 'dashboard',
     icon: 'dashboard',
     roles: [rolesPerm.ADMIN, rolesPerm.DINKESPROV, rolesPerm.DINKESKOTA, rolesPerm.FASKES]

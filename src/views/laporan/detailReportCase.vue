@@ -642,7 +642,7 @@ export default {
     },
     async getListCloseContactByCase(id) {
       const response = await this.$store.dispatch('closeContactCase/getListCloseContactByCase', id)
-      this.listCloseContact = response?.data.data || []
+      this.listCloseContact = response?.data || []
     },
     async getStatusCase(id) {
       const response = await this.$store.dispatch('reports/statusCase', id)

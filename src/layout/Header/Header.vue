@@ -11,7 +11,7 @@
       app
       overflow
     >
-      <app-sidebar />
+      <app-sidebar style="width: 106%;" />
     </v-navigation-drawer>
     <v-app-bar
       :clipped-left="primaryDrawer.clipped"

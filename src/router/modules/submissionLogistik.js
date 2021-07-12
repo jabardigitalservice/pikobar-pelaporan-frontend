@@ -8,8 +8,9 @@ const submissionLogistikRouter = {
   component: Layout,
   redirect: '/submission-logistik/create',
   meta: {
+    group: 'Lainnya',
     title: 'submission_Logistics',
-    icon: 'mdi-clipboard-plus',
+    icon: 'mdi-archive',
     roles: [rolesPerm.ADMIN, rolesPerm.DINKESKOTA, rolesPerm.FASKES]
   },
   active: false,
@@ -19,7 +20,7 @@ const submissionLogistikRouter = {
       component: () => import('@/views/logistik/submissionLogistik'),
       meta: {
         title: 'submission_Logistics',
-        icon: 'mdi-clipboard-plus',
+        icon: 'mdi-archive',
         child: true,
         noCache: true,
         roles: [rolesPerm.ADMIN, rolesPerm.DINKESPROV, rolesPerm.DINKESKOTA, rolesPerm.FASKES]
