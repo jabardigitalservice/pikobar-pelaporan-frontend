@@ -179,7 +179,7 @@
 }
 
 .row {
-  margin-bottom: -12px; 
+  margin-bottom: -12px;
 }
 .material-checkbox-custom {
   z-index: 0;
@@ -336,4 +336,8 @@
 .text-sub-header-detail-case {
   color: #FFFF !important;
   font-size: 1rem;
+}
+
+.warning-background {
+  background-image: url('../../static/warning_green_icon.svg'), linear-gradient(88.9deg, #27AE60 0%, #6FCF97 100%);
 }

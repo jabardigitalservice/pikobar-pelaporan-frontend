@@ -42,6 +42,15 @@
       {{ $t('label.close_contact_finished_quarantine') }}
     </v-chip>
     <v-chip
+      v-else-if="status === 'CreateCaseIntegrationLabkes'"
+      color="#263238"
+      text-color="white"
+      label
+      small
+    >
+      {{ $t('label.labkes_west_java') }}
+    </v-chip>
+    <v-chip
       v-else
       color="#27AE60"
       label

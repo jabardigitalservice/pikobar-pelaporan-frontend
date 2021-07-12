@@ -21,14 +21,6 @@ RUN npm run build
 # production stage
 FROM nginx:stable-alpine as production-stage
 
-# Environment app
-ARG VUE_APP_SECURE
-ARG VUE_APP_URL
-ARG VUE_APP_PORT
-ENV VUE_APP_SECURE $VUE_APP_SECURE
-ENV VUE_APP_URL $VUE_APP_URL
-ENV VUE_APP_PORT $VUE_APP_PORT
-
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

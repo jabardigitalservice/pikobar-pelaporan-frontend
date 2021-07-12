@@ -209,9 +209,9 @@ export default {
     async handleSearch() {
       this.listQuery.page = 1
       const response = await this.$store.dispatch('closeContactCase/getListCloseContact', this.listQuery)
-      this.listCloseContact = response.data.itemsList
-      this.totalPages = response.data._meta.totalPages
-      this.totalCloseContact = response.data._meta.itemCount
+      this.listCloseContact = response.data?.itemsList || []
+      this.totalPages = response.data?._meta?.totalPages || 0
+      this.totalCloseContact = response.data?._meta?.itemCount || 0
       this.loading = false
     },
     async onNext() {

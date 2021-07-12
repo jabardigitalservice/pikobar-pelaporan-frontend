@@ -6,9 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 let plugins = [
   new vueEnverywere({ filename: 'env-vars.js' }),
-  new MiniCssExtractPlugin({
-    filename: "[name].css",
-  }),
+  new MiniCssExtractPlugin({ filename: "[name].[hash].css" }),
   new webpack.IgnorePlugin(
     /^\.\/locale$/, /moment$/
   )
@@ -77,6 +75,10 @@ module.exports = {
         return options
       })
       .end()
+      
+    config.plugin('VuetifyLoaderPlugin').tap(args => [{
+      progressiveImages: true
+    }])
 
     config.when(process.env.NODE_ENV === 'development', configDev =>
       configDev.devtool('cheap-source-map')
@@ -93,7 +95,7 @@ module.exports = {
           },
           vuetify: {
             name: 'chunk-vuetify', // split vuetify into a single package
-            priority: 40, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+            priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
             test: /[\\/]node_modules[\\/]vuetify[\\/]/
           },
           commons: {
