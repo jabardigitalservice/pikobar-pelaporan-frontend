@@ -13,7 +13,8 @@
         />
       </div>
       <p class="text-center"><strong>{{ $t('label.disclaimer') }}</strong></p>
-      <p class="text-center">{{ $t('label.last_update') }}: {{ dataDateVersion ? formatDatetime(dataDateVersion, 'LLL'):'' }} |
+      <p class="text-center">
+        {{ $t('label.last_update') }}: {{ dataDateVersion ? formatDatetime(dataDateVersion, 'LLL'):'' }} |
         {{ $t('label.please_wait_and_refresh_this_page_to_update_the_data') }}</p>
       <div class="text-center pt-5">
         <v-btn
