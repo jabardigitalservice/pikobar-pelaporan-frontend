@@ -1,210 +1,216 @@
 <template>
   <div>
-    <div class="border-bottom">
-      <v-row class="filter-layer mx-2 mt-2">
-        <v-col
-          cols="12"
-          md="3"
+    <div>
+      <div class="border-bottom">
+        <v-row class="filter-layer mx-2 mt-2">
+          <v-col
+            cols="12"
+            md="3"
+          >
+            <div class="d-flex mb-1">
+              <div class="legend-color-title legend-description margin-top-3" />
+              <div class="legend-text-title">{{ $t('label.look_for_it') }} {{ $t('label.based') }}</div>
+            </div>
+          </v-col>
+        </v-row>
+        <v-row class="filter-layer mx-2 mb-1">
+          <v-col cols="8">
+            <v-row>
+              <v-col
+                cols="12"
+                md="4"
+                class="pt-0"
+              >
+                <select-area-district-city
+                  :disabled-district="disabledDistrict"
+                  :district-city="districtCity"
+                  :city-district.sync="districtCity"
+                  :on-select-district="onSelectDistrict"
+                />
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+                class="pt-0"
+              >
+                <select-area-sub-district
+                  :sub-district="subDistrict"
+                  :update-sub-district.sync="subDistrict"
+                  :code-district="districtCity.kota_kode"
+                  :district-code.sync="districtCity.kota_kode"
+                  :on-select-sub-district="onSelectSubDistrict"
+                />
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+                class="pt-0"
+              >
+                <select-area-village
+                  :village="village"
+                  :update-village.sync="village"
+                  :code-sub-district="subDistrict.kecamatan_kode"
+                  :sub-district-code.sync="subDistrict.kecamatan_kode"
+                  :on-select-village="onSelectVillage"
+                />
+              </v-col>
+            </v-row>
+          </v-col>
+          <v-col
+            cols="12"
+            md="2"
+            sm="12"
+          >
+            <v-btn
+              block
+              color="grey darken-3"
+              class="button button-action white--text"
+              @click="onReset"
+            >
+              {{ $t('label.reset') }}
+            </v-btn>
+          </v-col>
+          <v-col>
+            <v-btn
+              block
+              outlined
+              :loading="isLoading"
+              color="primary"
+              class="button button-action white--text"
+              @click="onPrintPNG"
+            >
+              <span class="green--text">{{ $t('label.export_png') }}</span>
+            </v-btn>
+          </v-col>
+        </v-row>
+      </div>
+      <div class="container-map relative">
+        <div id="sidebar">
+          <div
+            class="sidebar-content"
+            v-html="sidebarContent"
+          />
+        </div>
+        <div ref="printMap">
+          <div
+            id="map"
+            class="map-wrapper bg-aqua"
+          />
+        </div>
+        <div
+          v-if="isFilter"
+          class="filter"
         >
-          <div class="d-flex mb-1">
-            <div class="legend-color-title legend-description margin-top-3" />
-            <div class="legend-text-title">{{ $t('label.look_for_it') }} {{ $t('label.based') }}</div>
+          <div class="filter-data">
+            <ul>
+              <li
+                :class="[stage.positive_active.filter ? 'filter-active' : '']"
+                @click="onFilter('positive_active')"
+              >
+                <div class="legend-color cluster-positive-active" />
+                <span class="legend-text">
+                  {{ `${$t('label.positive')} - ${$t('label.isolation_still_sick')}` }}
+                </span>
+              </li>
+              <li
+                :class="[stage.positive_recovery.filter ? 'filter-active' : '']"
+                @click="onFilter('positive_recovery')"
+              >
+                <div class="legend-color cluster-positive-recovery" />
+                <span class="legend-text">
+                  {{ `${$t('label.positive')} - ${$t('label.recovery')}` }}
+                </span>
+              </li>
+              <li
+                :class="[stage.positive_dead.filter ? 'filter-active' : '']"
+                @click="onFilter('positive_dead')"
+              >
+                <div class="legend-color cluster-positive-dead" />
+                <span class="legend-text">
+                  {{ `${$t('label.positive')} - ${$t('label.dead')}` }}
+                </span>
+              </li>
+              <li
+                :class="[stage.probable_sick.filter ? 'filter-active' : '']"
+                @click="onFilter('probable_sick')"
+              >
+                <div class="legend-color cluster-probable-sick" />
+                <span class="legend-text">
+                  {{ `${$t('label.probable')} - ${$t('label.still_sick')}` }}
+                </span>
+              </li>
+              <li
+                :class="[stage.probable_recovery.filter ? 'filter-active' : '']"
+                @click="onFilter('probable_recovery')"
+              >
+                <div class="legend-color cluster-probable-recovery" />
+                <span class="legend-text">
+                  {{ `${$t('label.probable')} - ${$t('label.recovery')}` }}
+                </span>
+              </li>
+              <li
+                :class="[stage.probable_dead.filter ? 'filter-active' : '']"
+                @click="onFilter('probable_dead')"
+              >
+                <div class="legend-color cluster-probable-dead" />
+                <span class="legend-text">
+                  {{ `${$t('label.probable')} - ${$t('label.dead')}` }}
+                </span>
+              </li>
+              <li
+                :class="[stage.suspect_sick.filter ? 'filter-active' : '']"
+                @click="onFilter('suspect_sick')"
+              >
+                <div class="legend-color cluster-suspect-sick" />
+                <span class="legend-text">
+                  {{ `${$t('label.suspect')} - ${$t('label.still_sick')}` }}
+                </span>
+              </li>
+              <li
+                :class="[stage.suspect_discarded.filter ? 'filter-active' : '']"
+                @click="onFilter('suspect_discarded')"
+              >
+                <div class="legend-color cluster-suspect-discarded" />
+                <span class="legend-text">
+                  {{ `${$t('label.suspect')} - ${$t('label.discarded')}` }}
+                </span>
+              </li>
+              <li
+                :class="[stage.close_contact_quarantine.filter ? 'filter-active' : '']"
+                @click="onFilter('close_contact_quarantine')"
+              >
+                <div class="legend-color cluster-close-contact-quarantine" />
+                <span class="legend-text">
+                  {{ `${$t('label.tight_contact')} - ${$t('label.still_quarantine')}` }}
+                </span>
+              </li>
+              <li
+                :class="[stage.close_contact_discarded.filter ? 'filter-active' : '']"
+                @click="onFilter('close_contact_discarded')"
+              >
+                <div class="legend-color cluster-close-contact-discarded" />
+                <span class="legend-text">
+                  {{ `${$t('label.tight_contact')} - ${$t('label.discarded')}` }}
+                </span>
+              </li>
+            </ul>
           </div>
-        </v-col>
-      </v-row>
-      <v-row class="filter-layer mx-2 mb-1">
-        <v-col cols="8">
-          <v-row>
-            <v-col
-              cols="12"
-              md="4"
-              class="pt-0"
-            >
-              <select-area-district-city
-                :disabled-district="disabledDistrict"
-                :district-city="districtCity"
-                :city-district.sync="districtCity"
-                :on-select-district="onSelectDistrict"
-              />
-            </v-col>
-            <v-col
-              cols="12"
-              md="4"
-              class="pt-0"
-            >
-              <select-area-sub-district
-                :sub-district="subDistrict"
-                :update-sub-district.sync="subDistrict"
-                :code-district="districtCity.kota_kode"
-                :district-code.sync="districtCity.kota_kode"
-                :on-select-sub-district="onSelectSubDistrict"
-              />
-            </v-col>
-            <v-col
-              cols="12"
-              md="4"
-              class="pt-0"
-            >
-              <select-area-village
-                :village="village"
-                :update-village.sync="village"
-                :code-sub-district="subDistrict.kecamatan_kode"
-                :sub-district-code.sync="subDistrict.kecamatan_kode"
-                :on-select-village="onSelectVillage"
-              />
-            </v-col>
-          </v-row>
-        </v-col>
-        <v-col
-          cols="12"
-          md="2"
-          sm="12"
-        >
-          <v-btn
-            block
-            color="grey darken-3"
-            class="button button-action white--text"
-            @click="onReset"
-          >
-            {{ $t('label.reset') }}
-          </v-btn>
-        </v-col>
-        <v-col>
-          <v-btn
-            block
-            outlined
-            :loading="isLoading"
-            color="primary"
-            class="button button-action white--text"
-            @click="onPrintPNG"
-          >
-            <span class="green--text">{{ $t('label.export_png') }}</span>
-          </v-btn>
-        </v-col>
-      </v-row>
-    </div>
-    <div class="container-map relative">
-      <div id="sidebar">
-        <div
-          class="sidebar-content"
-          v-html="sidebarContent"
-        />
-      </div>
-      <div ref="printMap">
-        <div
-          id="map"
-          class="map-wrapper bg-aqua"
-        />
-      </div>
-      <div
-        v-if="isFilter"
-        class="filter"
-      >
-        <div class="filter-data">
-          <ul>
-            <li
-              :class="[stage.positive_active.filter ? 'filter-active' : '']"
-              @click="onFilter('positive_active')"
-            >
-              <div class="legend-color cluster-positive-active" />
-              <span class="legend-text">
-                {{ `${$t('label.positive')} - ${$t('label.isolation_still_sick')}` }}
-              </span>
-            </li>
-            <li
-              :class="[stage.positive_recovery.filter ? 'filter-active' : '']"
-              @click="onFilter('positive_recovery')"
-            >
-              <div class="legend-color cluster-positive-recovery" />
-              <span class="legend-text">
-                {{ `${$t('label.positive')} - ${$t('label.recovery')}` }}
-              </span>
-            </li>
-            <li
-              :class="[stage.positive_dead.filter ? 'filter-active' : '']"
-              @click="onFilter('positive_dead')"
-            >
-              <div class="legend-color cluster-positive-dead" />
-              <span class="legend-text">
-                {{ `${$t('label.positive')} - ${$t('label.dead')}` }}
-              </span>
-            </li>
-            <li
-              :class="[stage.probable_sick.filter ? 'filter-active' : '']"
-              @click="onFilter('probable_sick')"
-            >
-              <div class="legend-color cluster-probable-sick" />
-              <span class="legend-text">
-                {{ `${$t('label.probable')} - ${$t('label.still_sick')}` }}
-              </span>
-            </li>
-            <li
-              :class="[stage.probable_recovery.filter ? 'filter-active' : '']"
-              @click="onFilter('probable_recovery')"
-            >
-              <div class="legend-color cluster-probable-recovery" />
-              <span class="legend-text">
-                {{ `${$t('label.probable')} - ${$t('label.recovery')}` }}
-              </span>
-            </li>
-            <li
-              :class="[stage.probable_dead.filter ? 'filter-active' : '']"
-              @click="onFilter('probable_dead')"
-            >
-              <div class="legend-color cluster-probable-dead" />
-              <span class="legend-text">
-                {{ `${$t('label.probable')} - ${$t('label.dead')}` }}
-              </span>
-            </li>
-            <li
-              :class="[stage.suspect_sick.filter ? 'filter-active' : '']"
-              @click="onFilter('suspect_sick')"
-            >
-              <div class="legend-color cluster-suspect-sick" />
-              <span class="legend-text">
-                {{ `${$t('label.suspect')} - ${$t('label.still_sick')}` }}
-              </span>
-            </li>
-            <li
-              :class="[stage.suspect_discarded.filter ? 'filter-active' : '']"
-              @click="onFilter('suspect_discarded')"
-            >
-              <div class="legend-color cluster-suspect-discarded" />
-              <span class="legend-text">
-                {{ `${$t('label.suspect')} - ${$t('label.discarded')}` }}
-              </span>
-            </li>
-            <li
-              :class="[stage.close_contact_quarantine.filter ? 'filter-active' : '']"
-              @click="onFilter('close_contact_quarantine')"
-            >
-              <div class="legend-color cluster-close-contact-quarantine" />
-              <span class="legend-text">
-                {{ `${$t('label.tight_contact')} - ${$t('label.still_quarantine')}` }}
-              </span>
-            </li>
-            <li
-              :class="[stage.close_contact_discarded.filter ? 'filter-active' : '']"
-              @click="onFilter('close_contact_discarded')"
-            >
-              <div class="legend-color cluster-close-contact-discarded" />
-              <span class="legend-text">
-                {{ `${$t('label.tight_contact')} - ${$t('label.discarded')}` }}
-              </span>
-            </li>
-          </ul>
         </div>
       </div>
+      <dialog-cache-disclaimer
+        :disclaimer="disclaimer"
+        :data-date-version="dataDateVersion"
+        :on-disclaimer="onDisclaimer"
+      />
     </div>
     <div class="border-top">
       <v-row class="mx-2 mt-1 mb-2">
         <v-expansion-panels
           v-model="dashboardMapPanel"
-          multiple
         >
           <v-expansion-panel>
             <v-expansion-panel-header class="font-weight-bold text-lg">
-              {{ dashboardMapPanel ? this.$t('label.show_captions'):this.$t('label.hide_captions') }}
+              {{ dashboardMapPanel === 0 ? this.$t('label.hide_captions'):this.$t('label.show_captions') }}
             </v-expansion-panel-header>
             <v-expansion-panel-content>
               <v-col
@@ -288,6 +294,7 @@
                 </v-row>
               </v-col>
               <v-col
+                id="description"
                 cols="12"
                 md="12"
               >
@@ -304,32 +311,6 @@
           </v-expansion-panel>
         </v-expansion-panels>
       </v-row>
-    </div>
-    <div
-      class="disclaimer"
-      :style="{'display': disclaimer}"
-    >
-      <div class="backdrop" />
-      <div class="modal-disclaimer">
-        <div class="text-center pb-5">
-          <v-img
-            src="@/static/modal-disclaimer.svg"
-            width="50%"
-            class="img-center"
-          />
-        </div>
-        <p class="text-center"><strong>{{ $t('label.disclaimer') }}</strong></p>
-        <p class="text-center">{{ $t('label.last_update') }}: {{ dataDateVersion ? formatDatetime(dataDateVersion, 'LLL'):'' }} | {{ $t('label.please_wait_and_refresh_this_page_to_update_the_data') }}</p>
-        <div class="text-center pt-5">
-          <v-btn
-            color="success"
-            class="button button-action white--text"
-            @click="onDisclaimer"
-          >
-            {{ $t('label.understand') }}
-          </v-btn>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -529,6 +510,12 @@ export default {
         desa_kode: value,
         desa_nama: this.villageName
       }
+    },
+    dashboardMapPanel: async(value) => {
+      if (value === 0) {
+        const element = await document.getElementById('description')
+        setTimeout(function() { element.scrollIntoView({ behavior: 'smooth', block: 'end' }) }, 100)
+      }
     }
   },
   async beforeMount() {
@@ -544,8 +531,8 @@ export default {
     }
   },
   async mounted() {
-    this.initMap()
-    this.getData('init')
+    await this.initMap()
+    await this.getData('init')
   },
   beforeDestroy() {
     this.clearCity()
@@ -557,8 +544,8 @@ export default {
     formatDatetime,
     async onDisclaimer() {
       this.disclaimer = 'none'
-      this.initMap()
-      this.getData('init')
+      await this.initMap()
+      await this.getData('init')
     },
     async initMap() {
       // Map
@@ -649,7 +636,7 @@ export default {
           'statistic/distributionCase',
           params
         )
-        this.stage[this.filterActive].data = res.data
+        this.stage[this.filterActive].data = res?.data.map || []
         this.dataDateVersion = res?.data.date_version || null
         if (type === 'init') {
           if (rolesWidget['superadmin'].includes(this.roles[0])) {
@@ -1404,8 +1391,8 @@ export default {
 
 .map-wrapper {
   background: white;
-  height: calc(100vh - 178px);
-  min-height: calc(100vh - 178px);
+  height: calc(88vh - 178px);
+  min-height: calc(88vh - 178px);
   z-index: 0;
 }
 #map .easy-button-container {
@@ -1721,32 +1708,14 @@ export default {
 .filter-layer .v-text-field__details {
   display: none;
 }
-
-.backdrop {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: #000;
-  opacity: 0.5;
-}
-.modal-disclaimer {
-  position: absolute;
-  background-color: #fff;
-  width: 40%;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  border-radius: 8px;
-  padding: 30px;
-}
-.img-center {
-  display: block;
-  margin: 0 auto;
-}
 .v-expansion-panel-header__icon {
     margin-left: 2% !important;
+}
+/* .v-expansion-panel__header{
+  display:none;
+} */
+
+.v-toolbar{
+  cursor:pointer;
 }
 </style>
