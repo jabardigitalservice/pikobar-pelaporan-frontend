@@ -272,12 +272,12 @@ export default {
     } else {
       this.listQuery.address_district_code = '32.73'
     }
-    this.getData()
+    await this.getData()
   },
   methods: {
     async onDisclaimer() {
       this.disclaimer = 'none'
-      this.getData()
+      await this.getData()
     },
     async getData() {
       const res = await this.$store.dispatch(

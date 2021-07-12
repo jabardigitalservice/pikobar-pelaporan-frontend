@@ -531,8 +531,8 @@ export default {
     }
   },
   async mounted() {
-    this.initMap()
-    this.getData('init')
+    await this.initMap()
+    await this.getData('init')
   },
   beforeDestroy() {
     this.clearCity()
@@ -544,8 +544,8 @@ export default {
     formatDatetime,
     async onDisclaimer() {
       this.disclaimer = 'none'
-      this.initMap()
-      this.getData('init')
+      await this.initMap()
+      await this.getData('init')
     },
     async initMap() {
       // Map
