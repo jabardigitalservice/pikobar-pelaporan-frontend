@@ -1,5 +1,19 @@
 <template>
   <div>
+    <h3><strong>Laporan Harian Covid-19</strong></h3>
+    <v-card
+      class="warning-background"
+      outlined
+      min-height="75px"
+    >
+      <div
+        class="white--text ml-8 mt-6"
+      >
+        <div class="font-weight-bold">
+          {{ $t('label.last_update') }}: {{ data.date_version ? formatDatetime(data.date_version, 'LLL'):'' }} | {{ $t('label.please_wait_and_refresh_this_page_to_update_the_data') }}
+        </div>
+      </div>
+    </v-card>
     <v-row>
       <v-col v-if="rolesWidget['superadmin'].includes(roles[0])" cols="5">
         <v-autocomplete
@@ -151,6 +165,7 @@ export default {
     await this.$store.dispatch('region/getListDistrictCity')
   },
   methods: {
+    formatDatetime,
     async handleSearch() {
       const response = await this.$store.dispatch('reports/getDailyReport', this.listQuery)
       if (response) {

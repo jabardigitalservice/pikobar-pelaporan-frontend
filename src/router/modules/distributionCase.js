@@ -9,7 +9,7 @@ const distributionCaseRouter = {
   redirect: '/distribution-case/network',
   meta: {
     title: 'distribution_case',
-    icon: 'mdi-map-marker-radius',
+    icon: 'mdi-map',
     roles: [rolesPerm.ADMIN, rolesPerm.DINKESPROV, rolesPerm.DINKESKOTA, rolesPerm.FASKES]
   },
   active: false,

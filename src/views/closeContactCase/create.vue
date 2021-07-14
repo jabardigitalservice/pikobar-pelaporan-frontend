@@ -196,8 +196,4 @@ export default {
   }
 }
 </script>
-<style scoped>
-  .warning-background {
-    background-image: url('../../static/warning_green_icon.svg')
-  }
-</style>
+
