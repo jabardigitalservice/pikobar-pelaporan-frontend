@@ -14,7 +14,7 @@
     "@sentry/vue": "^6.7.2",
     "@turf/boolean-point-in-polygon": "^6.0.1",
     "@turf/turf": "^5.1.6",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "axios-cache-adapter": "^2.7.3",
     "babel-preset-stage-2": "^6.22.0",
     "chart.js": "^2.9.3",
